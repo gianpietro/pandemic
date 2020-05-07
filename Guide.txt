@@ -1,0 +1,92 @@
+Program to input numbers and perform various calculations
+
+Starting point is to have
+
+1. structure
+      this will have items to add various data items
+      e.g. country name, total cases, total deaths
+      I will start with these items and expand
+      
+2. linked list
+      The structure will be an array as it will have
+      a number of countries data.
+      I want to then have this array as a linked list
+      and will need to work on the various processes
+      such as add, delete, amend etc
+
+
+Once I have the starting point set up will want to look
+at saving the data to a file so that the program can
+save and retrieve from the file.
+
+3. retrieve and save to file
+
+
+STAGE 1 LETS START - COMPLETED
+ pandemic.c
+ the structure
+ 1. country
+ 2. total cases
+ 3. total deaths
+ 4. pointer to next structure in list
+ 5. store data in file and read file, manually create file for now
+
+
+STAGE 2 VIEW DATA - COMPLETED
+  Need to include a date value for each row in the data
+
+STAGE 3 SEARCH - COMPLETED 
+  A country search function which will sort data by date order
+  and store values recdate, tcase.
+  This will be used to plot graph with gnuplot.
+   
+
+STAGE 4 GITHUB
+  Tidy up pandemic.c file and them add repository in github
+  before continuing to next stage.
+
+
+STAGE 5 MAKEFILE
+  Look at seperating the functions into library files
+  This will require a header file 
+  Use makefile to compile project
+
+
+STAGE 6 OTHER CASE
+  Need to add tdeaths array. Could use tcases functions and depending on user
+  input e.g. 1 = tcase 2 = tdeaths, may be able to reuse the
+  same functions already built.
+
+  
+STAGE 7 DATA COLLECTION
+  Review method of data colletion.
+  Need to tidy up the country name , can look at using csv file 
+  and how spaces are applied in country name or just manually  
+  tidy up name using underscore e.g south_korea. I would make  
+  all names lowercase.
+
+
+STAGE 8
+ Load data from program, each day file save 
+ user enters file name to load.
+ Thinking of file name to be date e.g. 10520 so when
+ user enters name if already updated will get warning
+ Could use a file to store file name uploaded.
+
+  Each day will collect file of country listing need to append this
+  to a master file. Thinking of doing this in the program. For example
+  todaysFile.txt append to masterFile.txt. Will probably have prompt
+  to enter file name to append e.g. 010520.txt being 1st May data.
+
+STAGE 9 GTK
+Could use glade and gtk for UI
+
+  
+
+
+  
+  REFERENCES:
+  gnuplot
+  https://stackoverflow.com/questions/3521209/making-c-code-plot-a-graph-automatically
+  
+  
