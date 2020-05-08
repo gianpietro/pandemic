@@ -25,16 +25,17 @@ various outcomes
 /*******************************************************/
 //struct country *createCountry(char *,int, int, int);
 
-struct country *append(struct country *, struct country *);
-int getCoRec(struct country *, char *);
-int * getCoRecdate(struct country *, char *, int);
+//struct country *append(struct country *, struct country *);
+
+//int getCoRec(struct country *, char *);
+//int * getCoRecdate(struct country *, char *, int);
 //void filteredPtr(struct country *, char *);
 //void filterCo(struct country *, char *, int *, int);
-int * filterCo(struct country *, char *, int *, int);
-void searchCountry(struct country *, char *);
-void printCountry(struct country *);
-void freeCountry(struct country *);
-void countryGraph(int *, int *, int, char *);
+//int * filterCo(struct country *, char *, int *, int);
+//void searchCountry(struct country *, char *);
+//void printCountry(struct country *);
+//void freeCountry(struct country *);
+//void countryGraph(int *, int *, int, char *);
 
 int main(void) {
   struct country *start, *newCountryPtr, *end, *ptr;
@@ -137,11 +138,13 @@ int main(void) {
 */
 
 /* add new struct to end of linked list */
+/*
 struct country *append(struct country *end, struct country *newpt) {
   end->next = newpt;
   return (end->next);
 }
-
+*/
+/*
 void printCountry(struct country *start) {
   struct country *ptr;
   ptr = start;
@@ -150,8 +153,10 @@ void printCountry(struct country *start) {
     ptr = ptr->next;
   }
 }
+*/
 
 /* free up malloc memory initaied with createCountry */
+/*
 void freeCountry(struct country *start) {
   struct country *ptr;
   struct country *tmp;
@@ -162,9 +167,11 @@ void freeCountry(struct country *start) {
     ptr = tmp;
   }
 }
+*/
 
 /* search for a specific country and display struct values. The country may have
    multiple entries*/
+/*
 void searchCountry(struct country *start, char countryname[COUNTRY]) {
   struct country *ptr = start;
   int c = 0;
@@ -180,6 +187,7 @@ void searchCountry(struct country *start, char countryname[COUNTRY]) {
     if (c ==0)
       printf("Country not found\n");    
   }
+*/
 
 /* ABANDONED 
 
@@ -222,8 +230,10 @@ void filteredPtr(struct country *start, char countryname[COUNTRY]) {
 
 */
 
-/*Loop though the struct and for each record matching country search increate counter
+/* Find how many data records there are for a country.
+Loop though the struct and for each record matching country search increate counter
 at the end return the number of records found */
+/*
 int getCoRec(struct country *start, char countryname[COUNTRY]) {
   struct country *ptr = start;
   int c = 0;
@@ -238,9 +248,12 @@ int getCoRec(struct country *start, char countryname[COUNTRY]) {
   return c;
   }
 
+*/
+
 /* Loop through the struct seaching for country and add recdate values to array using
    number of records found with getCoRec() to increase size of array with malloc.  
    This is a dynamic array. */
+/*
 int * getCoRecdate(struct country *start, char countryname[COUNTRY], int z) {
   struct country *ptr = start;
   int *recdt;
@@ -250,11 +263,11 @@ int * getCoRecdate(struct country *start, char countryname[COUNTRY], int z) {
   int gap, a, b, temp;
   //int m;
   int k = z;
-  /* once number of values for a country found allocate the size to the array recdt */
+                 COMMENT  once number of values for a country found allocate the size to the array recdt 
   recdt = (int *)malloc(k * sizeof(int));
   
-  /* now that dynamic array has been allocated the correct size of memory, assign the
-     date values for the country */
+              COMMENT  now that dynamic array has been allocated the correct size of memory, assign the
+	      date values for the country 
   ptr = start;
   while (ptr != NULL) {
     if (strcmp(ptr->nation, countryname) == 0) {
@@ -268,7 +281,7 @@ int * getCoRecdate(struct country *start, char countryname[COUNTRY], int z) {
   for (i=0; i<k; i++){
     printf("date for country %d\n", recdt[i]);
   }
-  /* use a shellsort to arrange the date values in ascending order */
+    COMMENT use a shellsort to arrange the date values in ascending order 
   for (gap = k/2; gap > 0; gap /=2) {
     for (a=gap; a<k; a++) {
      for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
@@ -280,6 +293,7 @@ int * getCoRecdate(struct country *start, char countryname[COUNTRY], int z) {
    }
   return recdt;
 }
+*/
 
 /*
 void filterCo(struct country *start, char countryname[COUNTRY], int *date, int n){
@@ -314,13 +328,15 @@ void filterCo(struct country *start, char countryname[COUNTRY], int *date, int n
 }
 */
 
-/* This function will match number of cases in struct for country searched against the date value
+/* Build array of total case numbers for a country. 
+This function will match number of cases in struct for country searched against the date value
 and build an array with case numbers. This array along with recdate array is then used for the x and y
 axis of a graph. The values are piped to gnuplot application. If a country has only one data value in the 
 record file then this has to be identified or there are issues with array structures.
-The graph will draw using lines to join y values unless only one data item which will plot with a point.
+The graph will draw using lines to join y values unless only one data item in which case will plot with a point.
 */ 
 
+/*
 int * filterCo(struct country *start, char countryname[COUNTRY], int *arrayDate, int numrec) {
   struct country *ptr = start;
   int i = 0;
@@ -374,7 +390,9 @@ int * filterCo(struct country *start, char countryname[COUNTRY], int *arrayDate,
      
   return totalc;
 }
- 
+*/
+
+/*
 void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[COUNTRY]) {
   //int *xvals;
   //int *yvals;
@@ -388,19 +406,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   //xvals = (int *)malloc(numrec * sizeof(int));
   //yvals = (int *)malloc(numrec * sizeof(int));
 
-  /*
-  for (j=0; j<numrec; j++){
-    xvals[j] = date[j];
-    printf("date for graph %d\n", date[j]);
-}
-
-  for (j=0; j<numrec; j++)
-    yvals[j] = num[j];
-
-  for (j=0;j<numrec;j++)
-    printf("y values %d\n", yvals[j]);
-  */
-
+ 
   char * commandsForGnuplot[] = {"plot 'data.temp' with lines"};
   char * commandForGnuplotOne[] = {"plot 'data.temp'"};
   
@@ -427,7 +433,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
     
 }
 
-
+*/
 
   
   
