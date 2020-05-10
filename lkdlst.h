@@ -25,9 +25,11 @@ int * getCoRecdate(struct country *, char *, int);
 
 /* function to build array of cases for y value in graph */
 int * filterCo(struct country *, char *, int *, int);
+int * filterDCo(struct country *, char *, int *, int);
 
 /* function to draw graph using gnuplot */
 void countryGraph(int *, int *, int, char *);
+void countryGraphTotDC(int *, int *, int *,int, char *);
 
 
 #endif

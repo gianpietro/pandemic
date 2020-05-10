@@ -182,7 +182,52 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   return totalc;
 }
 
-void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[COUNTRY]) {
+int * filterDCo(struct country *start, char countryname[], int *arrayDate, int numrec) {
+  struct country *ptr = start;
+  int i = 0;
+  int j = numrec;
+  int *totalc;
+  //  int *arrdate = arrayDate;   //not using this can delete
+  totalc = (int *)malloc(numrec * sizeof(int)); 
+  //printf("arraydate at start %d\n", arrdate[1]);
+  printf("start date  %d\n", ptr->recdate);
+  printf("VALUE OF J %d\n", j);
+  
+  if (j > 1) {
+    for (i=0; i<j; i++){
+      while (ptr != NULL) {
+        if (strcmp(ptr->nation, countryname) == 0) {
+          if (arrayDate[i] == ptr->recdate) {
+  	    totalc[i] = ptr->tdeaths;
+	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
+         }
+       }
+      ptr = ptr->next;
+    }  
+    ptr = start;
+    }
+  }
+  if (j > 1) {
+    ptr = start;
+  for (i=0; i<j; i++)
+    printf("array totalc values %d\n", totalc[i]);
+  } 
+  
+  if (j == 1) {
+    while (ptr != NULL) {
+      if (strcmp(ptr->nation, countryname) == 0) {
+        totalc[0] = ptr->tcases;
+        printf("array totalc values %d\n", totalc[0]);
+     }
+      ptr = ptr->next;
+     }
+  }
+  return totalc;
+}
+
+/* Will plot either total cases or total deaths depending on option selected 
+   from menu */
+void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[]) {
   char filename[10];
   int i;
   int j;
@@ -218,8 +263,69 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   
   for (i=0; i < numrec; i++)
     {
-      //      row[i] = i;
       fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
+    }
+  printf("One data point %d\n", arrayDate[0]);
+
+  if (numrec > 1) {  
+    for (i=0; i < numOfCommands; i++) {
+      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
+      fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
+     }
+  }
+
+  if (numrec == 1) {
+      for (i=0; i < numOfCommands; i++) {
+      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
+      fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
+     }
+    }
+
+  /* need both to allow graph to plot while terminal program remains in focus */
+  fflush(temp);
+  fflush(gnuplotPipe);
+    
+}
+
+
+/* Plot total cases and total deaths by country */
+void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int numrec, char countryname[]) {
+  char filename[10];
+  int i;
+  int j;
+  int *row;
+  int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
+ 
+  char * commandsForGnuplot[]  =
+    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+     "set xtics font ',5'",
+     "set ytics font ',6'",
+     "set ylabel 'Total number of Cases",
+     "set xlabel 'Date'",
+     "set grid",
+     "unset key",
+     "plot for [i=2:3] 'data.temp' using i:xtic(1) with lines"};
+  // {"set xtics border out scale 3,2 mirror rotate by 90 offset character 0, -1.5, 0 autojustify",
+   //{"plot for [i=2:2] 'data.temp' using i:xtic(1)  with lines"};
+  char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
+    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+     "set xtics font ',5'",
+     "set ytics font ',6'",
+     "set ylabel 'Total number of Cases",
+     "set xlabel 'Date'",
+     "set grid",
+     "unset key",
+     "plot for [i=2:3] 'data.temp' using i:xtic(1)"};
+   
+  FILE *temp = fopen("data.temp", "w");
+
+  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");
+  /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
+   these warnings make program exit */
+  
+  for (i=0; i < numrec; i++)
+    {
+      fprintf(temp, "%d %d %d\n", arrayDate[i], arraytcases[i], arraydcases[i]); //Write the data to a temporary file
     }
   printf("One data point %d\n", arrayDate[0]);
 
