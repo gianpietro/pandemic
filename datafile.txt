@@ -1,36 +1,1277 @@
-USA	10420	434927	14788
-USA	20420	148220	14792
-USA	30420	139422	17669
-USA	40420	113296	2349
-USA	50420	112950	10869
-USA	60420	81802	3333
-USA	70420	64586	3993
-USA	80420	60733	7097
-USA	90420	38226	812
-USA	100420	23403	2240
-USA	110420	23280	895
-USA	120420	20549	2248
-USA	130420	19438	427
-USA	140420	16188	820
-USA	150420	13141	380
-USA	160420	12942	273
-USA	170420	10384	200
-USA	180420	9404	73
-USA	190420	8672	63
-USA	200420	8419	687
-USA	210420	6074	235
-USA	220420	6052	50
-USA	230420	6042	101
-USA	240420	5916	178
-USA	250420	5546	48
-USA	260420	5402	218
-USA	270420	5312	99
-USA	280420	5205	159
-USA	290420	4761	220
-USA	300420	4667	94
-USA	10520	4450	242
-Peru	20520	4342	121
-Pakistan 010520 4263	61
-Pakistan 020520 5108 	901
-
+usa	80420	434927	14788
+spain	80420	148220	14792
+italy	80420	139422	17669
+germany	80420	113296	2349
+france	80420	112950	10869
+china	80420	81802	3333
+iran	80420	64586	3993
+uk	80420	60733	7097
+turkey	80420	38226	812
+belgium	80420	23403	2240
+switzerland	80420	23280	895
+netherlands	80420	20549	2248
+canada	80420	19438	427
+brazil	80420	16188	820
+portugal	80420	13141	380
+austria	80420	12942	273
+south_korea	80420	10384	200
+israel	80420	9404	73
+russia	80420	8672	63
+sweden	80420	8419	687
+ireland	80420	6074	235
+australia	80420	6052	50
+norway	80420	6042	101
+india	80420	5916	178
+chile	80420	5546	48
+denmark	80420	5402	218
+czechia	80420	5312	99
+poland	80420	5205	159
+romania	80420	4761	220
+japan	80420	4667	94
+ecuador	80420	4450	242
+peru	80420	4342	121
+pakistan	80420	4263	61
+malaysia	80420	4119	65
+philippines	80420	3870	182
+luxembourg	80420	3034	46
+indonesia	80420	2956	240
+saudi_arabia	80420	2932	41
+mexico	80420	2785	141
+serbia	80420	2666	65
+uae	80420	2659	12
+panama	80420	2528	63
+finland	80420	2487	40
+thailand	80420	2369	30
+qatar	80420	2210	6
+dominican_republic	80420	2111	108
+colombia	80420	2054	55
+greece	80420	1884	83
+south africa	80420	1845	18
+argentina	80420	1795	65
+ukraine	80420	1668	52
+singapore	80420	1623	6
+iceland	80420	1616	6
+algeria	80420	1572	205
+egypt	80420	1560	103
+croatia	80420	1343	19
+morocco	80420	1275	93
+new_zealand	80420	1210	1
+iraq	80420	1202	69
+estonia	80420	1185	24
+moldova	80420	1174	27
+slovenia	80420	1091	40
+belarus	80420	1066	13
+hong kong	80420	961	4
+lithuania	80420	912	15
+hungary	80420	895	58
+armenia	80420	881	9
+kuwait	80420	855	1
+bahrain	80420	823	5
+azerbaijan	80420	822	8
+bosnia_and_herzegovina	80420	804	34
+cameroon	80420	730	10
+kazakhstan	80420	727	7
+diamond_princess	80420	712	11
+slovakia	80420	682	2
+tunisia	80420	628	24
+north macedonia	80420	617	29
+bulgaria	80420	593	24
+latvia	80420	577	2
+lebanon	80420	576	19
+andorra	80420	564	23
+uzbekistan	80420	545	3
+cyprus	80420	526	9
+costa_rica	80420	502	3
+cuba	80420	457	12
+uruguay	80420	456	7
+afghanistan	80420	444	14
+oman	80420	419	2
+burkina_faso	80420	414	23
+albania	80420	400	22
+ivory coast	80420	384	3
+taiwan	80420	379	5
+réunion	80420	362	0
+jordan	80420	358	6
+channel_islands	80420	351	8
+niger	80420	342	11
+ghana	80420	313	6
+honduras	80420	312	22
+san_marino	80420	308	34
+malta	80420	299	1
+nigeria	80420	276	6
+mauritius	80420	273	7
+kyrgyzstan	80420	270	4
+palestine	80420	263	1
+vietnam	80420	251	0
+montenegro	80420	248	2
+senegal	80420	244	2
+bangladesh	80420	218	20
+georgia	80420	211	3
+bolivia	80420	210	15
+sri lanka	80420	189	7
+mayotte	80420	184	2
+faeroe_islands	80420	184	0
+drc	80420	180	18
+kenya	80420	179	6
+venezuela	80420	167	9
+guinea	80420	164	0
+isle_of_man	80420	158	1
+martinique	80420	154	6
+guadeloupe	80420	141	8
+brunei	80420	135	1
+djibouti	80420	135	0
+gibraltar	80420	120	0
+paraguay	80420	119	5
+cambodia	80420	117	0
+rwanda	80420	110	0
+trinidad and tobago	80420	107	8
+el salvador	80420	93	5
+madagascar	80420	93	0
+guatemala	80420	87	3
+french_guiana	80420	83	0
+monaco	80420	81	1
+liechtenstein	80420	78	1
+aruba	80420	77	0
+togo	80420	70	3
+jamaica	80420	63	4
+barbados	80420	63	3
+mali	80420	59	7
+ethiopia	80420	55	2
+uganda	80420	53	0
+french_polynesia	80420	51	0
+congo	80420	45	5
+cayman_islands	80420	45	1
+macao	80420	45	0
+bahamas	80420	40	7
+sint_maarten	80420	40	6
+bermuda	80420	39	3
+zambia	80420	39	1
+guyana	80420	37	6
+gabon	80420	34	1
+eritrea	80420	33	0
+guinea_bissau	80420	33	0
+saint martin	80420	32	2
+liberia	80420	31	4
+haiti	80420	27	1
+benin	80420	26	1
+tanzania	80420	25	1
+myanmar	80420	22	3
+libya	80420	21	1
+angola	80420	19	2
+antigua_and_barbuda	80420	19	2
+syria	80420	19	2
+maldives	80420	19	0
+equatorial_guinea	80420	18	0
+new caledonia	80420	18	0
+mozambique	80420	17	0
+mongolia	80420	16	0
+namibia	80420	16	0
+dominica	80420	15	0
+fiji	80420	15	0
+laos	80420	15	0
+sudan	80420	14	2
+curaçao	80420	14	1
+saint lucia	80420	14	0
+somalia	80420	12	1
+grenada	80420	12	0
+eswatini	80420	12	0
+zimbabwe	80420	11	3
+greenland	80420	11	0
+saint_kitts_and_nevis	80420	11	0
+seychelles	80420	11	0
+suriname	80420	10	1
+chad	80420	10	0
+ms_zaandam	80420	9	2
+nepal	80420	9	0
+montserrat	80420	9	0
+belize	80420	8	1
+malawi	80420	8	1
+turks_and_caicos	80420	8	1
+car	80420	8	0
+vatican_city	80420	8	0
+st_vincent_grenadines	80420	8	0
+cabo_verde	80420	7	1
+sierra_leone	80420	7	0
+botswana	80420	6	1
+mauritania	80420	6	1
+nicaragua	80420	6	1
+st_barth	80420	6	0
+bhutan	80420	5	0
+falkland_islands	80420	5	0
+gambia	80420	4	1
+sao_tome_and_principe	80420	4	0
+western_sahara	80420	4	0
+anguilla	80420	3	0
+british_virgin_islands	80420	3	0
+burundi	80420	3	0
+caribbean_netherlands	80420	2	0
+papua_new_guinea	80420	2	0
+south_sudan	80420	2	0
+saint_pierre_miquelon	80420	1	0
+timor_leste	80420	1	0
+world	90420	1652652	100371
+usa	90420	478366	17927
+spain	90420	157053	15970
+italy	90420	147577	18849
+germany	90420	119624	2607
+france	90420	117749	12210
+china	90420	81907	3336
+uk	90420	70272	8958
+iran	90420	68192	4232
+turkey	90420	47029	1006
+belgium	90420	26667	3019
+switzerland	90420	24548	1001
+netherlands	90420	23097	2511
+canada	90420	21243	531
+brazil	90420	18397	974
+portugal	90420	15472	435
+austria	90420	13531	319
+russia	90420	11917	94
+south_korea	90420	10450	208
+israel	90420	10095	95
+sweden	90420	9685	870
+india	90420	7347	229
+ecuador	90420	7161	297
+ireland	90420	6574	263
+chile	90420	6501	65
+norway	90420	6244	112
+australia	90420	6203	53
+poland	90420	5955	181
+denmark	90420	5819	247
+czechia	90420	5674	119
+japan	90420	5530	99
+romania	90420	5467	270
+peru	90420	5256	138
+pakistan	90420	4695	66
+malaysia	90420	4346	70
+philippines	90420	4195	221
+saudi_arabia	90420	3651	47
+indonesia	90420	3512	306
+mexico	90420	3441	194
+luxembourg	90420	3223	54
+serbia	90420	3105	71
+uae	90420	2990	14
+finland	90420	2769	48
+panama	90420	2752	66
+qatar	90420	2512	6
+thailand	90420	2473	33
+dominican_republic	90420	2349	118
+colombia	90420	2223	69
+ukraine	90420	2203	69
+singapore	90420	2108	7
+greece	90420	2011	90
+south africa	90420	2003	24
+belarus	90420	1981	19
+argentina	90420	1894	81
+algeria	90420	1761	256
+egypt	90420	1699	118
+iceland	90420	1675	6
+croatia	90420	1495	21
+moldova	90420	1438	29
+morocco	90420	1431	105
+new_zealand	90420	1283	2
+iraq	90420	1279	70
+estonia	90420	1258	24
+hungary	90420	1190	77
+slovenia	90420	1160	45
+lithuania	90420	999	22
+kuwait	90420	993	1
+azerbaijan	90420	991	10
+hong kong	90420	990	4
+armenia	90420	937	12
+bahrain	90420	913	6
+bosnia_and_herzegovina	90420	886	36
+kazakhstan	90420	812	10
+cameroon	90420	803	12
+slovakia	90420	715	2
+diamond_princess	90420	712	11
+north macedonia	90420	711	32
+tunisia	90420	643	25
+bulgaria	90420	635	25
+uzbekistan	90420	624	3
+latvia	90420	612	3
+lebanon	90420	609	20
+andorra	90420	601	26
+cyprus	90420	595	10
+cuba	90420	564	15
+costa_rica	90420	539	3
+afghanistan	90420	521	15
+oman	90420	484	3
+uruguay	90420	473	7
+ivory coast	90420	444	3
+burkina_faso	90420	443	24
+bangladesh	90420	424	27
+albania	90420	416	23
+niger	90420	410	11
+honduras	90420	382	23
+taiwan	90420	382	6
+ghana	90420	378	6
+jordan	90420	372	7
+réunion	90420	362	0
+channel_islands	90420	361	8
+malta	90420	350	2
+san_marino	90420	344	34
+mauritius	90420	318	9
+kyrgyzstan	90420	298	5
+nigeria	90420	288	7
+bolivia	90420	268	19
+palestine	90420	266	2
+senegal	90420	265	2
+vietnam	90420	257	0
+montenegro	90420	255	2
+georgia	90420	234	3
+drc	90420	215	20
+isle_of_man	90420	201	1
+guinea	90420	194	0
+mayotte	90420	191	2
+sri lanka	90420	190	7
+kenya	90420	189	7
+faeroe_islands	90420	184	0
+venezuela	90420	171	9
+martinique	90420	154	6
+djibouti	90420	150	1
+guadeloupe	90420	143	8
+brunei	90420	136	1
+paraguay	90420	129	6
+guatemala	90420	126	3
+gibraltar	90420	123	0
+cambodia	90420	119	0
+el salvador	90420	117	6
+rwanda	90420	113	0
+trinidad and tobago	90420	109	8
+madagascar	90420	93	0
+mali	90420	87	7
+monaco	90420	84	1
+french_guiana	90420	83	0
+aruba	90420	82	0
+liechtenstein	90420	78	1
+togo	90420	76	3
+barbados	90420	66	4
+ethiopia	90420	65	3
+jamaica	90420	63	4
+congo	90420	60	5
+uganda	90420	53	0
+french_polynesia	90420	51	0
+sint_maarten	90420	50	8
+bermuda	90420	48	4
+cayman_islands	90420	45	1
+macao	90420	45	0
+gabon	90420	44	1
+bahamas	90420	41	8
+zambia	90420	40	2
+guyana	90420	37	6
+liberia	90420	37	5
+guinea_bissau	90420	36	0
+benin	90420	35	1
+eritrea	90420	33	0
+tanzania	90420	32	3
+saint martin	90420	32	2
+haiti	90420	30	2
+myanmar	90420	27	3
+libya	90420	24	1
+somalia	90420	21	1
+angola	90420	19	2
+antigua_and_barbuda	90420	19	2
+syria	90420	19	2
+maldives	90420	19	0
+equatorial_guinea	90420	18	0
+new caledonia	90420	18	0
+mozambique	90420	17	0
+dominica	90420	16	0
+fiji	90420	16	0
+laos	90420	16	0
+mongolia	90420	16	0
+namibia	90420	16	0
+sudan	90420	15	2
+curaçao	90420	14	1
+saint lucia	90420	14	0
+botswana	90420	13	1
+grenada	90420	12	0
+st_vincent_grenadines	90420	12	0
+eswatini	90420	12	0
+zimbabwe	90420	11	3
+chad	90420	11	0
+greenland	90420	11	0
+saint_kitts_and_nevis	90420	11	0
+seychelles	90420	11	0
+belize	90420	10	1
+suriname	90420	10	1
+ms_zaandam	90420	9	2
+malawi	90420	9	1
+nepal	90420	9	0
+montserrat	90420	9	0
+turks_and_caicos	90420	8	1
+car	90420	8	0
+vatican_city	90420	8	0
+sierra_leone	90420	8	0
+cabo_verde	90420	7	1
+mauritania	90420	7	1
+nicaragua	90420	7	1
+st_barth	90420	6	0
+bhutan	90420	5	0
+falkland_islands	90420	5	0
+gambia	90420	4	1
+sao_tome_and_principe	90420	4	0
+south_sudan	90420	4	0
+western_sahara	90420	4	0
+anguilla	90420	3	0
+british_virgin_islands	90420	3	0
+burundi	90420	3	0
+caribbean_netherlands	90420	2	0
+papua_new_guinea	90420	2	0
+timor_leste	90420	2	0
+saint_pierre_miquelon	90420	1	0
+yemen	90420	1	0
+world	100420	1765500	108042
+usa	100420	524242	20223
+spain	100420	161852	16480
+italy	100420	152271	19468
+france	100420	129654	13832
+germany	100420	123878	2736
+china	100420	81953	3339
+uk	100420	78991	9875
+iran	100420	70029	4357
+turkey	100420	52167	1101
+belgium	100420	28018	3346
+switzerland	100420	25107	1036
+netherlands	100420	24413	2643
+canada	100420	23195	648
+brazil	100420	20247	1090
+portugal	100420	15987	470
+austria	100420	13799	337
+russia	100420	13584	106
+israel	100420	10743	101
+south_korea	100420	10480	211
+sweden	100420	10151	887
+ireland	100420	8928	320
+india	100420	8446	288
+ecuador	100420	7257	315
+chile	100420	6927	73
+peru	100420	6848	181
+norway	100420	6408	118
+poland	100420	6356	208
+australia	100420	6303	56
+japan	100420	6005	99
+denmark	100420	5996	260
+romania	100420	5990	291
+czechia	100420	5831	129
+pakistan	100420	5011	86
+malaysia	100420	4530	73
+philippines	100420	4428	247
+saudi_arabia	100420	4033	52
+mexico	100420	3844	233
+indonesia	100420	3842	327
+uae	100420	3736	20
+serbia	100420	3380	74
+luxembourg	100420	3270	62
+panama	100420	2974	74
+finland	100420	2905	49
+qatar	100420	2728	6
+dominican_republic	100420	2620	126
+thailand	100420	2518	35
+ukraine	100420	2511	73
+colombia	100420	2473	80
+singapore	100420	2299	8
+belarus	100420	2226	23
+greece	100420	2081	93
+south africa	100420	2028	25
+argentina	100420	1975	83
+algeria	100420	1825	275
+egypt	100420	1794	135
+iceland	100420	1689	8
+moldova	100420	1560	30
+morocco	100420	1545	111
+croatia	100420	1534	21
+iraq	100420	1318	72
+new_zealand	100420	1312	4
+hungary	100420	1310	85
+estonia	100420	1304	24
+slovenia	100420	1188	50
+kuwait	100420	1154	1
+azerbaijan	100420	1058	11
+bahrain	100420	1040	6
+lithuania	100420	1026	23
+hong kong	100420	1001	4
+armenia	100420	977	13
+bosnia_and_herzegovina	100420	935	37
+kazakhstan	100420	865	10
+cameroon	100420	820	12
+north macedonia	100420	760	34
+uzbekistan	100420	729	3
+slovakia	100420	728	2
+diamond_princess	100420	712	11
+tunisia	100420	685	28
+bulgaria	100420	661	28
+latvia	100420	630	3
+cuba	100420	620	16
+lebanon	100420	619	20
+cyprus	100420	616	10
+andorra	100420	601	26
+costa_rica	100420	577	3
+afghanistan	100420	555	18
+oman	100420	546	3
+uruguay	100420	494	7
+bangladesh	100420	482	30
+ivory coast	100420	480	3
+burkina_faso	100420	448	26
+niger	100420	438	11
+albania	100420	433	23
+ghana	100420	408	8
+channel_islands	100420	398	9
+honduras	100420	392	24
+réunion	100420	388	0
+taiwan	100420	385	6
+jordan	100420	381	7
+malta	100420	370	3
+san_marino	100420	356	35
+kyrgyzstan	100420	339	5
+mauritius	100420	319	9
+nigeria	100420	305	7
+senegal	100420	278	2
+bolivia	100420	275	20
+palestine	100420	268	2
+montenegro	100420	263	2
+vietnam	100420	258	0
+guinea	100420	250	0
+georgia	100420	242	3
+isle_of_man	100420	226	2
+drc	100420	223	20
+sri lanka	100420	198	7
+mayotte	100420	196	3
+kenya	100420	191	7
+djibouti	100420	187	2
+faeroe_islands	100420	184	0
+venezuela	100420	175	9
+martinique	100420	155	6
+guadeloupe	100420	143	8
+guatemala	100420	137	3
+brunei	100420	136	1
+paraguay	100420	133	6
+gibraltar	100420	129	0
+cambodia	100420	120	0
+el salvador	100420	118	6
+rwanda	100420	118	0
+trinidad and tobago	100420	109	8
+madagascar	100420	102	0
+monaco	100420	92	1
+aruba	100420	92	0
+mali	100420	87	7
+french_guiana	100420	83	0
+liechtenstein	100420	79	1
+togo	100420	76	3
+ethiopia	100420	69	3
+barbados	100420	67	4
+jamaica	100420	65	4
+congo	100420	60	5
+uganda	100420	53	0
+french_polynesia	100420	51	0
+sint_maarten	100420	50	9
+liberia	100420	48	5
+bermuda	100420	48	4
+gabon	100420	46	1
+cayman_islands	100420	45	1
+macao	100420	45	0
+bahamas	100420	42	8
+guyana	100420	40	6
+zambia	100420	40	2
+guinea_bissau	100420	38	0
+benin	100420	35	1
+eritrea	100420	34	0
+tanzania	100420	32	3
+saint martin	100420	32	2
+myanmar	100420	31	3
+haiti	100420	31	2
+syria	100420	25	2
+libya	100420	24	1
+antigua_and_barbuda	100420	21	2
+somalia	100420	21	1
+mozambique	100420	20	0
+angola	100420	19	2
+sudan	100420	19	2
+maldives	100420	19	0
+equatorial_guinea	100420	18	0
+laos	100420	18	0
+new caledonia	100420	18	0
+dominica	100420	16	0
+fiji	100420	16	0
+mongolia	100420	16	0
+namibia	100420	16	0
+saint lucia	100420	15	0
+curaçao	100420	14	1
+grenada	100420	14	0
+zimbabwe	100420	13	3
+belize	100420	13	2
+botswana	100420	13	1
+malawi	100420	12	2
+saint_kitts_and_nevis	100420	12	0
+st_vincent_grenadines	100420	12	0
+eswatini	100420	12	0
+chad	100420	11	0
+greenland	100420	11	0
+seychelles	100420	11	0
+suriname	100420	10	1
+ms_zaandam	100420	9	2
+gambia	100420	9	1
+nepal	100420	9	0
+montserrat	100420	9	0
+cabo_verde	100420	8	1
+nicaragua	100420	8	1
+turks_and_caicos	100420	8	1
+car	100420	8	0
+vatican_city	100420	8	0
+sierra_leone	100420	8	0
+mauritania	100420	7	1
+st_barth	100420	6	0
+bhutan	100420	5	0
+burundi	100420	5	0
+falkland_islands	100420	5	0
+sao_tome_and_principe	100420	4	0
+south_sudan	100420	4	0
+western_sahara	100420	4	0
+anguilla	100420	3	0
+british_virgin_islands	100420	3	0
+caribbean_netherlands	100420	2	0
+papua_new_guinea	100420	2	0
+timor_leste	100420	2	0
+saint_pierre_miquelon	100420	1	0
+yemen	100420	1	0
+world	120420	1923848	119618	71591	5423
+usa	120420	586941	23640	26641	1535
+spain	120420	170099	17756	3268	547
+italy	120420	159516	20465	3153	566
+france	120420	136779	14967	4188	574
+germany	120420	130072	3194	2218	172
+uk	120420	88621	11329	4342	717
+china	120420	82160	3341	108	2
+iran	120420	73303	4585	1617	111
+turkey	120420	61049	1296	4093	98
+belgium	120420	30589	3903	942	303
+netherlands	120420	26551	2823	964	86
+switzerland	120420	25688	1138	273	32
+canada	120420	25680	780	1297	63
+brazil	120420	23430	1328	1238	105
+russia	120420	18328	148	2558	18
+portugal	120420	16934	535	349	31
+austria	120420	14041	368	96	18
+israel	120420	11586	116	441	13
+sweden	120420	10948	919	465	20
+ireland	120420	10647	365	992	31
+south_korea	120420	10537	217	25	3
+india	120420	10453	358	1248	27
+peru	120420	9784	216	2265	23
+japan	120420	7618	143	248	20
+ecuador	120420	7529	355	63	22
+chile	120420	7525	82	312	2
+poland	120420	6934	245	260	13
+romania	120420	6633	331	333	15
+norway	120420	6603	134	78	6
+australia	120420	6359	61	46	2
+denmark	120420	6318	285	144	12
+czechia	120420	6059	143	68	5
+pakistan	120420	5496	93	266	2
+saudi_arabia	120420	4934	65	472	6
+philippines	120420	4932	315	284	18
+malaysia	120420	4817	77	134	1
+mexico	120420	4661	296	442	23
+indonesia	120420	4557	399	316	26
+uae	120420	4521	25	398	3
+serbia	120420	4054	85	424	5
+panama	120420	3472	94	72	7
+luxembourg	120420	3292	69	11	3
+qatar	120420	3231	7	252	0
+dominican_republic	120420	3167	177	200	4
+ukraine	120420	3102	93	325	10
+finland	120420	3064	59	90	3
+belarus	120420	2919	29	341	3
+singapore	120420	2918	9	386	1
+colombia	120420	2852	112	76	3
+thailand	120420	2579	40	28	2
+argentina	120420	2277	98	135	8
+south africa	120420	2272	27	99	2
+egypt	120420	2190	164	125	5
+greece	120420	2145	99	31	1
+algeria	120420	1983	313	69	20
+morocco	120420	1763	126	102	8
+moldova	120420	1712	35	50	4
+iceland	120420	1711	8	10	0
+croatia	120420	1650	25	50	2
+hungary	120420	1458	109	48	10
+iraq	120420	1378	78	26	2
+bahrain	120420	1361	6	225	0
+new_zealand	120420	1349	5	19	1
+estonia	120420	1332	28	23	3
+kuwait	120420	1300	2	66	1
+slovenia	120420	1212	55	7	2
+azerbaijan	120420	1148	12	50	1
+kazakhstan	120420	1091	12	140	2
+lithuania	120420	1062	24	9	1
+armenia	120420	1039	14	26	1
+bosnia_and_herzegovina	120420	1037	39	28	0
+hong kong	120420	1010	4	5	0
+uzbekistan	120420	998	4	133	0
+north macedonia	120420	854	38	26	4
+cameroon	120420	848	12	28	0
+bangladesh	120420	803	39	182	5
+slovakia	120420	769	2	27	0
+oman	120420	727	4	128	0
+tunisia	120420	726	34	19	3
+cuba	120420	726	21	57	3
+diamond_princess	120420	712	12	0	0
+bulgaria	120420	685	32	10	3
+afghanistan	120420	665	21	58	3
+cyprus	120420	662	12	29	1
+latvia	120420	655	5	4	0
+andorra	120420	646	29	8	0
+lebanon	120420	632	20	2	0
+ivory coast	120420	626	6	52	1
+costa_rica	120420	612	3	17	0
+ghana	120420	566	8	0	0
+niger	120420	548	13	19	1
+burkina_faso	120420	515	27	18	0
+uruguay	120420	483	8	0	1
+albania	120420	467	23	21	0
+channel_islands	120420	436	9	5	0
+kyrgyzstan	120420	419	5	42	0
+honduras	120420	397	25	4	0
+taiwan	120420	393	6	5	0
+jordan	120420	391	7	2	0
+réunion	120420	391	0	2	0
+malta	120420	384	3	6	0
+san_marino	120420	371	36	15	1
+nigeria	120420	343	10	20	0
+bolivia	120420	330	27	30	3
+mauritius	120420	324	9	0	0
+guinea	120420	319	0	69	0
+palestine	120420	308	2	18	0
+djibouti	120420	298	2	84	0
+senegal	120420	291	2	11	0
+montenegro	120420	274	3	2	0
+georgia	120420	272	3	15	0
+vietnam	120420	265	0	3	0
+isle_of_man	120420	242	2	14	0
+drc	120420	235	20	1	0
+sri lanka	120420	217	7	7	0
+kenya	120420	208	9	11	1
+mayotte	120420	207	3	11	0
+venezuela	120420	189	9	8	0
+faeroe_islands	120420	184	0	0	0
+martinique	120420	157	6	2	0
+guatemala	120420	156	5	1	0
+paraguay	120420	147	6	13	0
+guadeloupe	120420	145	8	2	0
+el salvador	120420	137	6	12	0
+brunei	120420	136	1	0	0
+gibraltar	120420	129	0	0	0
+rwanda	120420	127	0	1	0
+mali	120420	123	10	18	1
+cambodia	120420	122	0	0	0
+trinidad and tobago	120420	113	8	0	0
+madagascar	120420	106	0	0	0
+monaco	120420	93	1	0	0
+aruba	120420	92	0	0	0
+french_guiana	120420	86	0	0	0
+liechtenstein	120420	79	1	0	0
+togo	120420	77	3	1	0
+ethiopia	120420	74	3	3	0
+jamaica	120420	73	4	1	0
+barbados	120420	72	4	1	0
+myanmar	120420	62	4	21	0
+congo	120420	60	5	0	0
+somalia	120420	60	2	35	1
+liberia	120420	59	6	9	1
+bermuda	120420	57	5	0	1
+gabon	120420	57	1	8	0
+french_polynesia	120420	55	0	2	0
+cayman_islands	120420	54	1	1	0
+uganda	120420	54	0	0	0
+sint_maarten	120420	50	9	0	0
+bahamas	120420	49	8	3	0
+tanzania	120420	49	3	17	0
+guyana	120420	47	6	2	0
+zambia	120420	45	2	2	0
+macao	120420	45	0	0	0
+haiti	120420	40	3	7	0
+guinea_bissau	120420	38	0	0	0
+benin	120420	35	1	0	0
+eritrea	120420	34	0	0	0
+saint martin	120420	32	2	0	0
+sudan	120420	29	4	10	2
+libya	120420	26	1	1	0
+syria	120420	25	2	0	0
+antigua_and_barbuda	120420	23	2	2	0
+chad	120420	23	0	5	0
+equatorial_guinea	120420	21	0	0	0
+mozambique	120420	21	0	0	0
+maldives	120420	20	0	0	0
+angola	120420	19	2	0	0
+laos	120420	19	0	0	0
+belize	120420	18	2	4	0
+new caledonia	120420	18	0	0	0
+zimbabwe	120420	17	3	3	0
+mongolia	120420	17	0	1	0
+malawi	120420	16	2	3	0
+dominica	120420	16	0	0	0
+fiji	120420	16	0	0	0
+namibia	120420	16	0	0	0
+saint lucia	120420	15	0	0	0
+eswatini	120420	15	0	1	0
+curaçao	120420	14	1	0	0
+nepal	120420	14	0	2	0
+grenada	120420	14	0	0	0
+botswana	120420	13	1	0	0
+saint_kitts_and_nevis	120420	12	0	0	0
+st_vincent_grenadines	120420	12	0	0	0
+car	120420	11	0	3	0
+greenland	120420	11	0	0	0
+montserrat	120420	11	0	2	0
+seychelles	120420	11	0	0	0
+cabo_verde	120420	10	1	2	0
+suriname	120420	10	1	0	0
+turks_and_caicos	120420	10	1	1	0
+sierra_leone	120420	10	0	0	0
+ms_zaandam	120420	9	2	0	0
+gambia	120420	9	1	0	0
+nicaragua	120420	9	1	0	0
+vatican_city	120420	8	0	0	0
+mauritania	120420	7	1	0	0
+st_barth	120420	6	0	0	0
+western_sahara	120420	6	0	0	0
+burundi	120420	5	1	0	1
+bhutan	120420	5	0	0	0
+falkland_islands	120420	5	0	0	0
+sao_tome_and_principe	120420	4	0	0	0
+south_sudan	120420	4	0	0	0
+timor_leste	120420	4	0	2	0
+anguilla	120420	3	0	0	0
+british_virgin_islands	120420	3	0	0	0
+caribbean_netherlands	120420	3	0	0	0
+papua_new_guinea	120420	2	0	0	0
+saint_pierre_miquelon	120420	1	0	0	0
+yemen	120420	1	0	0	0
+world	150420	2082372	134560
+usa	150420	644089	28529
+spain	150420	180659	18812
+italy	150420	165155	21645
+france	150420	147863	17167
+germany	150420	134753	3804
+uk	150420	98476	12868
+china	150420	82295	3342
+iran	150420	76389	4777
+turkey	150420	69392	1518
+belgium	150420	33573	4440
+brazil	150420	28610	1757
+canada	150420	28379	1010
+netherlands	150420	28153	3134
+switzerland	150420	26336	1239
+russia	150420	24490	198
+portugal	150420	18091	599
+austria	150420	14350	393
+ireland	150420	12547	444
+israel	150420	12501	130
+india	150420	12370	422
+sweden	150420	11927	1203
+peru	150420	11475	254
+south_korea	150420	10591	225
+japan	150420	8626	178
+chile	150420	8273	94
+ecuador	150420	7858	388
+poland	150420	7582	286
+romania	150420	7216	372
+norway	150420	6797	150
+denmark	150420	6681	309
+australia	150420	6447	63
+pakistan	150420	6383	111
+czechia	150420	6301	166
+saudi_arabia	150420	5862	79
+philippines	150420	5453	349
+mexico	150420	5399	406
+uae	150420	5365	33
+indonesia	150420	5136	469
+malaysia	150420	5072	83
+serbia	150420	4873	99
+ukraine	150420	3764	108
+panama	150420	3751	103
+belarus	150420	3728	36
+qatar	150420	3711	7
+singapore	150420	3699	10
+dominican_republic	150420	3614	189
+luxembourg	150420	3373	69
+finland	150420	3237	72
+colombia	150420	3105	131
+thailand	150420	2643	43
+argentina	150420	2571	112
+south africa	150420	2506	34
+egypt	150420	2505	183
+greece	150420	2192	102
+algeria	150420	2160	336
+moldova	150420	2049	46
+morocco	150420	2024	127
+croatia	150420	1741	33
+iceland	150420	1727	8
+bahrain	150420	1671	7
+hungary	150420	1579	134
+iraq	150420	1415	79
+kuwait	150420	1405	3
+estonia	150420	1400	35
+new_zealand	150420	1386	9
+uzbekistan	150420	1302	4
+kazakhstan	150420	1295	16
+azerbaijan	150420	1253	13
+slovenia	150420	1248	61
+bangladesh	150420	1231	50
+armenia	150420	1111	17
+bosnia_and_herzegovina	150420	1110	41
+lithuania	150420	1091	30
+hong kong	150420	1017	4
+north macedonia	150420	974	45
+oman	150420	910	4
+slovakia	150420	863	6
+cameroon	150420	848	17
+cuba	150420	814	24
+afghanistan	150420	784	25
+tunisia	150420	780	35
+bulgaria	150420	747	36
+cyprus	150420	715	12
+diamond_princess	150420	712	12
+andorra	150420	673	33
+latvia	150420	666	5
+lebanon	150420	658	21
+ivory coast	150420	654	6
+ghana	150420	641	8
+costa_rica	150420	626	4
+niger	150420	584	14
+burkina_faso	150420	542	32
+albania	150420	494	25
+uruguay	150420	493	9
+kyrgyzstan	150420	449	5
+channel_islands	150420	447	15
+djibouti	150420	435	2
+honduras	150420	419	31
+nigeria	150420	407	12
+guinea	150420	404	1
+jordan	150420	401	7
+malta	150420	399	3
+bolivia	150420	397	28
+taiwan	150420	395	6
+san_marino	150420	393	36
+réunion	150420	391	0
+palestine	150420	374	2
+mauritius	150420	324	9
+senegal	150420	314	2
+georgia	150420	306	3
+montenegro	150420	288	4
+vietnam	150420	268	0
+isle_of_man	150420	256	4
+drc	150420	254	21
+sri lanka	150420	238	7
+kenya	150420	225	10
+mayotte	150420	217	3
+venezuela	150420	197	9
+faeroe_islands	150420	184	0
+guatemala	150420	180	5
+paraguay	150420	161	8
+el salvador	150420	159	6
+martinique	150420	158	8
+mali	150420	148	13
+guadeloupe	150420	145	8
+brunei	150420	136	1
+rwanda	150420	136	0
+gibraltar	150420	131	0
+jamaica	150420	125	5
+cambodia	150420	122	0
+congo	150420	117	5
+trinidad and tobago	150420	114	8
+madagascar	150420	110	0
+monaco	150420	93	3
+aruba	150420	93	1
+tanzania	150420	88	4
+french_guiana	150420	86	0
+ethiopia	150420	85	3
+bermuda	150420	81	5
+togo	150420	81	3
+somalia	150420	80	5
+gabon	150420	80	1
+liechtenstein	150420	79	1
+myanmar	150420	74	4
+barbados	150420	73	5
+cayman_islands	150420	60	1
+liberia	150420	59	6
+cabo_verde	150420	56	1
+guyana	150420	55	6
+french_polynesia	150420	55	0
+uganda	150420	55	0
+sint_maarten	150420	53	9
+bahamas	150420	53	8
+equatorial_guinea	150420	51	0
+zambia	150420	48	2
+libya	150420	48	1
+macao	150420	45	0
+guinea_bissau	150420	43	0
+haiti	150420	41	3
+saint martin	150420	35	2
+benin	150420	35	1
+eritrea	150420	35	0
+syria	150420	33	2
+sudan	150420	32	5
+mongolia	150420	30	0
+mozambique	150420	29	0
+zimbabwe	150420	23	3
+antigua_and_barbuda	150420	23	2
+chad	150420	23	0
+maldives	150420	22	0
+angola	150420	19	2
+laos	150420	19	0
+belize	150420	18	2
+new caledonia	150420	18	0
+malawi	150420	16	2
+nepal	150420	16	0
+dominica	150420	16	0
+fiji	150420	16	0
+namibia	150420	16	0
+saint lucia	150420	15	0
+eswatini	150420	15	0
+curaçao	150420	14	1
+grenada	150420	14	0
+saint_kitts_and_nevis	150420	14	0
+botswana	150420	13	1
+sierra_leone	150420	13	0
+car	150420	12	0
+st_vincent_grenadines	150420	12	0
+falkland_islands	150420	11	0
+greenland	150420	11	0
+montserrat	150420	11	0
+seychelles	150420	11	0
+suriname	150420	10	1
+turks_and_caicos	150420	10	1
+ms_zaandam	150420	9	2
+gambia	150420	9	1
+nicaragua	150420	9	1
+vatican_city	150420	8	0
+timor_leste	150420	8	0
+mauritania	150420	7	1
+st_barth	150420	6	0
+western_sahara	150420	6	0
+burundi	150420	5	1
+bhutan	150420	5	0
+sao_tome_and_principe	150420	4	0
+south_sudan	150420	4	0
+anguilla	150420	3	0
+british_virgin_islands	150420	3	0
+caribbean_netherlands	150420	3	0
+papua_new_guinea	150420	2	0
+saint_pierre_miquelon	150420	1	0
+yemen	150420	1	0
+world	170420	2248863	154145
+usa	170420	709735	37154
+spain	170420	190839	20002
+italy	170420	172434	22745
+france	170420	147969	18681
+germany	170420	141397	4352
+uk	170420	108692	14576
+china	170420	82692	4632
+iran	170420	79494	4958
+turkey	170420	78546	1769
+belgium	170420	36138	5163
+brazil	170420	33682	2141
+russia	170420	32008	273
+canada	170420	31927	1310
+netherlands	170420	30449	3459
+switzerland	170420	27078	1327
+portugal	170420	19022	657
+austria	170420	14595	431
+india	170420	14352	486
+ireland	170420	13980	530
+peru	170420	13489	300
+sweden	170420	13216	1400
+israel	170420	12982	151
+south_korea	170420	10635	230
+japan	170420	9787	190
+chile	170420	9252	116
+ecuador	170420	8450	421
+poland	170420	8379	332
+romania	170420	8067	411
+saudi_arabia	170420	7142	87
+denmark	170420	7073	336
+pakistan	170420	7025	135
+norway	170420	6937	161
+czechia	170420	6549	173
+australia	170420	6533	65
+uae	170420	6302	37
+mexico	170420	6297	486
+indonesia	170420	5923	520
+philippines	170420	5878	387
+serbia	170420	5690	110
+malaysia	170420	5251	86
+singapore	170420	5050	11
+belarus	170420	4779	42
+qatar	170420	4663	7
+ukraine	170420	4662	125
+dominican_republic	170420	4126	200
+panama	170420	4016	109
+finland	170420	3489	82
+luxembourg	170420	3480	72
+colombia	170420	3439	153
+egypt	170420	2844	205
+south africa	170420	2783	50
+thailand	170420	2700	47
+argentina	170420	2669	123
+morocco	170420	2564	135
+algeria	170420	2418	364
+moldova	170420	2264	56
+greece	170420	2224	108
+bangladesh	170420	1838	75
+croatia	170420	1814	36
+hungary	170420	1763	156
+iceland	170420	1754	9
+bahrain	170420	1740	7
+kuwait	170420	1658	5
+kazakhstan	170420	1546	17
+iraq	170420	1482	81
+estonia	170420	1459	38
+new_zealand	170420	1409	11
+uzbekistan	170420	1405	4
+azerbaijan	170420	1340	15
+slovenia	170420	1304	66
+bosnia_and_herzegovina	170420	1214	46
+armenia	170420	1201	19
+lithuania	170420	1149	33
+north macedonia	170420	1117	49
+oman	170420	1069	6
+slovakia	170420	1049	9
+hong kong	170420	1022	4
+cameroon	170420	996	22
+cuba	170420	923	31
+afghanistan	170420	906	30
+tunisia	170420	864	37
+bulgaria	170420	846	41
+cyprus	170420	750	12
+djibouti	170420	732	2
+diamond_princess	170420	712	13
+andorra	170420	696	35
+ivory coast	170420	688	6
+latvia	170420	682	5
+lebanon	170420	668	21
+costa_rica	170420	649	4
+ghana	170420	641	8
+niger	170420	627	18
+burkina_faso	170420	557	35
+albania	170420	539	26
+uruguay	170420	502	9
+nigeria	170420	493	17
+kyrgyzstan	170420	489	5
+guinea	170420	477	3
+channel_islands	170420	470	20
+bolivia	170420	465	31
+honduras	170420	442	41
+san_marino	170420	435	39
+malta	170420	422	3
+jordan	170420	407	7
+palestine	170420	402	2
+réunion	170420	402	0
+taiwan	170420	395	6
+georgia	170420	370	3
+senegal	170420	342	2
+mauritius	170420	324	9
+montenegro	170420	303	5
+isle_of_man	170420	291	4
+drc	170420	287	23
+vietnam	170420	268	0
+kenya	170420	246	11
+mayotte	170420	245	4
+sri lanka	170420	244	7
+guatemala	170420	214	7
+venezuela	170420	204	9
+paraguay	170420	199	8
+faeroe_islands	170420	184	0
+el salvador	170420	177	7
+mali	170420	171	13
+martinique	170420	158	8
+tanzania	170420	147	5
+guadeloupe	170420	145	8
+congo	170420	143	6
+jamaica	170420	143	5
+rwanda	170420	143	0
+brunei	170420	136	1
+gibraltar	170420	132	0
+cambodia	170420	122	0
+madagascar	170420	117	0
+somalia	170420	116	6
+trinidad and tobago	170420	114	8
+gabon	170420	108	1
+ethiopia	170420	96	3
+aruba	170420	96	2
+french_guiana	170420	96	0
+monaco	170420	94	3
+myanmar	170420	88	4
+bermuda	170420	83	5
+togo	170420	83	5
+liechtenstein	170420	79	1
+equatorial_guinea	170420	79	0
+liberia	170420	76	7
+barbados	170420	75	5
+guyana	170420	63	6
+cayman_islands	170420	61	1
+sint_maarten	170420	57	9
+cabo_verde	170420	56	1
+french_polynesia	170420	55	0
+uganda	170420	55	0
+bahamas	170420	54	9
+zambia	170420	52	2
+libya	170420	49	1
+macao	170420	45	0
+haiti	170420	43	3
+guinea_bissau	170420	43	0
+syria	170420	38	2
+saint martin	170420	35	2
+benin	170420	35	1
+eritrea	170420	35	0
+mozambique	170420	34	0
+sudan	170420	33	6
+mongolia	170420	31	0
+nepal	170420	30	0
+maldives	170420	29	0
+chad	170420	27	0
+sierra_leone	170420	26	0
+zimbabwe	170420	24	3
+antigua_and_barbuda	170420	23	3
+angola	170420	19	2
+laos	170420	19	0
+belize	170420	18	2
+new caledonia	170420	18	0
+timor_leste	170420	18	0
+malawi	170420	17	2
+fiji	170420	17	0
+eswatini	170420	16	1
+dominica	170420	16	0
+namibia	170420	16	0
+botswana	170420	15	1
+saint lucia	170420	15	0
+curaçao	170420	14	1
+grenada	170420	14	0
+saint_kitts_and_nevis	170420	14	0
+car	170420	12	0
+st_vincent_grenadines	170420	12	0
+turks_and_caicos	170420	11	1
+falkland_islands	170420	11	0
+greenland	170420	11	0
+montserrat	170420	11	0
+seychelles	170420	11	0
+suriname	170420	10	1
+ms_zaandam	170420	9	2
+gambia	170420	9	1
+nicaragua	170420	9	1
+vatican_city	170420	8	0
+mauritania	170420	7	1
+papua_new_guinea	170420	7	0
+st_barth	170420	6	0
+western_sahara	170420	6	0
+burundi	170420	5	1
+bhutan	170420	5	0
+british_virgin_islands	170420	4	0
+sao_tome_and_principe	170420	4	0
+south_sudan	170420	4	0
+anguilla	170420	3	0
+caribbean_netherlands	170420	3	0
+saint_pierre_miquelon	170420	1	0
+yemen	170420	1	0
 

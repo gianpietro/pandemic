@@ -5,9 +5,9 @@
 
  struct country {
   char nation[COUNTRY];
+  int recdate; 
   int tcases;
   int tdeaths;
-  int recdate;
   struct country *next;
 };
     typedef struct country country;

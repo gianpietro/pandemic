@@ -116,6 +116,7 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
     printf("date for country %d\n", recdt[i]);
   }
   /* use a shellsort to arrange the date values in ascending order */
+  /*
   for (gap = k/2; gap > 0; gap /=2) {
     for (a=gap; a<k; a++) {
      for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
@@ -124,7 +125,7 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
         recdt[b+gap] = temp;
 	}
     }
-   }
+    }*/
   return recdt;
 }
 
@@ -185,29 +186,59 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   char filename[10];
   int i;
   int j;
-
-  char * commandsForGnuplot[] = {"plot 'data.temp' with lines"};
-  char * commandForGnuplotOne[] = {"plot 'data.temp'"};
-  
+  int *row;
+  int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
+ 
+  char * commandsForGnuplot[]  =
+    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+     "set xtics font ',5'",
+     "set ytics font ',6'",
+     "set ylabel 'Total number of Cases",
+     "set xlabel 'Date'",
+     "set grid",
+     "unset key",
+     "plot for [i=2:2] 'data.temp' using i:xtic(1) with lines"};
+  // {"set xtics border out scale 3,2 mirror rotate by 90 offset character 0, -1.5, 0 autojustify",
+   //{"plot for [i=2:2] 'data.temp' using i:xtic(1)  with lines"};
+  char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
+    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+     "set xtics font ',5'",
+     "set ytics font ',6'",
+     "set ylabel 'Total number of Cases",
+     "set xlabel 'Date'",
+     "set grid",
+     "unset key",
+     "plot for [i=2:2] 'data.temp' using i:xtic(1)"};
+   
   FILE *temp = fopen("data.temp", "w");
 
-  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");
+  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");
+  /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
+   these warnings make program exit */
   
   for (i=0; i < numrec; i++)
     {
-    fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
+      //      row[i] = i;
+      fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
     }
+  printf("One data point %d\n", arrayDate[0]);
 
   if (numrec > 1) {  
-    for (i=0; i < 1; i++) {
-      fprintf(gnuplotPipe, "set title '%s'\n", countryname);  // this allow me to have a variable title 
+    for (i=0; i < numOfCommands; i++) {
+      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
-    }
+     }
   }
-    
-    if (numrec == 1) {
-      fprintf(gnuplotPipe, "set title '%s'\n", countryname);  // this allow me to have a variable title 
-      fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[0]); //Send commands to gnuplot one by one.
+
+  if (numrec == 1) {
+      for (i=0; i < numOfCommands; i++) {
+      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
+      fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
+     }
     }
+
+  /* need both to allow graph to plot while terminal program remains in focus */
+  fflush(temp);
+  fflush(gnuplotPipe);
     
 }
