@@ -14,16 +14,15 @@ int main(void) {
   char name[COUNTRY];
   char s[COUNTRY];
   char c[COUNTRY];
-  int totalcases;
-  int totaldeaths;
+  int totalcases, totaldeaths, dailycases, dailydeaths;
   int rcdate;
   int n, i;
   int numrec;  /* number of records in date array for country being searched */
   int *arrayDate;
   int m;
-  int *arraytcases;
-  int *arraydcases;
+  int *arraytcases, *arraydcases;
   int choice = 0;
+ 
   
   FILE *fp;
  
@@ -34,12 +33,12 @@ int main(void) {
     exit(1);
   }
 
-  while (fscanf(fp, "%s %d %d %d", name, &rcdate, &totalcases, &totaldeaths) != EOF) {
+  while (fscanf(fp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {
     if (i == 0) {
-      start = createCountry(name, rcdate, totalcases, totaldeaths);                                                   
+      start = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);                                                   
       end = start;
     } else {
-      newCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths);
+      newCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
       end = append(end, newCountryPtr);
     }       
     i++;
@@ -53,6 +52,8 @@ int main(void) {
     printf("Option 2: Graph Total Cases by Country\n\n");
     printf("option 3: Graph Total Deaths by Country\n\n");
     printf("Option 4: Total Cases and Deaths by Country\n\n");
+    printf("Option 5: New Day Cases by Country\n\n");
+    printf("option 6: Graph New Deaths by Country\n\n");
     printf("Option 9: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -63,6 +64,7 @@ int main(void) {
         printCountry(start);
         break;
       case 2:
+	//type = 2;
         /* search for a particular country and print the values in its struct */
         printf("Search for a country: ");
         scanf("%s", s);
@@ -78,10 +80,10 @@ int main(void) {
         for (m=0; m<numrec;m++){
           printf("record date %d\n",arrayDate[m]);
         }
-        arraytcases =  filterCo(start, s, arrayDate, numrec);
+        arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
         for (i=0; i<numrec; i++) 
           printf("total cases %d\n", arraytcases[i]);
-        countryGraph(arrayDate, arraytcases, numrec, s);     
+        countryGraph(arrayDate, arraytcases, numrec, s, choice);     
         free(arraytcases);
         free(arrayDate);  
         /* free up memory initialised by malloc in create struct*/
@@ -101,13 +103,13 @@ int main(void) {
         for (m=0; m<numrec;m++){
           printf("record date %d\n",arrayDate[m]);
         }
-	arraydcases =  filterDCo(start, s, arrayDate, numrec);
-	countryGraph(arrayDate, arraydcases, numrec, s);
+	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
+	countryGraph(arrayDate, arraydcases, numrec, s, choice);
         free(arraydcases);
         free(arrayDate); 
       break;
     case 4:
-      printf("Search for a country: ");
+        printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
 	numrec = getCoRec(start,s);
@@ -115,11 +117,56 @@ int main(void) {
 	for (m=0; m<numrec;m++){
           printf("record date %d\n",arrayDate[m]);
         }
-        arraytcases =  filterCo(start, s, arrayDate, numrec);
-	arraydcases =  filterDCo(start, s, arrayDate, numrec);
+        arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
+	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraphTotDC(arrayDate, arraytcases, arraydcases, numrec, s);
 	free(arraytcases);
 	free(arraydcases);
+        free(arrayDate); 
+      break;
+    case 5:
+      //type = 2;
+        /* search for a particular country and print the values in its struct */
+        printf("Search for a country: ");
+        scanf("%s", s);
+        searchCountry(start,s);
+        /* pulls back the number of records for thecountry searched */
+        numrec = getCoRec(start,s);                           
+        printf("number of record %d\n", numrec);
+
+        /* builds an array of the dates found for the country searched, 
+           this will be number of data rows 
+           The dates will have been sorted in ascending order */  
+        arrayDate = getCoRecdate(start,s,numrec);
+        for (m=0; m<numrec; m++){
+          printf("record date %d\n",arrayDate[m]);
+        }
+        arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
+        for (i=0; i<numrec; i++) 
+          printf("total cases %d\n", arraytcases[i]);
+        countryGraph(arrayDate, arraytcases, numrec, s, choice);     
+        free(arraytcases);
+        free(arrayDate);  
+        /* free up memory initialised by malloc in create struct*/
+      break;
+      case 6:
+        printf("Search for a country: ");
+        scanf("%s", s);
+        searchCountry(start,s);
+        /* pulls back the number of records for thecountry searched */
+        numrec = getCoRec(start,s);                           
+        printf("number of record %d\n", numrec);
+
+        /* builds an array of the dates found for the country searched, 
+           this will be number of data rows 
+           The dates will have been sorted in ascending order */  
+        arrayDate = getCoRecdate(start,s,numrec);
+        for (m=0; m<numrec;m++){
+          printf("record date %d\n",arrayDate[m]);
+        }
+	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
+	countryGraph(arrayDate, arraydcases, numrec, s, choice);
+        free(arraydcases);
         free(arrayDate); 
       break;
     case 9:

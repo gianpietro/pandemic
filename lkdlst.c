@@ -6,7 +6,7 @@
 
 int coName = COUNTRY;                /* issue with using #define COUNTRY */
 
-struct country *createCountry(char countryname[], int rcdate,  int totcases, int totdeaths) {
+struct country *createCountry(char countryname[], int rcdate,  int totcases, int totdeaths, int daycases, int daydeaths) {
   struct country *ptr;
   int i;
 
@@ -16,6 +16,8 @@ struct country *createCountry(char countryname[], int rcdate,  int totcases, int
      ptr->nation[i] = countryname[i];
   ptr->tcases = totcases;
   ptr->tdeaths = totdeaths;
+  ptr->dcases = daycases;
+  ptr->ddeaths = daydeaths;
   ptr->recdate = rcdate;
   ptr->next = NULL;
 
@@ -36,7 +38,7 @@ void searchCountry(struct country *start, char countryname[]) {
   int c = 0;
   while (ptr != NULL) {
     if (strcmp(ptr->nation, countryname) == 0) {
-      printf("Country %s date %d totcases %d totdeaths %d\n", ptr->nation, ptr->recdate, ptr->tcases, ptr->tdeaths);
+      printf("Country %s date %d totcases %d totdeaths %d dailycases %d dailydeaths %d\n ", ptr->nation, ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
 	ptr = ptr->next;
 	c++;
       } else {
@@ -51,7 +53,7 @@ void printCountry(struct country *start) {
   struct country *ptr;
   ptr = start;
   while (ptr != NULL) {
-    printf("country %s, date %d, total cases %d, total deaths %d\n", ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths);
+    printf("country %s, date %d, total cases %d, total deaths %d new cases %d new deaths %d\n", ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
     ptr = ptr->next;
   }
 }
@@ -138,7 +140,7 @@ record file then this has to be identified or there are issues with array struct
 The graph will draw using lines to join y values unless only one data item in which case will plot with a point.
 */ 
 
-int * filterCo(struct country *start, char countryname[], int *arrayDate, int numrec) {
+int * filterCo(struct country *start, char countryname[], int *arrayDate, int numrec, int choice) {
   struct country *ptr = start;
   int i = 0;
   int j = numrec;
@@ -154,7 +156,11 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
       while (ptr != NULL) {
         if (strcmp(ptr->nation, countryname) == 0) {
           if (arrayDate[i] == ptr->recdate) {
-  	    totalc[i] = ptr->tcases;
+	       if (choice == 2 || choice == 4) {
+	    totalc[i] = ptr->tcases;
+	     } else if (choice == 5) {
+	      totalc[i] = ptr->dcases;
+	          }	    	 
 	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
          }
        }
@@ -173,8 +179,12 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   if (j == 1) {
     while (ptr != NULL) {
       if (strcmp(ptr->nation, countryname) == 0) {
+	if (choice == 2 || choice == 4) {
         totalc[0] = ptr->tcases;
-        printf("array totalc values %d\n", totalc[0]);
+	} else if (choice == 5){
+	  totalc[0] = ptr->dcases;
+	}
+        printf("array j1 totalc values %d\n", totalc[0]);
      }
       ptr = ptr->next;
      }
@@ -182,7 +192,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   return totalc;
 }
 
-int * filterDCo(struct country *start, char countryname[], int *arrayDate, int numrec) {
+int * filterDCo(struct country *start, char countryname[], int *arrayDate, int numrec, int choice) {
   struct country *ptr = start;
   int i = 0;
   int j = numrec;
@@ -198,7 +208,11 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
       while (ptr != NULL) {
         if (strcmp(ptr->nation, countryname) == 0) {
           if (arrayDate[i] == ptr->recdate) {
-  	    totalc[i] = ptr->tdeaths;
+	    if (choice == 3 || choice == 4) {
+  	      totalc[i] = ptr->tdeaths;
+	    } else if (choice == 6){
+	      totalc[i] = ptr->ddeaths;
+	    }
 	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
          }
        }
@@ -216,7 +230,11 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
   if (j == 1) {
     while (ptr != NULL) {
       if (strcmp(ptr->nation, countryname) == 0) {
-        totalc[0] = ptr->tcases;
+        if (choice == 3 || choice == 4) {
+          totalc[0] = ptr->tdeaths;
+        } else if (choice == 6) {
+            totalc[0] = ptr->ddeaths;
+	    }
         printf("array totalc values %d\n", totalc[0]);
      }
       ptr = ptr->next;
@@ -227,7 +245,7 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
 
 /* Will plot either total cases or total deaths depending on option selected 
    from menu */
-void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[]) {
+void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[], int choice) {
   char filename[10];
   int i;
   int j;
@@ -244,7 +262,6 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) with lines"};
   // {"set xtics border out scale 3,2 mirror rotate by 90 offset character 0, -1.5, 0 autojustify",
-   //{"plot for [i=2:2] 'data.temp' using i:xtic(1)  with lines"};
   char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
     {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
      "set xtics font ',5'",
@@ -255,9 +272,11 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1)"};
    
-  FILE *temp = fopen("data.temp", "w");
+  /* FILE *temp = fopen("data.temp", "w");   LINUX PATH */
+  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
 
-  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");
+  // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
   
@@ -267,26 +286,39 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
     }
   printf("One data point %d\n", arrayDate[0]);
 
-  if (numrec > 1) {  
+  if (numrec > 1) {
+    if (choice == 2){
+      fprintf(gnuplotPipe, "set title 'TOTAL CASES COVID 19 - %s'\n", countryname);
+    } else if (choice == 3){
+      fprintf(gnuplotPipe, "set title 'TOTAL DEATHS COVID 19 - %s'\n", countryname);
+    } else if (choice == 5) {
+      fprintf(gnuplotPipe, "set title 'NEW CASES COVID 19 - %s'\n", countryname);
+    } else if (choice == 6) {
+      fprintf(gnuplotPipe, "set title 'NEW DEATHS COVID 19 - %s'\n", countryname);
+    }
     for (i=0; i < numOfCommands; i++) {
-      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
-      fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
+       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
      }
   }
 
   if (numrec == 1) {
+      if (choice == 2){
+      fprintf(gnuplotPipe, "set title 'TOTAL CASES COVID 19 - %s'\n", countryname);
+    } else if (choice == 3){
+      fprintf(gnuplotPipe, "set title 'TOTAL DEATHS COVID 19 - %s'\n", countryname);
+    } else if (choice == 5) {
+      fprintf(gnuplotPipe, "set title 'NEW CASES COVID 19 - %s'\n", countryname);
+    } else if (choice == 6) {
+      fprintf(gnuplotPipe, "set title 'NEW DEATHS COVID 19 - %s'\n", countryname);
+    }   
       for (i=0; i < numOfCommands; i++) {
-      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
-      fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
+        fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
      }
-    }
-
+   }
   /* need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
-    
 }
-
 
 /* Plot total cases and total deaths by country */
 void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int numrec, char countryname[]) {
@@ -305,9 +337,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "set grid",
      "unset key",
      "plot for [i=2:3] 'data.temp' using i:xtic(1) with lines"};
-  // {"set xtics border out scale 3,2 mirror rotate by 90 offset character 0, -1.5, 0 autojustify",
-   //{"plot for [i=2:2] 'data.temp' using i:xtic(1)  with lines"};
-  char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
+   char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
     {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
@@ -317,9 +347,11 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "unset key",
      "plot for [i=2:3] 'data.temp' using i:xtic(1)"};
    
-  FILE *temp = fopen("data.temp", "w");
+  //  FILE *temp = fopen("data.temp", "w");    LINUX
+  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
 
-  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");
+  /*  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  LINUX */
+  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
   
@@ -329,22 +361,21 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
     }
   printf("One data point %d\n", arrayDate[0]);
 
-  if (numrec > 1) {  
+  if (numrec > 1) {
+      fprintf(gnuplotPipe, "set title 'TOTAL CASES AND DEATHS COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
     for (i=0; i < numOfCommands; i++) {
-      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
-      fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
+       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
      }
   }
 
   if (numrec == 1) {
+    	fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
       for (i=0; i < numOfCommands; i++) {
-      fprintf(gnuplotPipe, "set title 'COVID 19 - %s'\n", countryname);  // this allow me to have a variable title
       fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
      }
-    }
-
+   }
   /* need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
-    
+   
 }

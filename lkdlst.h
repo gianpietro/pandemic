@@ -8,12 +8,14 @@
   int recdate; 
   int tcases;
   int tdeaths;
+   int dcases;
+   int ddeaths;
   struct country *next;
 };
     typedef struct country country;
 
 /* functions to create, search, preint and free memonotry for  linked list */
-struct country *createCountry(char *, int,  int, int);
+struct country *createCountry(char *, int,  int, int, int, int);
 struct country *append(struct country *, struct country *);
 void searchCountry(struct country *, char *);
 void printCountry(struct country *);
@@ -24,11 +26,11 @@ int getCoRec(struct country *, char *);
 int * getCoRecdate(struct country *, char *, int);
 
 /* function to build array of cases for y value in graph */
-int * filterCo(struct country *, char *, int *, int);
-int * filterDCo(struct country *, char *, int *, int);
+int * filterCo(struct country *, char *, int *, int, int );
+int * filterDCo(struct country *, char *, int *, int, int);
 
 /* function to draw graph using gnuplot */
-void countryGraph(int *, int *, int, char *);
+void countryGraph(int *, int *, int, char *, int);
 void countryGraphTotDC(int *, int *, int *,int, char *);
 
 
