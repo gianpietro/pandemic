@@ -38,7 +38,8 @@ void searchCountry(struct country *start, char countryname[]) {
   int c = 0;
   while (ptr != NULL) {
     if (strcmp(ptr->nation, countryname) == 0) {
-      printf("Country %s date %d totcases %d totdeaths %d dailycases %d dailydeaths %d\n ", ptr->nation, ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
+      printf("Country %s date %d totcases %d totdeaths %d dailycases %d dailydeaths %d\n ",
+	     ptr->nation, ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
 	ptr = ptr->next;
 	c++;
       } else {
@@ -53,7 +54,8 @@ void printCountry(struct country *start) {
   struct country *ptr;
   ptr = start;
   while (ptr != NULL) {
-    printf("country %s, date %d, total cases %d, total deaths %d new cases %d new deaths %d\n", ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
+    printf("country %s, date %d, total cases %d, total deaths %d new cases %d new deaths %d\n",
+	   ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
     ptr = ptr->next;
   }
 }
@@ -118,7 +120,7 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
     printf("date for country %d\n", recdt[i]);
   }
   /* use a shellsort to arrange the date values in ascending order */
-  /*
+  
   for (gap = k/2; gap > 0; gap /=2) {
     for (a=gap; a<k; a++) {
      for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
@@ -127,7 +129,7 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
         recdt[b+gap] = temp;
 	}
     }
-    }*/
+    }
   return recdt;
 }
 
@@ -253,7 +255,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
  
   char * commandsForGnuplot[]  =
-    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
@@ -263,7 +265,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "plot for [i=2:2] 'data.temp' using i:xtic(1) with lines"};
   // {"set xtics border out scale 3,2 mirror rotate by 90 offset character 0, -1.5, 0 autojustify",
   char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
-    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
@@ -272,11 +274,11 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1)"};
    
-  /* FILE *temp = fopen("data.temp", "w");   LINUX PATH */
-  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
+    FILE *temp = fopen("data.temp", "w");   /* LINUX PATH */
+ //  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
 
-  // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
-  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
+   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+   //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
   
@@ -329,7 +331,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
   int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
  
   char * commandsForGnuplot[]  =
-    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
@@ -338,7 +340,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "unset key",
      "plot for [i=2:3] 'data.temp' using i:xtic(1) with lines"};
    char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
-    {"set xtics border out rotate by 90 offset character 0, -1.5, 0 autojustify",
+    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
@@ -347,11 +349,11 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "unset key",
      "plot for [i=2:3] 'data.temp' using i:xtic(1)"};
    
-  //  FILE *temp = fopen("data.temp", "w");    LINUX
-  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
+   FILE *temp = fopen("data.temp", "w");   // LINUX
+  // FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
 
-  /*  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  LINUX */
-  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
+    FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  /* LINUX */
+  // FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
   
