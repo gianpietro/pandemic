@@ -52,7 +52,7 @@ STAGE 5 MAKEFILE - COMPLETED
   Use makefile to compile project
 
 
-STAGE 6 OTHER CASE 
+STAGE 6 OTHER CASE - COMPLETED
   Need to add tdeaths array. Could use tcases functions and depending on user
   input e.g. 1 = tcase 2 = tdeaths, may be able to reuse the
   same functions already built.
@@ -81,7 +81,7 @@ STAGE 8
 STAGE 9 GTK
 Could use glade and gtk for UI
 
-STAGE 10
+STAGE 10 - COMPLETED
 Plot graph of a selected number of countries against each other.
 One method would be to create multiple datafiles, one for each country
 e.g. country1.txt, country2.txt, country3.txt etc
@@ -90,8 +90,6 @@ Can then use a loop to upload each data file:
 plot for [i=1:2] 'country'.i.'.txt' using 1:2:xtic(1) with lines
 
 This is 2 column data file, date and number of cases
-
-
 
 
 STAGE 11 -COMPLETED
@@ -104,6 +102,12 @@ e.g. 20200101, 20200102, 20200103......20200131
 Tested with new datafile and can now use above date format and shellsort on date.
 This is a great and simple fix, really happy with this.
 
+
+STAGE 12
+look at smooth lines in the plot
+plot "DATA" smooth csplines,
+other options:
+bezier, sbezier, csplines, acsplines
 
 
   
