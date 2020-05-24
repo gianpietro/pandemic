@@ -7,6 +7,7 @@ plot a graph using gnuplot
 #include <stdlib.h>
 #include <string.h>
 #include "lkdlst.h"
+#include "mltgrp.h"
 
 
 int main(void) {
@@ -22,7 +23,9 @@ int main(void) {
   int m;
   int *arraytcases, *arraydcases;
   int choice = 0;
- 
+  int f=0, g, p=0;   /* option 7 */
+  char **compare;
+
   
   FILE *fp;
  
@@ -53,7 +56,8 @@ int main(void) {
     printf("option 3: Graph Total Deaths by Country\n\n");
     printf("Option 4: Total Cases and Deaths by Country\n\n");
     printf("Option 5: New Day Cases by Country\n\n");
-    printf("option 6: Graph New Deaths by Country\n\n");
+    printf("Option 6: Graph New Deaths by Country\n\n");
+    printf("Option 7: Campare countries new cases\n\n");
     printf("Option 9: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -169,6 +173,38 @@ int main(void) {
         free(arraydcases);
         free(arrayDate); 
       break;
+    case 7:
+      printf("Number of countries to compare (max is 5): ");
+      scanf("%d", &f);
+      //      compare = malloc(f*sizeof(char*));      /* malloc for number of countries to compare */
+      if (f <= 5){
+	compare = malloc(f*sizeof(char*));      /* malloc for number of countries to compare */
+        for (g=0; g<f; g++){
+          printf("Enter country ");
+	  scanf("%s", s);	
+	  compare[g] = malloc(COUNTRY*sizeof(char));    /* malloc for char length of country name */
+	  strcpy(compare[g], s);
+	  printf("compare %s\n", compare[g]);
+	} 
+	//for (g=0; g<f; g++){
+	//printf("compare countries %s\n", compare[g]);
+	//}
+	for (g=0; g<f; g++){
+	  strcpy(s, compare[g]);
+	  printf("AND NOW compare %s\n", s);  //debug
+	  numrec = getCoRec(start, s);
+	  printf("numrec in compare %d in country %s\n", numrec, s); //debug
+	  arrayDate = getCoRecdate(start, s, numrec);
+	  arraytcases =  filterCo(start, s, arrayDate, numrec, choice);	
+	  compareGraph(arrayDate, arraytcases, numrec, s, g);
+	  free(arraytcases);
+	  free(arrayDate);
+	  free(compare[g]);
+	}
+	buildGraph(g);
+	free(compare);	
+     }
+     break;
     case 9:
       freeCountry(start);
       exit(0);

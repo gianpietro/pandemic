@@ -160,7 +160,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
           if (arrayDate[i] == ptr->recdate) {
 	       if (choice == 2 || choice == 4) {
 	    totalc[i] = ptr->tcases;
-	     } else if (choice == 5) {
+	     } else if (choice == 5 || choice == 7) {
 	      totalc[i] = ptr->dcases;
 	          }	    	 
 	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
@@ -320,6 +320,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   /* need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
+  fclose(temp);
 }
 
 /* Plot total cases and total deaths by country */
@@ -379,5 +380,5 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
   /* need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
-   
+  fclose(temp); 
 }
