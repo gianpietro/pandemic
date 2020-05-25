@@ -8,6 +8,7 @@ plot a graph using gnuplot
 #include <string.h>
 #include "lkdlst.h"
 #include "mltgrp.h"
+#include "datimp.h"
 
 
 int main(void) {
@@ -25,6 +26,7 @@ int main(void) {
   int choice = 0;
   int f=0, g, p=0;   /* option 7 */
   char **compare;
+  char filename[15];
 
   
   FILE *fp;
@@ -58,6 +60,7 @@ int main(void) {
     printf("Option 5: New Day Cases by Country\n\n");
     printf("Option 6: Graph New Deaths by Country\n\n");
     printf("Option 7: Campare countries new cases\n\n");
+    printf("Option 8: under development \n\n");
     printf("Option 9: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -205,6 +208,11 @@ int main(void) {
 	free(compare);	
      }
      break;
+    case 8:
+      printf("Filename to upload ");
+      scanf("%s", filename);
+      uploadDataFiles(filename);
+      break;
     case 9:
       freeCountry(start);
       exit(0);
