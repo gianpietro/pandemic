@@ -34,8 +34,6 @@ int * filterDCo(struct country *, char *, int *, int, int);
 void countryGraph(int *, int *, int, char *, int);
 void countryGraphTotDC(int *, int *, int *,int, char *);
 
-//void uploadDataFile();
-
 #endif
 
   

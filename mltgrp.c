@@ -6,37 +6,16 @@
 
 
 void compareGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[], int g) {
-  //  char filename[10];
   int i;
-  //int j;
-  //int *row;
-  //int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
-
   char * a = "country";
   int b = g+1;
   char * extension = ".gp";
   char fileSpec[strlen(a)+b+strlen(extension)+1];
 
-  /*
-  char * commandsForGnuplot[]  =
-    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
-     "set xtics font ',5'",
-     "set ytics font ',6'",
-     "set ylabel 'Total number of Cases",
-     "set xlabel 'Date'",
-     "set grid",
-     "unset key",
-     "plot for [i=1:2] 'country'.i.'.gp' using 1:2:xtic(1) with lines"};
-  */
-    //    plot for [i=1:2] 'country'.i.'.txt' using 1:2:xtic(1) with lines
-
-  
   FILE *temp;
+
   snprintf( fileSpec, sizeof( fileSpec ), "%s%d%s", a, b, extension );
   temp = fopen(fileSpec, "w");
-  
-  //FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); 
-
   fprintf(temp, "%s\n", countryname);
   fclose(temp);
   temp = fopen(fileSpec, "a");
@@ -45,15 +24,8 @@ void compareGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
     {
       fprintf(temp, "%d %d\n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
     }
-  /*
-  fprintf(gnuplotPipe, "set title 'NEW CASES - %s'\n", countryname);
-  for (i=0; i < numOfCommands; i++) {
-       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
-     }
-  */
   
   fflush(temp);
-  // fflush(gnuplotPipe);
   fclose(temp);
 }
 

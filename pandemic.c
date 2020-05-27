@@ -28,11 +28,7 @@ int main(void) {
   char **compare;
   /* livedata upload variables */
   char filename[UPLOAD];
-  //  uploadDataFile();
-
-  //char * a;
   char * extension = ".dat";
-  //  char fileSpec[strlen(a)+strlen(extension)+1];
   struct country *ufstart, *ufnewCountryPtr, *ufend, *ufptr;
   char fileSpec[UPLOAD+strlen(extension)+1];
   FILE *temp;
@@ -76,7 +72,7 @@ int main(void) {
     printf("Option 5: New Day Cases by Country\n\n");
     printf("Option 6: Graph New Deaths by Country\n\n");
     printf("Option 7: Campare countries new cases\n\n");
-    printf("Option 8: under development \n\n");
+    printf("Option 8: Upload data files\n\n");
     printf("Option 9: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -195,7 +191,6 @@ int main(void) {
     case 7:
       printf("Number of countries to compare (max is 5): ");
       scanf("%d", &f);
-      //      compare = malloc(f*sizeof(char*));      /* malloc for number of countries to compare */
       if (f <= 5){
 	compare = malloc(f*sizeof(char*));      /* malloc for number of countries to compare */
         for (g=0; g<f; g++){
@@ -205,9 +200,6 @@ int main(void) {
 	  strcpy(compare[g], s);
 	  printf("compare %s\n", compare[g]);
 	} 
-	//for (g=0; g<f; g++){
-	//printf("compare countries %s\n", compare[g]);
-	//}
 	for (g=0; g<f; g++){
 	  strcpy(s, compare[g]);
 	  printf("AND NOW compare %s\n", s);  //debug
@@ -228,7 +220,6 @@ int main(void) {
       ucount = 0;
       strcpy(path,"livedata/");
       auditcheck = 0;
-      // u = 0;
       
       /* code to count number of items in audit file and load filename into array */
        uf = fopen("auditfile.dat", "r");
@@ -236,21 +227,29 @@ int main(void) {
   	  printf("No File exists ");
 	  break; 
 	}
+       
        while (fscanf(uf, "%s", ufname) != EOF) {
          ++ucount;
         }
+       
        fclose(uf);
+       
        printf("ucount first scan %d\n", ucount);
+       
        ufdata = malloc(ucount * sizeof(char*));
+       
        uf = fopen("auditfile.dat", "r");
        ucount = 0;
+       
        while (fscanf(uf, "%s", ufname) != EOF) {
 	 ufdata[ucount] = malloc(UPLOAD * sizeof(char));
 	 strcpy(ufdata[ucount], ufname);
 	 printf("ucount %d\n", ucount);
 	 ++ucount;
        }
+       
        fclose(uf);
+       
        printf("ucount second scan %d\n", ucount);
        for (z=0; z<ucount; z++)
          printf("upload filename %s\n",ufdata[z]);
@@ -268,25 +267,18 @@ int main(void) {
 	 if (strcmp(ufdata[z], fileSpec) == 0) {
 	   printf("File is in auditfile\n");
 	   auditcheck = 1;
-	   //printf("ucount %d\n", ucount);
-	   //break;
 	 }
        }
 
+       /* If file to upload is not found in auditfile then it can be uploaded */
        if (auditcheck == 0) {
-       
-       temp = fopen(path, "r");
-         if (temp == NULL) {
-           fprintf(stdout, "ERROR file not found\n");
-       break;
-       }
-
-
+         temp = fopen(path, "r");
+           if (temp == NULL) {
+             fprintf(stdout, "ERROR file not found\n");
+             break;
+           }
        /* if file is not in auditfile load to country structure */
-
-	 
-	 //       if (auditcheck == 0){
-       while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {
+         while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
            if (u == 0) {
              ufstart = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
              ufend = ufstart;
@@ -296,42 +288,38 @@ int main(void) {
            }       
          u++;
         }
-       //  }
-      
+	 
        fclose(temp);
-       // if (auditcheck == 0) {
-         printCountry(ufstart);
-            uf = fopen("auditfile.dat", "a");
-       fprintf(uf, "%s \n", fileSpec);
-	fclose(uf);
-	// }
-      
        
+       printCountry(ufstart);
+       
+       /* add uploaded filename to the auditfile */
+       uf = fopen("auditfile.dat", "a");
+       fprintf(uf, "%s\n", fileSpec);
+       fclose(uf);
+       
+       /* write data from uploaded file to the main datafile */
        ufp = fopen("datafile.txt", "a");
        if (ufp == NULL) {
          fprintf(stdout,"\nError opening file\n");
          break;
        }
        ufptr = ufstart;
-          while(ufptr != NULL)
+       
+       while(ufptr != NULL)
        {
          fprintf(ufp, "%s %d %d %d %d %d\n", ufptr->nation, ufptr->recdate, ufptr->tcases, ufptr->tdeaths, ufptr->dcases, ufptr->ddeaths);
 	 ufptr = ufptr->next;
        }
+       
        fclose(ufp);
 
        freeCountry(ufstart);
-
-
     }
-
-        
        /* free memory from ufdata array */
        for (z=0; z<ucount; z++)
          free(ufdata[z]);
        free(ufdata);
-		       
-       
     break;
     case 9:
       freeCountry(start);
