@@ -2,6 +2,7 @@
 #define _LKDLST_H
 
 #define COUNTRY 25   /* if value changed see also coName in lkdlst.c */
+#define UPLOAD 15   /*data file to be uploaded */
 
  struct country {
   char nation[COUNTRY];
@@ -33,6 +34,7 @@ int * filterDCo(struct country *, char *, int *, int, int);
 void countryGraph(int *, int *, int, char *, int);
 void countryGraphTotDC(int *, int *, int *,int, char *);
 
+//void uploadDataFile();
 
 #endif
 

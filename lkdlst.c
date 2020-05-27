@@ -6,6 +6,31 @@
 
 int coName = COUNTRY;                /* issue with using #define COUNTRY */
 
+/*
+void uploadDataFile(){
+  struct country *start, *newCountryPtr, *end, *ptr;
+  char name[coName];
+  int totalcases, totaldeaths, dailycases, dailydeaths, rcdate, i;
+  FILE *fp;
+  fp = fopen("datafile.txt", "r");
+  if (fp == NULL) {
+    fprintf(stdout,"\nError opening file\n");
+    exit(1);
+  } 
+  while (fscanf(fp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {
+    if (i == 0) {
+      start = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);                              end = start;
+    } else {
+      newCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
+      end = append(end, newCountryPtr);
+    }       
+    i++;
+  }
+  fclose(fp);
+  printf("File uploaded\n");
+}
+*/
+
 struct country *createCountry(char countryname[], int rcdate,  int totcases, int totdeaths, int daycases, int daydeaths) {
   struct country *ptr;
   int i;
@@ -53,11 +78,17 @@ void searchCountry(struct country *start, char countryname[]) {
 void printCountry(struct country *start) {
   struct country *ptr;
   ptr = start;
+  /*  if (ptr->tcases < 1){
+    printf("no data available - load data\n");
+    exit(1);
+    } else { */
+    
   while (ptr != NULL) {
     printf("country %s, date %d, total cases %d, total deaths %d new cases %d new deaths %d\n",
 	   ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
     ptr = ptr->next;
   }
+  //  } //else
 }
 
 
