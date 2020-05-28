@@ -54,18 +54,20 @@ void searchCountry(struct country *start, char countryname[]) {
 void printCountry(struct country *start) {
   struct country *ptr;
   ptr = start;
+  int count = 0;
 
   while (ptr != NULL) {
     printf("country %s, date %d, total cases %d, total deaths %d new cases %d new deaths %d\n",
 	   ptr->nation,ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
     ptr = ptr->next;
+    count++;
   }
-  
+  printf("NUMBER OF RECORDS %d\n", count);
 }
 
 
 /* free up malloc memory initaied with createCountry */
-void freeCountry(struct country *start) {
+void freeCountry(struct country *start) {  
   struct country *ptr;
   struct country *tmp;
   ptr = start;
@@ -197,6 +199,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   return totalc;
 }
 
+/* total deaths for a country */
 int * filterDCo(struct country *start, char countryname[], int *arrayDate, int numrec, int choice) {
   struct country *ptr = start;
   int i = 0;
@@ -265,7 +268,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "set xlabel 'Date'",
      "set grid",
      "unset key",
-     "plot for [i=2:2] 'data.temp' using i:xtic(1) with lines"};
+     "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
   
   char * commandForGnuplotOne[] = 
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
@@ -330,7 +333,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fclose(temp);
   }
 
-/* Plot total cases and total deaths by country */
+/* Plot new total cases and new total deaths by country */
 void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int numrec, char countryname[]) {
   char filename[10];
   int i;
@@ -346,7 +349,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "set xlabel 'Date'",
      "set grid",
      "unset key",
-     "plot for [i=2:3] 'data.temp' using i:xtic(1) with lines"};
+     "plot for [i=2:3] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
    char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
