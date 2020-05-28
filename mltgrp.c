@@ -52,7 +52,7 @@ void buildGraph(int g) {
    strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 1:2:xtic(1) with lines");
    }
 
-  FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); 
+  FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); 
 
   fprintf(gnuplotPipe, "set title 'NEW CASES' \n");
   

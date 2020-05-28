@@ -280,7 +280,11 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
     FILE *temp = fopen("data.temp", "w");   /* LINUX PATH */
  //  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
 
-   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+    /* The option -persistent will leave gnuplot running even when application is closed.
+       Noted that gnuplot-qt session for each graph and this session remains even when graph
+       is closed. Seems to cause gnuplot to crash after many graphs open. */
+    //   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+      FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
    //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
@@ -324,7 +328,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp);
-}
+  }
 
 /* Plot total cases and total deaths by country */
 void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int numrec, char countryname[]) {
@@ -356,7 +360,8 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
    FILE *temp = fopen("data.temp", "w");   // LINUX
   // FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
 
-    FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  /* LINUX */
+   // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  /* LINUX */
+    FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w");  /* LINUX */
   // FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
