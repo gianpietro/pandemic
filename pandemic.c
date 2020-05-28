@@ -220,6 +220,8 @@ int main(void) {
       ucount = 0;
       strcpy(path,"livedata/");
       auditcheck = 0;
+      printf("value of u 1st %d\n", u);
+      u = 0;
       
       /* code to count number of items in audit file and load filename into array */
        uf = fopen("auditfile.dat", "r");
@@ -277,6 +279,8 @@ int main(void) {
              fprintf(stdout, "ERROR file not found\n");
              break;
            }
+
+	   printf("value of u 2nd %d\n", u);
        /* if file is not in auditfile load to country structure */
          while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
            if (u == 0) {
@@ -287,7 +291,10 @@ int main(void) {
             ufend = append(ufend, ufnewCountryPtr);
            }       
          u++;
+	 printf("value of u 3rd %d\n", u);
         }
+
+	 printf("value of u 4th %d\n", u);
 	 
        fclose(temp);
        
@@ -311,6 +318,8 @@ int main(void) {
          fprintf(ufp, "%s %d %d %d %d %d\n", ufptr->nation, ufptr->recdate, ufptr->tcases, ufptr->tdeaths, ufptr->dcases, ufptr->ddeaths);
 	 ufptr = ufptr->next;
        }
+
+       //does ufptr need to be set to start??
        
        fclose(ufp);
 
