@@ -42,7 +42,7 @@ int main(void) {
   
   FILE *fp;
   
-  fp = fopen("datafile.txt", "r");
+  fp = fopen("datafile.dat", "r");
 
   if (fp == NULL) {
     fprintf(stdout,"\nError opening file\n");
@@ -305,7 +305,7 @@ int main(void) {
        fclose(uf);
        
        /* write data from uploaded file to the main datafile */
-       ufp = fopen("datafile.txt", "a");
+       ufp = fopen("datafile.dat", "a");
        if (ufp == NULL) {
          fprintf(stdout,"\nError opening file\n");
          break;
