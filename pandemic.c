@@ -8,7 +8,6 @@ plot a graph using gnuplot
 #include <string.h>
 #include "lkdlst.h"
 #include "mltgrp.h"
-//#include "datimp.h"
 
 
 int main(void) {
