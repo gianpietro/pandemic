@@ -268,7 +268,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "set xlabel 'Date'",
      "set grid",
      "unset key",
-     "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
+     "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
   
   char * commandForGnuplotOne[] = 
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",

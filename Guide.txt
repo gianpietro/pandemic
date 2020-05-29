@@ -109,6 +109,13 @@ plot "DATA" smooth csplines,
 other options:
 bezier, sbezier, csplines, acsplines
 
+Could have a menu option to allow user to select which graph type view would like.
+This would be parameter to sent to plot graph functions.
+
+https://stackoverflow.com/questions/30580471/smooth-peaks-in-gnuplot
+Smoothing with acsplines draws an approximating cubic spline, which doesn't go through your original data points.
+A better approach could be to use cubic splines smooth csplines, which go through all data points but may show overshoots for sharp peaks.
+The probably best solution in your case is to use monotonic cubic splines, smooth mcsplines, which maintain the monotonicity and convexity of the original data points
 
   
   REFERENCES:

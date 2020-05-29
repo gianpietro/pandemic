@@ -43,13 +43,13 @@ void buildGraph(int g) {
    strcpy(commandsForGnuplot[5],"set grid");
    strcpy(commandsForGnuplot[6],"set key autotitle columnhead");     
    if (g == 2){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:2] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 with lines");
+   strcpy(commandsForGnuplot[7],"plot for [i=1:2] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
    } else if ( g == 3){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:3] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 with lines");
+   strcpy(commandsForGnuplot[7],"plot for [i=1:3] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
    } else if ( g == 4){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:4] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 with lines");
+   strcpy(commandsForGnuplot[7],"plot for [i=1:4] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
    } else if ( g == 5){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 with lines");
+   strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
    }
 
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); 
