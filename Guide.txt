@@ -66,7 +66,7 @@ STAGE 7 DATA COLLECTION - COMPLETED
   all names lowercase.
 
 
-STAGE 8
+STAGE 8 - COMPLETED
  Load data from program, each day file save 
  user enters file name to load.
  Thinking of file name to be date e.g. 10520 so when
@@ -117,7 +117,24 @@ Smoothing with acsplines draws an approximating cubic spline, which doesn't go t
 A better approach could be to use cubic splines smooth csplines, which go through all data points but may show overshoots for sharp peaks.
 The probably best solution in your case is to use monotonic cubic splines, smooth mcsplines, which maintain the monotonicity and convexity of the original data points
 
-  
+
+STAGE 13
+Country population and rate of infection. Could have a seperate file with country and population. Use this to calculation rate of infection and plot graph. 
+1. datafile with country and population
+2. upload this data to a struct.
+3. then need an array of country and the number of cases
+      can use the latest value of new cases
+      or can enter a date and use the number of cases at that date
+4. will need to match the datafile country with the case number array
+   and calculate the percentage of infected people. This will be
+   percent of pop infected = number of cases / population * 100
+   Then need to have another array with country and infected percentage (2 columns)
+5. Use this to plot a histogram, could be of all countries or user
+   enters a rate value and will plot rate value or greater
+ 
+
+
+
   REFERENCES:
   gnuplot
   https://stackoverflow.com/questions/3521209/making-c-code-plot-a-graph-automatically

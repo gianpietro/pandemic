@@ -8,6 +8,9 @@ plot a graph using gnuplot
 #include <string.h>
 #include "lkdlst.h"
 #include "mltgrp.h"
+#include "poplib.h"
+
+
 
 
 int main(void) {
@@ -18,13 +21,14 @@ int main(void) {
   int totalcases, totaldeaths, dailycases, dailydeaths;
   int rcdate;
   int n, i;
-  int numrec;  /* number of records in date array for country being searched */
+  int numrec = 0;  /* number of records in date array for country being searched */
   int *arrayDate;
   int m;
   int *arraytcases, *arraydcases;
   int choice = 0;
   int f=0, g, p=0;   /* option 7 */
   char **compare;
+  FILE *fp;
   /* livedata upload variables */
   char filename[UPLOAD];
   char * extension = ".dat";
@@ -38,9 +42,13 @@ int main(void) {
   char **ufdata; 
   int ucount = 0;
   int z, u=0, auditcheck=0, v=0;
-
-  
-  FILE *fp;
+  /* popoulation variables */
+  struct population *pstart, *pCountryPtr, *pend, *pptr;
+  FILE *fpop;  
+  char pname[CTNAME];
+  int totalpop;
+  int pop;
+  int poploaded = 0;
   
   fp = fopen("datafile.dat", "r");
 
@@ -72,7 +80,8 @@ int main(void) {
     printf("Option 6: Graph - New Deaths by Country\n\n");
     printf("Option 7: Graph - Campare New Cases by Countries\n\n");
     printf("Option 8: Upload data files\n\n");
-    printf("Option 9: Exit\n\n");
+    printf("Option 10: Percentage of Population Infected\n\n");
+    printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
     scanf("%d", &choice);
@@ -329,7 +338,37 @@ int main(void) {
          free(ufdata[z]);
        free(ufdata);
     break;
-    case 9:
+    case 10:
+      if (poploaded == 0) {
+        fpop = fopen("datapopfile.dat", "r");
+
+	if (fpop == NULL) {
+        fprintf(stdout,"\nError opening file\n");
+        exit(1);
+      } 
+
+      while (fscanf(fpop, "%s %d", pname, &totalpop) != EOF) {
+        if (pop == 0) {
+          pstart = popCreateCountry(pname, totalpop);
+          pend = pstart;
+       } else {
+          pCountryPtr = popCreateCountry(pname, totalpop);
+          pend = popAppend(pend, pCountryPtr);
+       }       
+       pop++;
+     }
+
+     fclose(fpop);
+     poploaded = 1;
+     } else {
+	printf("Population already loaded \n");
+     }
+
+      popPrintCountry(pstart); 
+      
+      break;
+      
+    case 99:
       freeCountry(start);
       exit(0);
       break;
