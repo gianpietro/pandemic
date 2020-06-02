@@ -94,7 +94,7 @@ int getCoRec(struct country *start, char countryname[]) {
       }
       }
   return c;
-  }
+}
 
 /* Loop through the struct seaching for country and add recdate values to array using
    number of records found with getCoRec() to increase size of array with malloc.  
@@ -331,7 +331,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp);
-  }
+}
 
 /* Plot new total cases and new total deaths by country */
 void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int numrec, char countryname[]) {
@@ -393,3 +393,77 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
   fflush(gnuplotPipe);
   fclose(temp); 
 }
+
+
+/* Finds the most recent date uploaded, did consider using audit file */
+int getDate(struct country *start) {
+  struct country *ptr = start;
+  int rdate = 0;
+  while (ptr != NULL) {
+    if (ptr->recdate > rdate){
+      rdate = ptr->recdate;
+    } else {
+      ptr = ptr->next;
+    }
+  }
+  printf("most recent date %d\n", rdate);
+  return rdate;
+}
+   
+int getDateRecNum(struct country *start, int rdate) {
+  struct country *ptr = start;
+  int c = 0;
+  while (ptr != NULL) {
+    if (ptr->recdate == rdate) {
+	ptr = ptr->next;
+	c++;
+      } else {
+	ptr = ptr->next;
+      }
+      }
+  printf("number of records with date %d\n", c);
+						  
+  return c;
+}
+
+char **getDateRecCountry(struct country *start, int rdate, int rdatenum) {
+  struct country *ptr = start;
+  char **ctryName;
+  int i = 0;
+  ctryName = malloc(rdatenum*sizeof(char*));
+  while (ptr != NULL){
+    if(ptr->recdate == rdate){
+      ctryName[i] = malloc(coName*sizeof(char));
+      strcpy(ctryName[i], ptr->nation);
+      ptr = ptr->next;
+      i++;
+    }else {
+    ptr = ptr->next;
+    }
+  }
+  return ctryName;
+}
+
+
+int * getDateRecCountryCases(struct country *start, char **ctryName, int rdate, int rdatenum){
+  struct country *ptr = start;
+  int *icases;
+  int i = 0;
+
+  printf("DATE %d\n", rdate);
+  icases = malloc(rdatenum*sizeof(int));
+  
+  while (ptr != NULL) {
+    for (i=0; i<rdatenum; i++){
+      if((strcmp(ctryName[i], ptr->nation) == 0) && rdate == ptr->recdate) {
+	icases[i] = ptr->tcases;	
+     }
+    }
+    ptr = ptr->next;
+  }
+  return icases;
+}
+    
+
+  
+      

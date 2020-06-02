@@ -34,6 +34,13 @@ int * filterDCo(struct country *, char *, int *, int, int);
 void countryGraph(int *, int *, int, char *, int);
 void countryGraphTotDC(int *, int *, int *,int, char *);
 
+/* functions to find infection percentage of population */
+int getDate(struct country *);
+int getDateRecNum(struct country *, int);
+char **getDateRecCountry(struct country *, int, int);
+int * getDateRecCountryCases(struct country *, char **,int, int);
+
+
 #endif
 
   

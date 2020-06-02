@@ -14,5 +14,6 @@ struct population {
   struct population *popCreateCountry(char *, int);
   struct population *popAppend(struct population *, struct population *);
   void popPrintCountry(struct population *);
+  double * infectionPercent(struct population *, char **, int *, int);
 
 #endif
