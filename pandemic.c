@@ -76,15 +76,15 @@ int main(void) {
 
   do {
     printf("\n");
-    printf("Option 1: Display list of all data from file\n\n");
-    printf("Option 2: Graph - Total Cases by Country\n\n");
-    printf("option 3: Graph - Total Deaths by Country\n\n");
-    printf("Option 4: Graph - Total Cases and Deaths by Country\n\n");
-    printf("Option 5: Graph - New Cases by Country\n\n");
-    printf("Option 6: Graph - New Deaths by Country\n\n");
-    printf("Option 7: Graph - Campare New Cases by Countries\n\n");
-    printf("Option 8: Upload data files\n\n");
-    printf("Option 10: UNDER DEVELOPMENT Percentage of Population Infected\n\n");
+    printf("Option 1:  Display list of all data from file\n\n");
+    printf("Option 2:  Graph - Total Cases by Country\n\n");
+    printf("option 3:  Graph - Total Deaths by Country\n\n");
+    printf("Option 4:  Graph - Total Cases and Deaths by Country\n\n");
+    printf("Option 5:  Graph - New Cases by Country\n\n");
+    printf("Option 6:  Graph - New Deaths by Country\n\n");
+    printf("Option 7:  Graph - Campare New Cases by Countries\n\n");
+    printf("Option 8:  Upload data files\n\n");
+    printf("Option 10: Percentage of Population Infected\n\n");
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -381,7 +381,13 @@ int main(void) {
 	  }*/
         /* array of percentage of population infected */
         iperPopArray = infectionPercent(pstart, icountryArray, icasesArray, idatenum);
-		
+
+	/* prepare file with data */
+	infectionGraph(icountryArray,iperPopArray, idatenum);
+
+        /* plot graph */
+	buildInfecGraph();
+	
 	/* free array memory */
 	for (ic=0; ic<idatenum;ic++){
 	  free(icountryArray[ic]);
