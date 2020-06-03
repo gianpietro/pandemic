@@ -50,6 +50,8 @@ int main(void) {
   char **icountryArray;
   int *icasesArray;
   double *iperPopArray;
+  /* graph view variables */
+  int gview = 1;
   //  int pop;
   //int poploaded = 0;
   //int idate;
@@ -76,7 +78,11 @@ int main(void) {
 
   do {
     printf("\n");
-    printf("Option 1:  Display list of all data from file\n\n");
+    printf("********************************************************************\n");
+    printf("************** P A N D E M I C -  C O V I D 19 *********************\n");
+    printf("****************** Graph plots of world cases **********************\n");
+    printf("********************************************************************\n");
+    printf("Option 1:  Display list of all data\n\n");
     printf("Option 2:  Graph - Total Cases by Country\n\n");
     printf("option 3:  Graph - Total Deaths by Country\n\n");
     printf("Option 4:  Graph - Total Cases and Deaths by Country\n\n");
@@ -85,6 +91,7 @@ int main(void) {
     printf("Option 7:  Graph - Campare New Cases by Countries\n\n");
     printf("Option 8:  Upload data files\n\n");
     printf("Option 10: Percentage of Population Infected\n\n");
+    printf("Option 11: Select Graph View Type\n\n");
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -95,6 +102,7 @@ int main(void) {
         printCountry(start);
       break;
       case 2:
+	printf("GVIEW %d\n", gview);
 	//type = 2;
         /* search for a particular country and print the values in its struct */
         printf("Search for a country: ");
@@ -114,7 +122,7 @@ int main(void) {
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
         for (i=0; i<numrec; i++) 
           printf("total cases %d\n", arraytcases[i]);
-        countryGraph(arrayDate, arraytcases, numrec, s, choice);     
+        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
         free(arraytcases);
         free(arrayDate);  
         /* free up memory initialised by malloc in create struct*/
@@ -135,7 +143,7 @@ int main(void) {
           printf("record date %d\n",arrayDate[m]);
         }
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
-	countryGraph(arrayDate, arraydcases, numrec, s, choice);
+	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
         free(arraydcases);
         free(arrayDate); 
       break;
@@ -175,7 +183,7 @@ int main(void) {
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
         for (i=0; i<numrec; i++) 
           printf("total cases %d\n", arraytcases[i]);
-        countryGraph(arrayDate, arraytcases, numrec, s, choice);     
+        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
         free(arraytcases);
         free(arrayDate);  
         /* free up memory initialised by malloc in create struct*/
@@ -196,7 +204,7 @@ int main(void) {
           printf("record date %d\n",arrayDate[m]);
         }
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
-	countryGraph(arrayDate, arraydcases, numrec, s, choice);
+	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
         free(arraydcases);
         free(arrayDate); 
       break;
@@ -331,12 +339,11 @@ int main(void) {
 	  ufptr = ufptr->next;
         }
 
-        //does ufptr need to be set to start??
-       
         fclose(ufp);
 
         freeCountry(ufstart);
       }
+	
        /* free memory from ufdata array */
         for (z=0; z<ucount; z++)
           free(ufdata[z]);
@@ -371,23 +378,14 @@ int main(void) {
 	idatenum = getDateRecNum(start, idate);
 	/* array of countries with idate */
 	icountryArray = getDateRecCountry(start, idate, idatenum);
-	/*for (ic=0; ic<idatenum;ic++){
-	  printf("Country infection %s\n", icountryArray[ic]);
-	  }*/
         /* arxray of total cases for country on idate */ 
 	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum);
-	/*for (ic=0; ic<idatenum;ic++){
-	  printf("Cases infection %d\n", icasesArray[ic]);
-	  }*/
         /* array of percentage of population infected */
         iperPopArray = infectionPercent(pstart, icountryArray, icasesArray, idatenum);
-
 	/* prepare file with data */
 	infectionGraph(icountryArray,iperPopArray, idatenum);
-
         /* plot graph */
 	buildInfecGraph();
-	
 	/* free array memory */
 	for (ic=0; ic<idatenum;ic++){
 	  free(icountryArray[ic]);
@@ -395,6 +393,14 @@ int main(void) {
 	free(icountryArray);
 	free(icasesArray);
 	free(iperPopArray);
+      break;
+      case 11:
+	printf("Following graph plot views are available\n");
+	printf("Enter 1 for default view\n");
+	printf("Enter 2 for trend line plot view\n");
+   	printf("Which view would you like to see: ");
+	scanf("%d",&gview);	  
+	printf("view %d\n", gview);
       break;
       case 99:
         freeCountry(start);

@@ -31,7 +31,7 @@ int * filterCo(struct country *, char *, int *, int, int );
 int * filterDCo(struct country *, char *, int *, int, int);
 
 /* function to draw graph using gnuplot */
-void countryGraph(int *, int *, int, char *, int);
+void countryGraph(int *, int *, int, char *, int, int);
 void countryGraphTotDC(int *, int *, int *,int, char *);
 
 /* functions to find infection percentage of population */

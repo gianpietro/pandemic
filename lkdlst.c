@@ -253,13 +253,14 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
 
 /* Will plot either total cases or total deaths depending on option selected 
    from menu */
-void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[], int choice) {
+void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname[], int choice, int view) {
   char filename[10];
   int i;
   int j;
   int *row;
   int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
- 
+
+  /*
   char * commandsForGnuplot[]  =
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
@@ -269,6 +270,23 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "set grid",
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
+  */
+  char commandsForGnuplot[8][200];
+  strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
+  strcpy(commandsForGnuplot[1],"set xtics font ',5'");
+  strcpy(commandsForGnuplot[2],"set ytics font ',6'");
+  strcpy(commandsForGnuplot[3],"set ylabel 'Total number of Cases");
+  strcpy(commandsForGnuplot[4],"set xlabel 'Date'");
+  strcpy(commandsForGnuplot[5],"set grid");
+  strcpy(commandsForGnuplot[6],"unset key");
+  if (view == 2) {
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines");
+  } else {
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
+  }
+  
+  //  strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
+  //  "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines"};
   
   char * commandForGnuplotOne[] = 
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
