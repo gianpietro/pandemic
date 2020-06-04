@@ -52,9 +52,10 @@ int main(void) {
   double *iperPopArray;
   /* graph view variables */
   int gview = 1;
-  //  int pop;
-  //int poploaded = 0;
-  //int idate;
+  /* population infection rate range */
+  int is = 0;
+  double rg = 00.0000, rl = 00.0000;
+   
   
   fp = fopen("datafile.dat", "r");
 
@@ -371,7 +372,7 @@ int main(void) {
         } else {
 	    printf("Population already loaded \n");
         }
-        popPrintCountry(pstart);
+        popPrintCountry(pstart);	
 	/* optain most recent date in datafile */
 	idate = getDate(start);
 	/* count number of records which have idate */	
@@ -379,11 +380,37 @@ int main(void) {
 	/* array of countries with idate */
 	icountryArray = getDateRecCountry(start, idate, idatenum);
         /* arxray of total cases for country on idate */ 
-	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum);
+	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum);	
         /* array of percentage of population infected */
         iperPopArray = infectionPercent(pstart, icountryArray, icasesArray, idatenum);
+
+	//printf("For percentage equale to or greater than (enter %): ");
+	//scanf("%lf", &irateGr);
+	 
+       printf("Select one of the following:\n");
+       printf("1 - Rate equale to or greater than.\n");
+       printf("2 - Range between two rates.\n");
+       printf("3 - Rate equale to or less than.\n");
+       printf("4 - All data all countries\n");
+       printf("Select option required: ");
+       scanf("%d",&is);
+       if (is == 1){
+          printf("Enter percentage greater of equale to: ");
+	  scanf("%lf", &rg);
+       } else if (is == 2) {
+           printf("Enter percentage from: ");
+	   scanf("%lf", &rg);
+	   printf("Enter percentage to: ");
+	   scanf("%lf", &rl);
+       } else if (is == 3){
+           printf("Enter percentage less or euqale to:");
+	   scanf("%lf", &rl);
+       } else if (is == 4){
+	   rg = 00.0000;
+       }
+  
 	/* prepare file with data */
-	infectionGraph(icountryArray,iperPopArray, idatenum);
+       infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
         /* plot graph */
 	buildInfecGraph();
 	/* free array memory */

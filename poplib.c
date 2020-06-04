@@ -63,15 +63,25 @@ double * infectionPercent(struct population *start, char ** icountryArray, int *
 }
 
 	  
-void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum) {
+void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, int is, double rg, double rl) {
   int i;
 
   FILE *temp;
 
-  temp = fopen("datapop.temp", "w");
-
-  for (i=0; i<idatenum; i++)
-    fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+  temp = fopen("datapop.temp", "w"); 
+  
+  for (i=0; i<idatenum; i++) {
+    if (is == 1 || is == 4){
+      if (iperpopArray[i] >= rg)
+        fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+    } else if (is == 2) {
+      if (iperpopArray[i] >= rg && iperpopArray[i] <= rl)
+	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+    } else if (is == 3){
+      if (iperpopArray[i] <= rl)
+	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+    }      
+  }
 
   fflush(temp);
   fclose(temp);
@@ -107,5 +117,7 @@ void buildInfecGraph() {
 }
 
 
+  
+  
 
 

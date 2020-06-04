@@ -280,9 +280,9 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   strcpy(commandsForGnuplot[5],"set grid");
   strcpy(commandsForGnuplot[6],"unset key");
   if (view == 2) {
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
   } else {
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
   }
   
   //  strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
