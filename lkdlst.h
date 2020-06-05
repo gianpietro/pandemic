@@ -38,8 +38,7 @@ void countryGraphTotDC(int *, int *, int *,int, char *);
 int getDate(struct country *);
 int getDateRecNum(struct country *, int);
 char **getDateRecCountry(struct country *, int, int);
-int * getDateRecCountryCases(struct country *, char **,int, int);
-
+int * getDateRecCountryCases(struct country *, char **,int, int, int);
 
 #endif
 

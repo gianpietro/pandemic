@@ -53,7 +53,7 @@ int main(void) {
   /* graph view variables */
   int gview = 1;
   /* population infection rate range */
-  int is = 0;
+  int is = 0, ptype =0;
   double rg = 00.0000, rl = 00.0000;
    
   
@@ -379,8 +379,17 @@ int main(void) {
 	idatenum = getDateRecNum(start, idate);
 	/* array of countries with idate */
 	icountryArray = getDateRecCountry(start, idate, idatenum);
-        /* arxray of total cases for country on idate */ 
-	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum);	
+	/*for (i=0;i<idatenum;i++){
+	  printf("country in array %s\n", icountryArray[i]);
+	  }*/
+        printf("Select one of the following options:\n");
+	printf("Enter 1 - percentage based on total cases\n");
+	printf("Enter 2 - percentage based on total deaths\n");
+	printf("Enter option: ");
+	scanf("%d", &ptype);
+	
+        /* array of total cases for country on idate */ 
+	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum, ptype);	
         /* array of percentage of population infected */
         iperPopArray = infectionPercent(pstart, icountryArray, icasesArray, idatenum);
 
@@ -412,7 +421,7 @@ int main(void) {
 	/* prepare file with data */
        infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
         /* plot graph */
-	buildInfecGraph();
+	buildInfecGraph(ptype);
 	/* free array memory */
 	for (ic=0; ic<idatenum;ic++){
 	  free(icountryArray[ic]);

@@ -463,7 +463,7 @@ char **getDateRecCountry(struct country *start, int rdate, int rdatenum) {
 }
 
 
-int * getDateRecCountryCases(struct country *start, char **ctryName, int rdate, int rdatenum){
+int * getDateRecCountryCases(struct country *start, char **ctryName, int rdate, int rdatenum, int ptype){
   struct country *ptr = start;
   int *icases;
   int i = 0;
@@ -474,7 +474,14 @@ int * getDateRecCountryCases(struct country *start, char **ctryName, int rdate, 
   while (ptr != NULL) {
     for (i=0; i<rdatenum; i++){
       if((strcmp(ctryName[i], ptr->nation) == 0) && rdate == ptr->recdate) {
-	icases[i] = ptr->tcases;	
+	if (ptype == 1){
+ 	  icases[i] = ptr->tcases;
+	} else if (ptype == 2){
+	  icases[i] = ptr->tdeaths;
+	} else {
+	  icases[i] = ptr->tcases;
+	}
+	  
      }
     }
     ptr = ptr->next;

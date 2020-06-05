@@ -88,11 +88,28 @@ void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, in
 }
 		  
       
-void buildInfecGraph() {
+void buildInfecGraph(int ptype) {
    int numOfCommands = 9;   /*increase this if number of commands in commandsForGnuplot[] increases */
    int i;
 
-   char * commandsForGnuplot[]  =
+
+ char commandsForGnuplot[9][200];
+  strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
+  strcpy(commandsForGnuplot[1],"set style data histograms");  
+  strcpy(commandsForGnuplot[2],"set xtics font ',8'");
+  strcpy(commandsForGnuplot[3],"set ytics font ',6'");
+  strcpy(commandsForGnuplot[4],"set ylabel 'Percentage");
+  strcpy(commandsForGnuplot[5],"set xlabel 'Country'");
+  strcpy(commandsForGnuplot[6],"set grid");
+  strcpy(commandsForGnuplot[7],"unset key");
+  if (ptype == 2) {
+    strcpy(commandsForGnuplot[8],"plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc 'red' fill solid");
+  } else {
+    strcpy(commandsForGnuplot[8],"plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc '#00ace6' fill solid");
+  }
+
+  /*
+     char * commandsForGnuplot[]  =
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set style data histograms",
      "set xtics font ',8'",
@@ -101,12 +118,16 @@ void buildInfecGraph() {
      "set xlabel 'Country'",
      "set grid",
      "unset key",
-     "plot for [i=2:2] 'datapop.temp' using i:xtic(1)"};
+     "plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc '#00ace6' fill solid"};
+  */
 
-
-   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); 
-
-   fprintf(gnuplotPipe, "set title 'Percentage of population who have been infected' \n");
+   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w");
+   
+   if (ptype == 2){
+     fprintf(gnuplotPipe, "set title 'Percentage of population who have died from Covid 19' \n");
+   } else {
+     fprintf(gnuplotPipe, "set title 'Percentage of population who have been infected with Covid 19' \n");
+   }
   
   for (i=0; i < numOfCommands; i++) {
        fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
