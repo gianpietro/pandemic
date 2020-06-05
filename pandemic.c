@@ -55,7 +55,6 @@ int main(void) {
   /* population infection rate range */
   int is = 0, ptype =0;
   double rg = 00.0000, rl = 00.0000;
-   
   
   fp = fopen("datafile.dat", "r");
 
@@ -103,7 +102,7 @@ int main(void) {
         printCountry(start);
       break;
       case 2:
-	printf("GVIEW %d\n", gview);
+        printf("GVIEW %d\n", gview);
 	//type = 2;
         /* search for a particular country and print the values in its struct */
         printf("Search for a country: ");
@@ -125,7 +124,7 @@ int main(void) {
           printf("total cases %d\n", arraytcases[i]);
         countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
         free(arraytcases);
-        free(arrayDate);  
+        free(arrayDate);
         /* free up memory initialised by malloc in create struct*/
       break;
       case 3:

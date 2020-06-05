@@ -272,6 +272,8 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
   */
   char commandsForGnuplot[8][200];
+  // strcpy(commandsForGnuplot[0],"set terminal gif");
+  //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
   strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
   strcpy(commandsForGnuplot[1],"set xtics font ',5'");
   strcpy(commandsForGnuplot[2],"set ytics font ',6'");
@@ -279,7 +281,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   strcpy(commandsForGnuplot[4],"set xlabel 'Date'");
   strcpy(commandsForGnuplot[5],"set grid");
   strcpy(commandsForGnuplot[6],"unset key");
-  if (view == 2) {
+  if (view == 2) {    
     strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
   } else {
     strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
@@ -298,18 +300,20 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1)"};
    
-    FILE *temp = fopen("data.temp", "w");   /* LINUX PATH */
+  FILE *temp = fopen("data.temp", "w");   /* LINUX PATH */
  //  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
 
     /* The option -persistent will leave gnuplot running even when application is closed.
        Noted that gnuplot-qt session for each graph and this session remains even when graph
        is closed. Seems to cause gnuplot to crash after many graphs open. */
-    //   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
-      FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
+   //   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+
+  
+  FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
    //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
-  
+
   for (i=0; i < numrec; i++)
     {
       fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
