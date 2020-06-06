@@ -258,7 +258,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   int i;
   int j;
   int *row;
-  int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
+  int numOfCommands = 9;   /*increase this if number of commands in commandsForGnuplot[] increases */
 
   /*
   char * commandsForGnuplot[]  =
@@ -271,7 +271,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
   */
-  char commandsForGnuplot[8][200];
+  char commandsForGnuplot[9][200];
   // strcpy(commandsForGnuplot[0],"set terminal gif");
   //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
   strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
@@ -353,6 +353,13 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp);
+  
+  /*  could look at using getchar to hit enter so newline would close graph and go back to main menu
+  int cls =0;
+  printf("CLOSE WINDOW");
+  scanf("%d", &cls);
+  if (cls == 1)
+  pclose(gnuplotPipe); */
 }
 
 /* Plot new total cases and new total deaths by country */
