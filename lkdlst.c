@@ -259,6 +259,8 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   int j;
   int *row;
   int numOfCommands = 9;   /*increase this if number of commands in commandsForGnuplot[] increases */
+  //static int gpOpen = 0;
+  int c;
 
   /*
   char * commandsForGnuplot[]  =
@@ -271,6 +273,8 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
   */
+
+   
   char commandsForGnuplot[9][200];
   // strcpy(commandsForGnuplot[0],"set terminal gif");
   //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
@@ -310,6 +314,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
 
   
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
+    
    //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
    these warnings make program exit */
@@ -354,12 +359,21 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(gnuplotPipe);
   fclose(temp);
   
-  /*  could look at using getchar to hit enter so newline would close graph and go back to main menu
+  /*  could look at using getchar to hit enter so newline would close graph and go back to main menu 
   int cls =0;
   printf("CLOSE WINDOW");
   scanf("%d", &cls);
   if (cls == 1)
   pclose(gnuplotPipe); */
+
+  /* another option (better option) to close graph before opening new one 
+
+  while ((c = getchar()) != '1')
+     printf("enter 1 to continue...");
+    pclose(gnuplotPipe);
+  */
+
+  
 }
 
 /* Plot new total cases and new total deaths by country */
