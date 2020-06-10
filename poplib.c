@@ -33,7 +33,7 @@ void popPrintCountry(struct population *start) {
   int count = 0;
 
   while (ptr != NULL) {
-    printf("country %s, population %d\n", ptr->nation, ptr->tpop);
+    printf("country %s population %d\n", ptr->nation, ptr->tpop);
     ptr = ptr->next;
     count++;
   }
@@ -51,7 +51,7 @@ double * infectionPercent(struct population *start, char ** icountryArray, int *
     while (ptr != NULL){
       if (strcmp(icountryArray[i], ptr->nation) == 0){
         perc[i] = (icasesArray[i]/(double)ptr->tpop)*100;
-	printf("country: %s pop %d cases: %d rate: %2.4f\n",icountryArray[i], ptr->tpop, icasesArray[i], perc[i]);
+	printf("country %s pop %d cases %d rate %2.4f\n",icountryArray[i], ptr->tpop, icasesArray[i], perc[i]);
 	ptr = ptr->next;
        } else {
         ptr = ptr->next;

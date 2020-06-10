@@ -258,7 +258,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   int i;
   int j;
   int *row;
-  int numOfCommands = 9;   /*increase this if number of commands in commandsForGnuplot[] increases */
+  int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
   //static int gpOpen = 0;
   int c;
 
@@ -275,7 +275,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   */
 
    
-  char commandsForGnuplot[9][200];
+  char commandsForGnuplot[8][200];
   // strcpy(commandsForGnuplot[0],"set terminal gif");
   //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
   strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
@@ -290,6 +290,12 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   } else {
     strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
   }
+  /* if need to plot using every 3rd x value, can use every 3 as follows  
+     strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 3 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines"); 
+So to plot the 3rd column vs. the 1st, and plot every 3rd row starting from
+the 2nd, I do
+
+plot "filename" every 3::1 using 1:3 */
   
   //  strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
   //  "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines"};

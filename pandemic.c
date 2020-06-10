@@ -20,7 +20,7 @@ int main(void) {
   char c[COUNTRY];
   int totalcases, totaldeaths, dailycases, dailydeaths;
   int rcdate;
-  int n, i;
+  int n, i = 0;
   int numrec = 0;  /* number of records in date array for country being searched */
   int *arrayDate;
   int m;
@@ -46,7 +46,7 @@ int main(void) {
   struct population *pstart, *pCountryPtr, *pend, *pptr;
   FILE *fpop;  
   char pname[CTNAME];
-  int totalpop, pop, poploaded = 0, idate, idatenum =0, ic;
+  int totalpop, pop = 0, poploaded = 0, idate, idatenum =0, ic;
   char **icountryArray;
   int *icasesArray;
   double *iperPopArray;
@@ -381,7 +381,7 @@ int main(void) {
 	/*for (i=0;i<idatenum;i++){
 	  printf("country in array %s\n", icountryArray[i]);
 	  }*/
-        printf("Select one of the following options:\n");
+        printf("\nSelect one of the following options:\n");
 	printf("Enter 1 - percentage based on total cases\n");
 	printf("Enter 2 - percentage based on total deaths\n");
 	printf("Enter option: ");
@@ -395,7 +395,7 @@ int main(void) {
 	//printf("For percentage equale to or greater than (enter %): ");
 	//scanf("%lf", &irateGr);
 	 
-       printf("Select one of the following:\n");
+       printf("\nSelect one of the following:\n");
        printf("1 - Rate equale to or greater than.\n");
        printf("2 - Range between two rates.\n");
        printf("3 - Rate equale to or less than.\n");
