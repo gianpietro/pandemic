@@ -51,7 +51,7 @@ double * infectionPercent(struct population *start, char ** icountryArray, int *
     while (ptr != NULL){
       if (strcmp(icountryArray[i], ptr->nation) == 0){
         perc[i] = (icasesArray[i]/(double)ptr->tpop)*100;
-	printf("country %s pop %d cases %d rate %2.4f\n",icountryArray[i], ptr->tpop, icasesArray[i], perc[i]);
+	//printf("country %s pop %d cases %d rate %2.4f\n",icountryArray[i], ptr->tpop, icasesArray[i], perc[i]);
 	ptr = ptr->next;
        } else {
         ptr = ptr->next;
@@ -72,8 +72,10 @@ void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, in
   
   for (i=0; i<idatenum; i++) {
     if (is == 1 || is == 4){
-      if (iperpopArray[i] >= rg)
+      if (iperpopArray[i] >= rg){
         fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+	//printPercInfection(icountryArray,iperpopArray,idatenum);
+      }
     } else if (is == 2) {
       if (iperpopArray[i] >= rg && iperpopArray[i] <= rl)
 	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
@@ -82,6 +84,7 @@ void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, in
 	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
     }      
   }
+  //  printPercInfection(icountryArray,iperpopArray,idatenum);
 
   fflush(temp);
   fclose(temp);
@@ -91,9 +94,8 @@ void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, in
 void buildInfecGraph(int ptype) {
    int numOfCommands = 9;   /*increase this if number of commands in commandsForGnuplot[] increases */
    int i;
-
-
- char commandsForGnuplot[9][200];
+   char commandsForGnuplot[9][200];
+   
  //strcpy(commandsForGnuplot[0],"set terminal gif");
  //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");   
   strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
@@ -139,7 +141,50 @@ void buildInfecGraph(int ptype) {
 }
 
 
+/* sort infection rate from highest to lowest, add population total for each country and print */
+void printPercInfection(struct population *start, char **icountryArray, double *iperpopArray, int idatenum) {
+  int i = 0, j = 1;
+  double temp;
+  char cttemp[ctName];
+  int totalPop[idatenum];
   
+  struct population *ptr = start;
+
+  for (i=0; i<idatenum; i++) {
+    for (j=i+1; j<idatenum; j++) {
+      if(iperpopArray[i] < iperpopArray[j]) {
+	  temp = iperpopArray[i];
+	  iperpopArray[i] = iperpopArray[j];
+	  iperpopArray[j] = temp;
+	  strcpy(cttemp, icountryArray[i]);
+	  strcpy(icountryArray[i], icountryArray[j]);
+	  strcpy(icountryArray[j], cttemp);
+      }
+    }
+  }
+
+  for (i=0; i<idatenum; i++){
+    while (ptr != NULL){
+      if (strcmp(icountryArray[i], ptr->nation) == 0){
+	totalPop[i] = ptr->tpop;
+	ptr = ptr->next;
+      } else {
+	ptr = ptr->next;
+      }
+    }
+    ptr = start;
+  }
+  
+  for (i=0; i<idatenum; i++) {
+    printf("Country: %s population: %d  Percentage:  %2.4f\n", icountryArray[i], totalPop[i], iperpopArray[i]);
+  }  
+}
+
+
+
+
+
+ 
   
 
 

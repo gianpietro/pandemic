@@ -1,5 +1,5 @@
 program: pandemic.c lkdlst.so mltgrp.so poplib.so
-	gcc pandemic.c lkdlst.so mltgrp.so poplib.so -o pandemic
+	gcc -g pandemic.c lkdlst.so mltgrp.so poplib.so -o pandemic
 
 lkdlst.so: lkdlst.c lkdlst.h
 	gcc lkdlst.c -o lkdlst.so -c

@@ -394,6 +394,8 @@ int main(void) {
 
 	//printf("For percentage equale to or greater than (enter %): ");
 	//scanf("%lf", &irateGr);
+
+	//printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
 	 
        printf("\nSelect one of the following:\n");
        printf("1 - Rate equale to or greater than.\n");
@@ -419,6 +421,8 @@ int main(void) {
   
 	/* prepare file with data */
        infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
+
+       	printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
         /* plot graph */
 	buildInfecGraph(ptype);
 	/* free array memory */

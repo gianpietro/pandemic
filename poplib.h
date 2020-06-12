@@ -17,6 +17,7 @@ struct population {
   double * infectionPercent(struct population *, char **, int *, int);
   void infectionGraph(char **, double *, int, int, double, double);
   void buildInfecGraph(int);
+  void printPercInfection(struct population *, char **, double *, int);
   
 
 #endif
