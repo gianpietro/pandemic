@@ -53,8 +53,9 @@ int main(void) {
   /* graph view variables */
   int gview = 1;
   /* population infection rate range */
-  int is = 0, ptype =0;
+  int is = 0, ptype =0, gsort = 0;
   double rg = 00.0000, rl = 00.0000;
+  
   
   fp = fopen("datafile.dat", "r");
 
@@ -385,7 +386,10 @@ int main(void) {
 	printf("Enter 1 - percentage based on total cases\n");
 	printf("Enter 2 - percentage based on total deaths\n");
 	printf("Enter option: ");
-	scanf("%d", &ptype);
+        scanf("%d", &ptype);
+	printf("Sort high to low options  Yes = 1, No = 2:  ");
+	scanf("%d", &gsort);
+	
 	
         /* array of total cases for country on idate */ 
 	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum, ptype);	
@@ -394,8 +398,8 @@ int main(void) {
 
 	//printf("For percentage equale to or greater than (enter %): ");
 	//scanf("%lf", &irateGr);
-
-	//printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
+	if(gsort == 1)
+	  printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
 	 
        printf("\nSelect one of the following:\n");
        printf("1 - Rate equale to or greater than.\n");
@@ -422,7 +426,9 @@ int main(void) {
 	/* prepare file with data */
        infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
 
-       	printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
+       if (gsort == 2)
+         printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
+       
         /* plot graph */
 	buildInfecGraph(ptype);
 	/* free array memory */

@@ -388,17 +388,23 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
   int i;
   int j;
   int *row;
-  int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
+  int numOfCommands = 12;   /*increase this if number of commands in commandsForGnuplot[] increases */
  
   char * commandsForGnuplot[]  =
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
-     "set ylabel 'Total number of Cases",
+     "set ylabel 'Total number of Cases'",
+     "set ytics nomirror",
+     "set y2tics",
+     "set y2tics font ',6'",
+     "set y2label 'Total number of Deaths",
      "set xlabel 'Date'",
+     "set key font ',6'",
      "set grid",
-     "unset key",
-     "plot for [i=2:3] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
+     "plot 'data.temp' using 0:2:xtic(1) title 'cases' lw 1.5 with lines axes x1y1, 'data.temp' using 0:3:xtic(1) title 'deaths' lw 1.5 with lines axes x1y2"}; 
+     //"unset key",
+     //"plot for [i=2:3] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
    char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
