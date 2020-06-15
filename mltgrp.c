@@ -29,7 +29,7 @@ void compareGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fclose(temp);
 }
 
-void buildGraph(int g) {
+void buildGraph(int g, int view) {
    int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
    int i;
    char commandsForGnuplot[8][200];
@@ -41,15 +41,27 @@ void buildGraph(int g) {
    strcpy(commandsForGnuplot[3],"set ylabel 'Number of New Cases");
    strcpy(commandsForGnuplot[4],"set xlabel 'Date'");
    strcpy(commandsForGnuplot[5],"set grid");
-   strcpy(commandsForGnuplot[6],"set key autotitle columnhead");     
-   if (g == 2){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:2] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
-   } else if ( g == 3){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:3] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
-   } else if ( g == 4){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:4] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
-   } else if ( g == 5){
-   strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
+   strcpy(commandsForGnuplot[6],"set key autotitle columnhead");
+   if (view == 2) {
+     if (g == 2){
+       strcpy(commandsForGnuplot[7],"plot for [i=1:2] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth acsplines");
+     } else if ( g == 3){
+       strcpy(commandsForGnuplot[7],"plot for [i=1:3] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth acsplines");
+     } else if ( g == 4){
+      strcpy(commandsForGnuplot[7],"plot for [i=1:4] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth acsplines");
+     } else if ( g == 5){
+     strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth acsplines");
+     }
+   } else {     
+       if (g == 2){
+        strcpy(commandsForGnuplot[7],"plot for [i=1:2] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
+       } else if ( g == 3){
+      strcpy(commandsForGnuplot[7],"plot for [i=1:3] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
+      } else if ( g == 4){
+      strcpy(commandsForGnuplot[7],"plot for [i=1:4] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
+      } else if ( g == 5){
+      strcpy(commandsForGnuplot[7],"plot for [i=1:5] 'country'.i.'.gp' using 0:2:xtic(1) lw 1.5 smooth mcsplines");
+     }
    }
 
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); 

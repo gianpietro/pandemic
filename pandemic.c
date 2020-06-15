@@ -233,7 +233,7 @@ int main(void) {
 	    free(arrayDate);
 	    free(compare[g]);
 	  }
-	  buildGraph(g);
+	  buildGraph(g, gview);
 	  free(compare);	
         }
       break;
