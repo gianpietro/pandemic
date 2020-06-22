@@ -56,7 +56,7 @@ int main(void) {
   int is = 0, ptype =0, gsort = 0;
   double rg = 00.0000, rl = 00.0000;
   /* API link */
-  FILE *api;
+  FILE *api, *fapi;
   char apiStr[50000];  
 
     
@@ -458,9 +458,9 @@ int main(void) {
       api = popen("wget -q https://api.covid19api.com/summary","w");
       fflush(api);
       pclose(api);
-      api = fopen("summary", "r");
-      fread(apiStr, 50000, 1, api);  
-      fclose(api);
+      fapi = fopen("summary", "r");
+      fread(apiStr, 50000, 1, fapi);  
+      fclose(fapi);
 
       cJSON *root = cJSON_Parse(apiStr);
 
@@ -470,9 +470,14 @@ int main(void) {
       
       cJSON_ArrayForEach(Country_idx, Countries_Obj) {
         cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
+	cJSON *NewConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewConfirmed");
         cJSON *TotalConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalConfirmed");
+	cJSON *NewDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewDeaths");
+	cJSON *TotalDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalDeaths");
+	cJSON *Date_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Date");
         totCases = TotalConfirmed_Obj->valuedouble;
-        printf("Country %s Total Confirmed %f\n",totCases, Country_Obj->valuestring);
+        printf("Country %s Total Confirmed %f Total Deaths %f New Confirmed %f New Deaths %f Date %s\n",
+	       Country_Obj->valuestring, totCases, TotalDeaths_Obj->valuedouble, NewConfirmed_Obj->valuedouble, NewDeaths_Obj->valuedouble, Date_Obj->valuestring);
       }
 
       char *rendered = cJSON_Print(root);
