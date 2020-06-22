@@ -268,7 +268,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
-     "set xlabel 'Date'",
+oo     "set xlabel 'Date'",
      "set grid",
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};

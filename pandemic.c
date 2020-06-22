@@ -9,7 +9,7 @@ plot a graph using gnuplot
 #include "lkdlst.h"
 #include "mltgrp.h"
 #include "poplib.h"
-
+#include "cJSON.h"
 
 
 
@@ -55,8 +55,11 @@ int main(void) {
   /* population infection rate range */
   int is = 0, ptype =0, gsort = 0;
   double rg = 00.0000, rl = 00.0000;
-  
-  
+  /* API link */
+  FILE *api;
+  char apiStr[50000];  
+
+    
   fp = fopen("datafile.dat", "r");
 
   if (fp == NULL) {
@@ -93,6 +96,7 @@ int main(void) {
     printf("Option 8:  Upload data files\n\n");
     printf("Option 10: Percentage of Population Infected\n\n");
     printf("Option 11: Select Graph View Type\n\n");
+    printf("Option 12: DEVELOPMENT API File\n\n");
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -447,6 +451,35 @@ int main(void) {
 	scanf("%d",&gview);	  
 	printf("view %d\n", gview);
       break;
+    case 12:
+      remove("summary");
+      /* using application gwet to retrieve jason file from API */
+      /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
+      api = popen("wget -q https://api.covid19api.com/summary","w");
+      fflush(api);
+      pclose(api);
+      api = fopen("summary", "r");
+      fread(apiStr, 50000, 1, api);  
+      fclose(api);
+
+      cJSON *root = cJSON_Parse(apiStr);
+
+      const cJSON *Country_idx = NULL;
+      const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
+      double totCases;
+      
+      cJSON_ArrayForEach(Country_idx, Countries_Obj) {
+        cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
+        cJSON *TotalConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalConfirmed");
+        totCases = TotalConfirmed_Obj->valuedouble;
+        printf("Country %s Total Confirmed %f\n",totCases, Country_Obj->valuestring);
+      }
+
+      char *rendered = cJSON_Print(root);
+
+      free(rendered);
+      cJSON_Delete(root);
+      break; 
       case 99:
         freeCountry(start);
         exit(0);
