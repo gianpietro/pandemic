@@ -10,6 +10,7 @@ plot a graph using gnuplot
 #include "mltgrp.h"
 #include "poplib.h"
 #include "cJSON.h"
+#include "apiget.h"
 
 
 
@@ -31,7 +32,7 @@ int main(void) {
   FILE *fp;
   /* livedata upload variables */
   char filename[UPLOAD];
-  char * extension = ".dat";
+  char *extension = ".dat";
   struct country *ufstart, *ufnewCountryPtr, *ufend, *ufptr;
   char fileSpec[UPLOAD+strlen(extension)+1];
   FILE *temp;
@@ -40,8 +41,8 @@ int main(void) {
   char path[] = "livedata/";
   char ufname[UPLOAD];
   char **ufdata; 
-  int ucount = 0;
-  int z, u=0, auditcheck=0, v=0;
+  int  ucount = 0;
+  int  z, u=0, auditcheck=0, v=0;
   /* popoulation variables */
   struct population *pstart, *pCountryPtr, *pend, *pptr;
   FILE *fpop;  
@@ -57,7 +58,11 @@ int main(void) {
   double rg = 00.0000, rl = 00.0000;
   /* API link */
   FILE *api, *fapi;
-  char apiStr[50000];  
+  char apiStr[50000];
+  struct apiGetData *apiStart, *apiNewCountryPtr, *apiEnd, *apiPtr;
+  //char apiname[COUNTRY], apicode[3], apirdate[21];
+  //int api_newcases, api_totcases, api_newdeaths, api_totdeaths;
+  int apiList = 0;
 
     
   fp = fopen("datafile.dat", "r");
@@ -71,7 +76,8 @@ int main(void) {
     if (i == 0) {
       start = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
       end = start;
-    } else {
+    }
+    else {
       newCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
       end = append(end, newCountryPtr);
     }       
@@ -105,7 +111,7 @@ int main(void) {
       case 1:
         /* print struct content of linked list */ 
         printCountry(start);
-      break;
+        break;
       case 2:
         printf("GVIEW %d\n", gview);
 	//type = 2;
@@ -121,9 +127,10 @@ int main(void) {
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-        for (m=0; m<numrec;m++){
+	
+        for (m=0; m<numrec;m++)
           printf("record date %d\n",arrayDate[m]);
-        }
+        
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
         for (i=0; i<numrec; i++) 
           printf("total cases %d\n", arraytcases[i]);
@@ -131,7 +138,7 @@ int main(void) {
         free(arraytcases);
         free(arrayDate);
         /* free up memory initialised by malloc in create struct*/
-      break;
+        break;
       case 3:
         printf("Search for a country: ");
         scanf("%s", s);
@@ -144,30 +151,33 @@ int main(void) {
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-        for (m=0; m<numrec;m++){
+
+	for (m=0; m<numrec;m++)
           printf("record date %d\n",arrayDate[m]);
-        }
+        	
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
         free(arraydcases);
         free(arrayDate); 
-      break;
+        break;
       case 4:
         printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
 	numrec = getCoRec(start,s);
 	arrayDate = getCoRecdate(start,s,numrec);
-	for (m=0; m<numrec;m++){
+
+	for (m=0; m<numrec;m++)
           printf("record date %d\n",arrayDate[m]);
-        }
+        	
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraphTotDC(arrayDate, arraytcases, arraydcases, numrec, s);
+	
 	free(arraytcases);
 	free(arraydcases);
         free(arrayDate); 
-      break;
+        break;
       case 5:
       //type = 2;
         /* search for a particular country and print the values in its struct */
@@ -182,17 +192,21 @@ int main(void) {
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-        for (m=0; m<numrec; m++){
+
+	for (m=0; m<numrec; m++)
           printf("record date %d\n",arrayDate[m]);
-        }
+      	
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
-        for (i=0; i<numrec; i++) 
+
+	for (i=0; i<numrec; i++) 
           printf("total cases %d\n", arraytcases[i]);
-        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
+	
+        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);
+	
         free(arraytcases);
         free(arrayDate);  
         /* free up memory initialised by malloc in create struct*/
-      break;
+        break;
       case 6:
         printf("Search for a country: ");
         scanf("%s", s);
@@ -205,14 +219,16 @@ int main(void) {
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-        for (m=0; m<numrec;m++){
-          printf("record date %d\n",arrayDate[m]);
-        }
+	
+        for (m=0; m<numrec;m++)
+          printf("record date %d\n",arrayDate[m]);        
+	
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
+	
         free(arraydcases);
         free(arrayDate); 
-      break;
+        break;
       case 7:
         printf("Number of countries to compare (max is 5): ");
         scanf("%d", &f);
@@ -240,7 +256,7 @@ int main(void) {
 	  buildGraph(g, gview);
 	  free(compare);	
         }
-      break;
+        break;
       case 8:
         ucount = 0;
         strcpy(path,"livedata/");
@@ -278,6 +294,7 @@ int main(void) {
         fclose(uf);
        
         printf("ucount second scan %d\n", ucount);
+	
         for (z=0; z<ucount; z++)
           printf("upload filename %s\n",ufdata[z]);
 
@@ -311,7 +328,8 @@ int main(void) {
           if (u == 0) {
             ufstart = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
             ufend = ufstart;
-          } else {
+	  }
+	  else {
             ufnewCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
             ufend = append(ufend, ufnewCountryPtr);
           }       
@@ -332,10 +350,12 @@ int main(void) {
        
         /* write data from uploaded file to the main datafile */
         ufp = fopen("datafile.dat", "a");
+	
         if (ufp == NULL) {
           fprintf(stdout,"\nError opening file\n");
           break;
         }
+	
         ufptr = ufstart;
        
         while(ufptr != NULL)
@@ -352,8 +372,8 @@ int main(void) {
        /* free memory from ufdata array */
         for (z=0; z<ucount; z++)
           free(ufdata[z]);
-        free(ufdata);
-      break;
+        free(ufdata);	
+        break;
       case 10:
         if (poploaded == 0) {
           fpop = fopen("datapopfile.dat", "r");
@@ -365,7 +385,8 @@ int main(void) {
             if (pop == 0) {
               pstart = popCreateCountry(pname, totalpop);
               pend = pstart;
-            } else {
+            }
+	    else {
               pCountryPtr = popCreateCountry(pname, totalpop);
               pend = popAppend(pend, pCountryPtr);
             }       
@@ -373,7 +394,8 @@ int main(void) {
         }
           fclose(fpop);
           poploaded = 1;
-        } else {
+        }
+        else {
 	    printf("Population already loaded \n");
         }
         popPrintCountry(pstart);	
@@ -415,15 +437,18 @@ int main(void) {
        if (is == 1){
           printf("Enter percentage greater of equale to: ");
 	  scanf("%lf", &rg);
-       } else if (is == 2) {
+       }
+       else if (is == 2) {
            printf("Enter percentage from: ");
 	   scanf("%lf", &rg);
 	   printf("Enter percentage to: ");
 	   scanf("%lf", &rl);
-       } else if (is == 3){
+       }
+       else if (is == 3){
            printf("Enter percentage less or euqale to:");
 	   scanf("%lf", &rl);
-       } else if (is == 4){
+       }
+       else if (is == 4){
 	   rg = 00.0000;
        }
   
@@ -442,7 +467,7 @@ int main(void) {
 	free(icountryArray);
 	free(icasesArray);
 	free(iperPopArray);
-      break;
+        break;
       case 11:
 	printf("Following graph plot views are available\n");
 	printf("Enter 1 for default view\n");
@@ -450,45 +475,85 @@ int main(void) {
    	printf("Which view would you like to see: ");
 	scanf("%d",&gview);	  
 	printf("view %d\n", gview);
-      break;
-    case 12:
-      remove("summary");
-      /* using application gwet to retrieve jason file from API */
-      /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
-      api = popen("wget -q https://api.covid19api.com/summary","w");
-      fflush(api);
-      pclose(api);
-      fapi = fopen("summary", "r");
-      fread(apiStr, 50000, 1, fapi);  
-      fclose(fapi);
+        break;
+      case 12:
+        remove("summary");
+	apiList = 0;
+	int Countries_count = 0;
+        /* using application gwet to retrieve jason file from API */
+        /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
+        //api = popen("wget -q https://api.covid19api.com/summary","w");
 
-      cJSON *root = cJSON_Parse(apiStr);
+	// next 3 lines required
+	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
+	fflush(api);
+	pclose(api);
+        fapi = fopen("summary", "r");
+        fread(apiStr, 50000, 1, fapi);  
+        fclose(fapi);
 
-      const cJSON *Country_idx = NULL;
-      const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
-      double totCases;
+        cJSON *root = cJSON_Parse(apiStr);
+
+        //const cJSON *Country_idx = NULL;
+        const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
+        //double totCases;
+
+        Countries_count = cJSON_GetArraySize(Countries_Obj);
+        int idxData = 0;
+        //int NewConfirmed_Obj[220];
+
       
-      cJSON_ArrayForEach(Country_idx, Countries_Obj) {
-        cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
-	cJSON *NewConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewConfirmed");
-        cJSON *TotalConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalConfirmed");
-	cJSON *NewDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewDeaths");
-	cJSON *TotalDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalDeaths");
-	cJSON *Date_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Date");
-        totCases = TotalConfirmed_Obj->valuedouble;
-        printf("Country %s Total Confirmed %f Total Deaths %f New Confirmed %f New Deaths %f Date %s\n",
+        /* cJSON_ArrayForEach(Country_idx, Countries_Obj) {
+          cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
+	  cJSON *NewConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewConfirmed");
+          cJSON *TotalConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalConfirmed");
+	  cJSON *NewDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewDeaths");
+	  cJSON *TotalDeaths_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalDeaths");
+	  cJSON *Date_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Date");
+          totCases = TotalConfirmed_Obj->valuedouble;
+          printf("Country %s Total Confirmed %f Total Deaths %f New Confirmed %f New Deaths %f Date %s\n",
 	       Country_Obj->valuestring, totCases, TotalDeaths_Obj->valuedouble, NewConfirmed_Obj->valuedouble, NewDeaths_Obj->valuedouble, Date_Obj->valuestring);
-      }
+	       } */
 
-      char *rendered = cJSON_Print(root);
+        for (idxData = 0; idxData < Countries_count; idxData++) {
+          cJSON *CountryData_Array = cJSON_GetArrayItem(Countries_Obj, idxData);
+          char *CountryName_Obj = cJSON_GetObjectItem(CountryData_Array, "Country")->valuestring;
+	  char *CountryCode_Obj = cJSON_GetObjectItem(CountryData_Array, "CountryCode")->valuestring;
+          int NewConfirmed_Obj = cJSON_GetObjectItem(CountryData_Array, "NewConfirmed")->valueint;
+          int TotalConfirmed_Obj = cJSON_GetObjectItem(CountryData_Array, "TotalConfirmed")->valueint;
+          int NewDeaths_Obj = cJSON_GetObjectItem(CountryData_Array, "NewDeaths")->valueint;
+          int TotalDeaths_Obj = cJSON_GetObjectItem(CountryData_Array, "TotalDeaths")->valueint;
+          char *Slug_Obj  = cJSON_GetObjectItem(CountryData_Array, "Slug")->valuestring;
+          char *Date_Obj = cJSON_GetObjectItem(CountryData_Array, "Date")->valuestring;
+       
+	  /*   printf("country %s code %s  slug %s newCases %d totCases %d newDeaths %d totDeaths %d date %s\n",
+	       CountryName_Obj, CountryCode_Obj, Slug_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj); */
 
-      free(rendered);
-      cJSON_Delete(root);
-      break; 
+	  if (apiList == 0) {
+	    apiStart = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj);
+	    apiEnd = apiStart;
+	  }
+	  else {
+	    apiNewCountryPtr = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj,TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj);
+	    apiEnd = apiAppend(apiEnd , apiNewCountryPtr);
+	  }
+	  apiList++;	  
+        }
+
+	printf("countries count %d\n", Countries_count);
+	
+        char *rendered = cJSON_Print(root);
+
+        apiPrintCountry(apiStart);
+	 
+        free(rendered);	
+        cJSON_Delete(root);
+        break; 
       case 99:
         freeCountry(start);
+	apiFreeCountry(apiStart);
         exit(0);
-      break;
+        break;
       }
     } while (choice != 99);
 
