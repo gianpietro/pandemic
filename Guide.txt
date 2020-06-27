@@ -133,6 +133,15 @@ Country population and rate of infection. Could have a seperate file with countr
    enters a rate value and will plot rate value or greater
  
 
+STAGE 14 - API
+1. Need to make linklist of data upload
+2. Lookup table for country name with its alias, this will be a file of 2 columns
+3. Replace country name in linklist with that from lookup table
+4. Date in api is string format need to change this to yyyymmdd and string format
+5. Enter this date for each country in link list
+6. Once linklist is completed ask user if want to upload to datafile
+7. If api to be uploaded need similar process to option 8 with a file being produced of data to upload
+8. Once uploaded date to be added to auditfile
 
 
   REFERENCES:
