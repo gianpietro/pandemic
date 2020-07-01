@@ -11,15 +11,34 @@ struct apiGetData {
   int apiNewDeathsConfirmed;
   int apiTotalDeaths;
   char apiUploadDate[21];
+  int apiRequiredDate;
   struct apiGetData *next;
 };
   typedef struct apiGetData apiGetData;
 
-struct apiGetData *apiCreateCountry(char *, char *, int, int, int, int, char *);
+struct apiAlias {
+  char apiCoName[APICOUNTRY];
+  char apiCoAlias[3];
+  struct apiAlias *next;
+};
+  typedef struct apiAlias apiAlias;
+
+
+struct apiGetData *apiCreateCountry(char *, char *, int, int, int, int, char *, int);
 struct apiGetData *apiAppend(struct apiGetData *, struct apiGetData *);
 void apiPrintCountry(struct apiGetData *);
 void apiFreeCountry(struct apiGetData *);
-  
+char **apiDataDate(struct apiGetData *);
+int formatDate(char **);
+void apiPrintCountryFinal(struct apiGetData *);
+void apiCorrectDate(struct apiGetData *, int);
+//char **countryAliasCode();  
+
+struct apiAlias *apiCreateAliasList(char *, char *);
+struct apiAlias *apiAliasAppend(struct apiAlias *, struct apiAlias *);
+void apiPrintAlias(struct apiAlias *);
+void apiFreeAlias(struct apiAlias *);
+void apiCorrectCountryName(struct apiGetData *, struct apiAlias *, int);
 
 
 #endif

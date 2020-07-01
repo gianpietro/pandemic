@@ -60,9 +60,15 @@ int main(void) {
   FILE *api, *fapi;
   char apiStr[50000];
   struct apiGetData *apiStart, *apiNewCountryPtr, *apiEnd, *apiPtr;
-  //char apiname[COUNTRY], apicode[3], apirdate[21];
-  //int api_newcases, api_totcases, api_newdeaths, api_totdeaths;
   int apiList = 0;
+  char **aliasName;
+  struct apiAlias *aStart, *aNewAliasPtr, *aEnd, *aPtr;
+  FILE *fAlias;
+  char nameStr[COUNTRY];
+  char aliasStr[3];
+  int acount = 0;
+  char **apiDateStr;
+  int fileUploadDate;
 
     
   fp = fopen("datafile.dat", "r");
@@ -324,49 +330,49 @@ int main(void) {
 
 	  printf("value of u 2nd %d\n", u);
        /* if file is not in auditfile load to country structure */
-        while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
-          if (u == 0) {
-            ufstart = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
-            ufend = ufstart;
-	  }
-	  else {
-            ufnewCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
-            ufend = append(ufend, ufnewCountryPtr);
-          }       
-          u++;
-	  printf("value of u 3rd %d\n", u);
+          while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
+            if (u == 0) {
+              ufstart = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
+              ufend = ufstart;
+	    }
+	    else {
+              ufnewCountryPtr = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
+              ufend = append(ufend, ufnewCountryPtr);
+            }       
+            u++;
+	    printf("value of u 3rd %d\n", u);
          }
 
-	printf("value of u 4th %d\n", u);
+	  printf("value of u 4th %d\n", u);
 	 
-        fclose(temp);
+          fclose(temp);
        
-        printCountry(ufstart);
+          printCountry(ufstart);
        
-        /* add uploaded filename to the auditfile */
-        uf = fopen("auditfile.dat", "a");
-        fprintf(uf, "%s\n", fileSpec);
-        fclose(uf);
+          /* add uploaded filename to the auditfile */
+          uf = fopen("auditfile.dat", "a");
+          fprintf(uf, "%s\n", fileSpec);
+          fclose(uf);
        
-        /* write data from uploaded file to the main datafile */
-        ufp = fopen("datafile.dat", "a");
+          /* write data from uploaded file to the main datafile */
+          ufp = fopen("datafile.dat", "a");
 	
-        if (ufp == NULL) {
-          fprintf(stdout,"\nError opening file\n");
-          break;
-        }
+          if (ufp == NULL) {
+            fprintf(stdout,"\nError opening file\n");
+            break;
+          }
 	
-        ufptr = ufstart;
+          ufptr = ufstart;
        
-        while(ufptr != NULL)
-        {
-          fprintf(ufp, "%s %d %d %d %d %d\n", ufptr->nation, ufptr->recdate, ufptr->tcases, ufptr->tdeaths, ufptr->dcases, ufptr->ddeaths);
-	  ufptr = ufptr->next;
-        }
+          while(ufptr != NULL)
+          {
+            fprintf(ufp, "%s %d %d %d %d %d\n", ufptr->nation, ufptr->recdate, ufptr->tcases, ufptr->tdeaths, ufptr->dcases, ufptr->ddeaths);
+	    ufptr = ufptr->next;
+          }
 
-        fclose(ufp);
+          fclose(ufp);
 
-        freeCountry(ufstart);
+          freeCountry(ufstart);
       }
 	
        /* free memory from ufdata array */
@@ -479,16 +485,22 @@ int main(void) {
       case 12:
         remove("summary");
 	apiList = 0;
+	acount = 0;
 	int Countries_count = 0;
+
         /* using application gwet to retrieve jason file from API */
         /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
         //api = popen("wget -q https://api.covid19api.com/summary","w");
-
-	// next 3 lines required
 	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
 	fflush(api);
 	pclose(api);
         fapi = fopen("summary", "r");
+
+	if (fapi == NULL) {
+	  perror("Error ");
+          break; 
+        }
+	
         fread(apiStr, 50000, 1, fapi);  
         fclose(fapi);
 
@@ -525,33 +537,69 @@ int main(void) {
           int TotalDeaths_Obj = cJSON_GetObjectItem(CountryData_Array, "TotalDeaths")->valueint;
           char *Slug_Obj  = cJSON_GetObjectItem(CountryData_Array, "Slug")->valuestring;
           char *Date_Obj = cJSON_GetObjectItem(CountryData_Array, "Date")->valuestring;
-       
-	  /*   printf("country %s code %s  slug %s newCases %d totCases %d newDeaths %d totDeaths %d date %s\n",
-	       CountryName_Obj, CountryCode_Obj, Slug_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj); */
-
+	  int rd = 0;
+       	  /* printf("country %s code %s  slug %s newCases %d totCases %d newDeaths %d totDeaths %d date %s\n",
+	     CountryName_Obj, CountryCode_Obj, Slug_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj); */
+	  //printf("%s\n",CountryCode_Obj); 
 	  if (apiList == 0) {
-	    apiStart = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj);
+	    apiStart = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj, rd);
 	    apiEnd = apiStart;
 	  }
 	  else {
-	    apiNewCountryPtr = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj,TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj);
+	    apiNewCountryPtr = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj,TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj, rd);
 	    apiEnd = apiAppend(apiEnd , apiNewCountryPtr);
 	  }
-	  apiList++;	  
+	  apiList++;  	  
         }
 
-	printf("countries count %d\n", Countries_count);
-	
         char *rendered = cJSON_Print(root);
 
-        apiPrintCountry(apiStart);
-	 
+	//apiPrintCountry(apiStart);
+	//printf("countries count %d\n", Countries_count);
+
+        /* Convert string date to int date format */
+	if (apiStart != NULL){
+	  apiDateStr = apiDataDate(apiStart);
+	  // printf("Date string %s\n", *apiDateStr);
+	  fileUploadDate = formatDate(apiDateStr);
+	}
+
+	apiCorrectDate(apiStart, fileUploadDate);
+        //apiPrintCountry(apiStart);
+
+        /* open datafile containing the country and its country code (alias)
+           and pass data into linked list */
+	fAlias = fopen("datacode.dat", "r");
+
+        if(fAlias == NULL){
+	  perror("Error");
+          break;
+        }
+
+        while (fscanf(fAlias, "%s %s", nameStr, aliasStr) != EOF){
+ 	  if (acount == 0) {
+	    aStart = apiCreateAliasList(nameStr, aliasStr);
+	    aEnd = aStart;
+	  }
+	  else {
+	    aNewAliasPtr = apiCreateAliasList(nameStr, aliasStr);
+	    aEnd = apiAliasAppend(aEnd, aNewAliasPtr);
+	  }
+	  acount++;
+        }
+
+	//apiPrintAlias(aStart);
+	apiCorrectCountryName(apiStart, aStart, acount);
+	apiPrintCountry(apiStart);
+	printf("File upload date %d\n",fileUploadDate);
+
         free(rendered);	
         cJSON_Delete(root);
         break; 
       case 99:
         freeCountry(start);
 	apiFreeCountry(apiStart);
+	apiFreeAlias(aStart);
         exit(0);
         break;
       }
