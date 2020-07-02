@@ -75,7 +75,7 @@ int main(void) {
 
   if (fp == NULL) {
     fprintf(stdout,"\nError opening file\n");
-    exit(1);
+    perror("Error "); //exit(1);
   } 
   
   while (fscanf(fp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {
@@ -108,7 +108,7 @@ int main(void) {
     printf("Option 8:  Upload data files\n\n");
     printf("Option 10: Percentage of Population Infected\n\n");
     printf("Option 11: Select Graph View Type\n\n");
-    printf("Option 12: DEVELOPMENT API File\n\n");
+    printf("Option 12: Covid data make upload file\n\n");
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -274,7 +274,7 @@ int main(void) {
         uf = fopen("auditfile.dat", "r");
         if (uf == NULL){
   	  printf("No File exists ");
-          break; 
+          perror("Error "); 
 	}
        
         while (fscanf(uf, "%s", ufname) != EOF) {
@@ -385,7 +385,7 @@ int main(void) {
           fpop = fopen("datapopfile.dat", "r");
 	  if (fpop == NULL) {
             fprintf(stdout,"\nError opening file\n");
-            exit(1);
+            perror("Error ");//exit(1);
           }
           while (fscanf(fpop, "%s %d", pname, &totalpop) != EOF) {
             if (pop == 0) {
@@ -592,6 +592,8 @@ int main(void) {
 	apiCorrectCountryName(apiStart, aStart, acount);
 	apiPrintCountry(apiStart);
 	printf("File upload date %d\n",fileUploadDate);
+
+	makeUploadFile(apiStart, fileUploadDate);
 
         free(rendered);	
         cJSON_Delete(root);

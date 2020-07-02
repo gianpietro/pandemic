@@ -5,6 +5,7 @@
 #include "apiget.h"
 
 int apiName = APICOUNTRY;
+int flift = UPLDFILE;
 
 struct apiGetData *apiCreateCountry(char apiCountry[], char apiCode[], int apiNewCases, int apiTotCases, int apiNewDeaths, int apiTotDeaths, char apiRecDate[], int apiUpDate){
   struct apiGetData *ptr;
@@ -119,6 +120,7 @@ void apiPrintAlias(struct apiAlias *start){
   printf("Alias count %d\n", aCount);
 }
 
+/* get date from first record in struct */
 char **apiDataDate(struct apiGetData *start) {
   struct apiGetData *ptr = start;
   char **dateStr;
@@ -135,7 +137,8 @@ char **apiDataDate(struct apiGetData *start) {
 
   return dateStr;
 }
-  
+
+/* convert the string format date in API data to an integer */
 int formatDate(char **dateStr) {
   int i = 0; 
   char apidate[21];
@@ -173,7 +176,34 @@ int formatDate(char **dateStr) {
   
   return reqdate;
 }
-				
+
+
+void makeUploadFile(struct apiGetData *start, int fileUploadDate){
+  struct apiGetData *ptr  = start;
+  int d = fileUploadDate;
+  char *extension = ".datx";  //remove x from name after testing
+  FILE *temp;
+  char path[] = "livedata/";
+  char uploadFileSpec[strlen(path)+flift+strlen(extension)+1];
+
+  strcpy(path, "livedata/");
+
+  snprintf(uploadFileSpec, sizeof(uploadFileSpec), "%s%d%s", path, d, extension);
+ 
+  temp = fopen(uploadFileSpec, "w");
+
+  while (ptr != NULL) {
+    fprintf(temp, "%s %d %d %d %d %d\n", ptr->apiCountryName, ptr->apiRequiredDate, ptr->apiTotalConfirmed, ptr->apiTotalDeaths, ptr->apiNewConfirmed, ptr->apiNewDeathsConfirmed);
+    ptr = ptr->next;
+  }
+ 
+  printf("NAME OF FILE TO UPLOAD: %d\n", d);
+  
+  fflush(temp);
+  fclose(temp);
+}
+
+
 void apiFreeAlias(struct apiAlias *start){
   struct apiAlias *ptr;
   struct apiAlias *tmp;

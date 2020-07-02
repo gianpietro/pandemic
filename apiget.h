@@ -2,6 +2,7 @@
 #define _APIGET_H
 
 #define APICOUNTRY 35
+#define UPLDFILE 8
 
 struct apiGetData {
   char apiCountryName[APICOUNTRY];
@@ -40,7 +41,7 @@ void apiPrintAlias(struct apiAlias *);
 void apiFreeAlias(struct apiAlias *);
 void apiCorrectCountryName(struct apiGetData *, struct apiAlias *, int);
 
-
+void makeUploadFile(struct apiGetData *, int);
 #endif
 
 
