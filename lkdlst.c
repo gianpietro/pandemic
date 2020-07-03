@@ -121,11 +121,8 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
       ptr = ptr->next;
     }
   }
-  for (i=0; i<k; i++){
-    printf("date for country %d\n", recdt[i]);
-  }
-  /* use a shellsort to arrange the date values in ascending order */
-  
+
+  /* use a shellsort to arrange the date values in ascending order */  
   for (gap = k/2; gap > 0; gap /=2) {
     for (a=gap; a<k; a++) {
      for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
@@ -155,9 +152,6 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   
   totalc = (int *)malloc(numrec * sizeof(int)); 
   
-  printf("start date  %d\n", ptr->recdate);
-  printf("VALUE OF J %d\n", j);
-  
   if (j > 1) {
     for (i=0; i<j; i++){
       while (ptr != NULL) {
@@ -167,8 +161,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
 	    totalc[i] = ptr->tcases;
 	     } else if (choice == 5 || choice == 7) {
 	      totalc[i] = ptr->dcases;
-	          }	    	 
-	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
+	       }	    	 
          }
        }
       ptr = ptr->next;
@@ -177,11 +170,8 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
     }
   } 
 
-  if (j > 1) {
+  if (j > 1)
     ptr = start;
-  for (i=0; i<j; i++)
-    printf("array totalc values %d\n", totalc[i]);
-  } 
   
   if (j == 1) {
     while (ptr != NULL) {
@@ -191,8 +181,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
 	} else if (choice == 5){
 	  totalc[0] = ptr->dcases;
 	}
-        printf("array j1 totalc values %d\n", totalc[0]);
-     }
+      }
       ptr = ptr->next;
      }
   }
@@ -208,9 +197,6 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
   
   totalc = (int *)malloc(numrec * sizeof(int)); 
   
-  printf("start date  %d\n", ptr->recdate);
-  printf("VALUE OF J %d\n", j);
-  
   if (j > 1) {
     for (i=0; i<j; i++){
       while (ptr != NULL) {
@@ -221,7 +207,7 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
 	    } else if (choice == 6){
 	      totalc[i] = ptr->ddeaths;
 	    }
-	    printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
+	    //printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
          }
        }
       ptr = ptr->next;
@@ -229,11 +215,9 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
     ptr = start;
     }
   }
-  if (j > 1) {
+  
+  if (j > 1) 
     ptr = start;
-  for (i=0; i<j; i++)
-    printf("array totalc values %d\n", totalc[i]);
-  } 
   
   if (j == 1) {
     while (ptr != NULL) {
@@ -243,8 +227,7 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
         } else if (choice == 6) {
             totalc[0] = ptr->ddeaths;
 	    }
-        printf("array totalc values %d\n", totalc[0]);
-     }
+      }
       ptr = ptr->next;
      }
   }
@@ -259,7 +242,6 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   int j;
   int *row;
   int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
-  //static int gpOpen = 0;
   int c;
 
   /*
@@ -317,7 +299,6 @@ plot "filename" every 3::1 using 1:3 */
        Noted that gnuplot-qt session for each graph and this session remains even when graph
        is closed. Seems to cause gnuplot to crash after many graphs open. */
    //   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
-
   
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
     
@@ -326,11 +307,8 @@ plot "filename" every 3::1 using 1:3 */
    these warnings make program exit */
 
   for (i=0; i < numrec; i++)
-    {
       fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
-    }
-  printf("One data point %d\n", arrayDate[0]);
-
+    
   if (numrec > 1) {
     if (choice == 2){
       fprintf(gnuplotPipe, "set title 'TOTAL CASES COVID 19 - %s'\n", countryname);
@@ -378,8 +356,6 @@ plot "filename" every 3::1 using 1:3 */
      printf("enter 1 to continue...");
     pclose(gnuplotPipe);
   */
-
-  
 }
 
 /* Plot new total cases and new total deaths by country */
@@ -425,10 +401,8 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
    these warnings make program exit */
   
   for (i=0; i < numrec; i++)
-    {
-      fprintf(temp, "%d %d %d\n", arrayDate[i], arraytcases[i], arraydcases[i]); //Write the data to a temporary file
-    }
-  printf("One data point %d\n", arrayDate[0]);
+    fprintf(temp, "%d %d %d\n", arrayDate[i], arraytcases[i], arraydcases[i]); //Write the data to a temporary file
+    
 
   if (numrec > 1) {
       fprintf(gnuplotPipe, "set title 'TOTAL CASES AND DEATHS COVID 19 - %s'\n", countryname);  // this allow me to have a variable title

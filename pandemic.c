@@ -131,15 +131,10 @@ int main(void) {
         /* Builds an array of the dates found for the country searched, 
            this will be number of data rows.
            The dates will have been sorted in ascending order */  
-        arrayDate = getCoRecdate(start,s,numrec);
-	
-        for (m=0; m<numrec;m++)
-          printf("record date %d\n",arrayDate[m]);
-        
+        arrayDate = getCoRecdate(start,s,numrec); 
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
-        for (i=0; i<numrec; i++) 
-          printf("total cases %d\n", arraytcases[i]);
-        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
+        countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);
+	
         free(arraytcases);
         free(arrayDate);
         break;
@@ -155,10 +150,6 @@ int main(void) {
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-
-	for (m=0; m<numrec;m++)
-          printf("record date %d\n",arrayDate[m]);
-        	
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
 	
@@ -170,11 +161,9 @@ int main(void) {
         scanf("%s", s);
         searchCountry(start,s);
 	numrec = getCoRec(start,s);
-	arrayDate = getCoRecdate(start,s,numrec);
+	printf("number of record %d\n", numrec);
 
-	for (m=0; m<numrec;m++)
-          printf("record date %d\n",arrayDate[m]);
-        	
+	arrayDate = getCoRecdate(start,s,numrec);
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraphTotDC(arrayDate, arraytcases, arraydcases, numrec, s);
@@ -196,15 +185,7 @@ int main(void) {
            this will be number of data rows. 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-
-	for (m=0; m<numrec; m++)
-          printf("record date %d\n",arrayDate[m]);
-      	
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
-
-	for (i=0; i<numrec; i++) 
-          printf("total cases %d\n", arraytcases[i]);
-	
         countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);
 	
         free(arraytcases);
@@ -222,10 +203,6 @@ int main(void) {
            this will be number of data rows. 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
-	
-        for (m=0; m<numrec;m++)
-          printf("record date %d\n",arrayDate[m]);        
-	
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
 	
@@ -425,7 +402,7 @@ int main(void) {
 
 	if(gsort == 1)
 	  printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
-	 
+        
         printf("\nSelect one of the following:\n");
         printf("1 - Rate equale to or greater than.\n");
         printf("2 - Range between two rates.\n");
