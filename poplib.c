@@ -22,10 +22,12 @@ struct population *popCreateCountry(char countryname[], int tpop){
   return ptr;
 }
 
+
 struct population *popAppend(struct population *end, struct population *newpt) {
   end->next = newpt;
   return (end->next);
 }
+
 
 void popPrintCountry(struct population *start) {
   struct population *ptr;
@@ -40,6 +42,7 @@ void popPrintCountry(struct population *start) {
   printf("NUMBER OF RECORDS %d\n", count);
 }
 
+
 double * infectionPercent(struct population *start, char ** icountryArray, int * icasesArray, int idatenum) {
   struct population *ptr = start;
   int i = 0;
@@ -51,7 +54,6 @@ double * infectionPercent(struct population *start, char ** icountryArray, int *
     while (ptr != NULL){
       if (strcmp(icountryArray[i], ptr->nation) == 0){
         perc[i] = (icasesArray[i]/(double)ptr->tpop)*100;
-	//printf("country %s pop %d cases %d rate %2.4f\n",icountryArray[i], ptr->tpop, icasesArray[i], perc[i]);
 	ptr = ptr->next;
        } else {
         ptr = ptr->next;
@@ -74,17 +76,15 @@ void infectionGraph(char **icountryArray, double *iperpopArray, int idatenum, in
     if (is == 1 || is == 4){
       if (iperpopArray[i] >= rg){
         fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
-	//printPercInfection(icountryArray,iperpopArray,idatenum);
       }
     } else if (is == 2) {
-      if (iperpopArray[i] >= rg && iperpopArray[i] <= rl)
-	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+        if (iperpopArray[i] >= rg && iperpopArray[i] <= rl)
+	  fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
     } else if (is == 3){
-      if (iperpopArray[i] <= rl)
-	fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
+        if (iperpopArray[i] <= rl)
+	  fprintf(temp, "%s %2.4f\n", icountryArray[i], iperpopArray[i]);
     }      
   }
-  //  printPercInfection(icountryArray,iperpopArray,idatenum);
 
   fflush(temp);
   fclose(temp);
@@ -108,40 +108,28 @@ void buildInfecGraph(int ptype) {
   strcpy(commandsForGnuplot[7],"unset key");
   if (ptype == 2) {
     strcpy(commandsForGnuplot[8],"plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc 'red' fill solid");
-  } else {
+  }
+  else {
     strcpy(commandsForGnuplot[8],"plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc '#00ace6' fill solid");
   }
 
-  /*
-     char * commandsForGnuplot[]  =
-    {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
-     "set style data histograms",
-     "set xtics font ',8'",
-     "set ytics font ',6'",
-     "set ylabel 'Percentage Infected",
-     "set xlabel 'Country'",
-     "set grid",
-     "unset key",
-     "plot for [i=2:2] 'datapop.temp' using i:xtic(1) lc '#00ace6' fill solid"};
-  */
-
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w");
    
-   if (ptype == 2){
-     fprintf(gnuplotPipe, "set title 'Percentage of population who have died from Covid 19' \n");
-   } else {
-     fprintf(gnuplotPipe, "set title 'Percentage of population who have been infected with Covid 19' \n");
-   }
+  if (ptype == 2){
+    fprintf(gnuplotPipe, "set title 'Percentage of population who have died from Covid 19' \n");
+  }
+  else {
+    fprintf(gnuplotPipe, "set title 'Percentage of population who have been infected with Covid 19' \n");
+  }
   
-  for (i=0; i < numOfCommands; i++) {
-       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
-     }
-
+  for (i=0; i < numOfCommands; i++)
+    fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
+ 
   fflush(gnuplotPipe);
 }
 
 
-/* sort infection rate from highest to lowest, add population total for each country and print */
+/* Sort infection rate from highest to lowest, add population total for each country and print */
 void printPercInfection(struct population *start, char **icountryArray, double *iperpopArray, int idatenum) {
   int i = 0, j = 1;
   double temp;
