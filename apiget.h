@@ -33,7 +33,6 @@ char **apiDataDate(struct apiGetData *);
 int formatDate(char **);
 void apiPrintCountryFinal(struct apiGetData *);
 void apiCorrectDate(struct apiGetData *, int);
-//char **countryAliasCode();  
 
 struct apiAlias *apiCreateAliasList(char *, char *);
 struct apiAlias *apiAliasAppend(struct apiAlias *, struct apiAlias *);
@@ -42,6 +41,7 @@ void apiFreeAlias(struct apiAlias *);
 void apiCorrectCountryName(struct apiGetData *, struct apiAlias *, int);
 
 void makeUploadFile(struct apiGetData *, int);
+
 #endif
 
 
