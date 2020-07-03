@@ -20,12 +20,14 @@ void compareGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fclose(temp);
   temp = fopen(fileSpec, "a");
   
+  /* Write the data to a temporary file */
   for (i=0; i < numrec; i++)
-    fprintf(temp, "%d %d\n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
+    fprintf(temp, "%d %d\n", arrayDate[i], arraytcases[i]); 
      
   fflush(temp);
   fclose(temp);
 }
+
 
 void buildGraph(int g, int view) {
    int numOfCommands = 8;   /*increase this if number of commands in commandsForGnuplot[] increases */
@@ -65,9 +67,10 @@ void buildGraph(int g, int view) {
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); 
 
   fprintf(gnuplotPipe, "set title 'NEW CASES' \n");
-  
+
+  /* Send commands to gnuplot one by one */
   for (i=0; i < numOfCommands; i++) 
-       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); //Send commands to gnuplot one by one.
+       fprintf(gnuplotPipe, "%s \n", commandsForGnuplot[i]); 
      
   fflush(gnuplotPipe);  
 }
