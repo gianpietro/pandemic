@@ -1,4 +1,5 @@
-/* Program to record information relating to coronavirus pandemic
+/*  (c) Gianpietro Signorini
+Program to record information relating to coronavirus pandemic
 for various countries. Information to store number of cases and 
 plot a graph using gnuplot 
 */
@@ -13,7 +14,6 @@ plot a graph using gnuplot
 #include "apiget.h"
 
 
-
 int main(void) {
   struct country *start, *newCountryPtr, *end, *ptr;
   char name[COUNTRY];
@@ -22,12 +22,12 @@ int main(void) {
   int totalcases, totaldeaths, dailycases, dailydeaths;
   int rcdate;
   int n, i = 0;
-  int numrec = 0;  /* number of records in date array for country being searched */
+  int numrec = 0;                                                        /* number of records in date array for country being searched */
   int *arrayDate;
   int m;
   int *arraytcases, *arraydcases;
   int choice = 0;
-  int f=0, g, p=0;   /* option 7 */
+  int f=0, g, p=0;                                                       /* option 7 */
   char **compare;
   FILE *fp;
   /* livedata upload variables */
@@ -75,7 +75,7 @@ int main(void) {
 
   if (fp == NULL) {
     fprintf(stdout,"\nError opening file\n");
-    perror("Error "); //exit(1);
+    perror("Error "); 
   } 
   
   while (fscanf(fp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {
@@ -115,22 +115,21 @@ int main(void) {
     scanf("%d", &choice);
     switch (choice) {
       case 1:
-        /* print struct content of linked list */ 
+        /* Print struct content of linked list */ 
         printCountry(start);
         break;
       case 2:
-        printf("GVIEW %d\n", gview);
-	//type = 2;
-        /* search for a particular country and print the values in its struct */
+        printf("Graph View %d\n", gview);
+        /* Search for a particular country and print the values in its struct */
         printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
-        /* pulls back the number of records for thecountry searched */
+        /* Pulls back the number of records for the country searched */
         numrec = getCoRec(start,s);                           
         printf("number of record %d\n", numrec);
 
-        /* builds an array of the dates found for the country searched, 
-           this will be number of data rows 
+        /* Builds an array of the dates found for the country searched, 
+           this will be number of data rows.
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
 	
@@ -143,17 +142,16 @@ int main(void) {
         countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);     
         free(arraytcases);
         free(arrayDate);
-        /* free up memory initialised by malloc in create struct*/
         break;
       case 3:
         printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
-        /* pulls back the number of records for thecountry searched */
+        /* Pulls back the number of records for the country searched */
         numrec = getCoRec(start,s);                           
         printf("number of record %d\n", numrec);
 
-        /* builds an array of the dates found for the country searched, 
+        /* Builds an array of the dates found for the country searched, 
            this will be number of data rows 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
@@ -163,6 +161,7 @@ int main(void) {
         	
 	arraydcases =  filterDCo(start, s, arrayDate, numrec, choice);
 	countryGraph(arrayDate, arraydcases, numrec, s, choice, gview);
+	
         free(arraydcases);
         free(arrayDate); 
         break;
@@ -185,17 +184,16 @@ int main(void) {
         free(arrayDate); 
         break;
       case 5:
-      //type = 2;
-        /* search for a particular country and print the values in its struct */
+        /* Search for a particular country and print the values in its struct */
         printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
-        /* pulls back the number of records for thecountry searched */
+        /* Pulls back the number of records for the country searched */
         numrec = getCoRec(start,s);                           
         printf("number of record %d\n", numrec);
 
-        /* builds an array of the dates found for the country searched, 
-           this will be number of data rows 
+        /* Builds an array of the dates found for the country searched, 
+           this will be number of data rows. 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
 
@@ -211,18 +209,17 @@ int main(void) {
 	
         free(arraytcases);
         free(arrayDate);  
-        /* free up memory initialised by malloc in create struct*/
         break;
       case 6:
         printf("Search for a country: ");
         scanf("%s", s);
         searchCountry(start,s);
-        /* pulls back the number of records for thecountry searched */
+        /* Pulls back the number of records for thecountry searched */
         numrec = getCoRec(start,s);                           
         printf("number of record %d\n", numrec);
 
-        /* builds an array of the dates found for the country searched, 
-           this will be number of data rows 
+        /* Builds an array of the dates found for the country searched, 
+           this will be number of data rows. 
            The dates will have been sorted in ascending order */  
         arrayDate = getCoRecdate(start,s,numrec);
 	
@@ -239,7 +236,7 @@ int main(void) {
         printf("Number of countries to compare (max is 5): ");
         scanf("%d", &f);
         if (f <= 5){
-	  compare = malloc(f*sizeof(char*));      /* malloc for number of countries to compare */
+	  compare = malloc(f*sizeof(char*));              /* malloc for number of countries to compare */
           for (g=0; g<f; g++){
             printf("Enter country ");
 	    scanf("%s", s);	
@@ -249,7 +246,7 @@ int main(void) {
 	  } 
 	  for (g=0; g<f; g++){
 	    strcpy(s, compare[g]);
-	    printf("AND NOW compare %s\n", s);  //debug
+	    printf("AND NOW compare %s\n", s);            //debug
 	    numrec = getCoRec(start, s);
 	    printf("numrec in compare %d in country %s\n", numrec, s); //debug
 	    arrayDate = getCoRecdate(start, s, numrec);
@@ -270,7 +267,7 @@ int main(void) {
         printf("value of u 1st %d\n", u);
         u = 0;
       
-      /* code to count number of items in audit file and load filename into array */
+        /* Count number of items in audit file and load filename into array */
         uf = fopen("auditfile.dat", "r");
         if (uf == NULL){
   	  printf("No File exists ");
@@ -304,7 +301,6 @@ int main(void) {
         for (z=0; z<ucount; z++)
           printf("upload filename %s\n",ufdata[z]);
 
-        /* code to enter filename to import  */
         printf("Enter filename to import ");
         scanf("%s", filename);
         snprintf(fileSpec, sizeof(fileSpec), "%s%s", filename, extension);
@@ -312,7 +308,7 @@ int main(void) {
         strcat(path, fileSpec);
         printf("path %s\n", path);        
       
-       /* check to see if file entered to be uploaded is in auditfile */
+        /* Check to see if file entered to be uploaded is in auditfile */
         for (z=0; z<ucount; z++){
 	  if (strcmp(ufdata[z], fileSpec) == 0) {
 	    printf("File is in auditfile\n");
@@ -320,7 +316,7 @@ int main(void) {
 	  }
         }
 
-       /* If file to upload is not found in auditfile then it can be uploaded */
+        /* If file to upload is not found in auditfile then it can be uploaded */
         if (auditcheck == 0) {
           temp = fopen(path, "r");
           if (temp == NULL) {
@@ -329,7 +325,7 @@ int main(void) {
           }
 
 	  printf("value of u 2nd %d\n", u);
-       /* if file is not in auditfile load to country structure */
+          /* If file is not in auditfile load data to country structure */
           while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
             if (u == 0) {
               ufstart = createCountry(name, rcdate, totalcases, totaldeaths, dailycases, dailydeaths);
@@ -349,12 +345,12 @@ int main(void) {
        
           printCountry(ufstart);
        
-          /* add uploaded filename to the auditfile */
+          /* Add uploaded filename to the auditfile */
           uf = fopen("auditfile.dat", "a");
           fprintf(uf, "%s\n", fileSpec);
           fclose(uf);
        
-          /* write data from uploaded file to the main datafile */
+          /* Write data from uploaded file to the main datafile */
           ufp = fopen("datafile.dat", "a");
 	
           if (ufp == NULL) {
@@ -375,7 +371,7 @@ int main(void) {
           freeCountry(ufstart);
       }
 	
-       /* free memory from ufdata array */
+        /* Free memory from ufdata array */
         for (z=0; z<ucount; z++)
           free(ufdata[z]);
         free(ufdata);	
@@ -385,7 +381,7 @@ int main(void) {
           fpop = fopen("datapopfile.dat", "r");
 	  if (fpop == NULL) {
             fprintf(stdout,"\nError opening file\n");
-            perror("Error ");//exit(1);
+            perror("Error ");
           }
           while (fscanf(fpop, "%s %d", pname, &totalpop) != EOF) {
             if (pop == 0) {
@@ -404,16 +400,15 @@ int main(void) {
         else {
 	    printf("Population already loaded \n");
         }
+	
         popPrintCountry(pstart);	
-	/* optain most recent date in datafile */
+	/* Optain most recent date in datafile */
 	idate = getDate(start);
-	/* count number of records which have idate */	
+	/* Count number of records which have idate */	
 	idatenum = getDateRecNum(start, idate);
-	/* array of countries with idate */
+	/* Array of countries with idate */
 	icountryArray = getDateRecCountry(start, idate, idatenum);
-	/*for (i=0;i<idatenum;i++){
-	  printf("country in array %s\n", icountryArray[i]);
-	  }*/
+	
         printf("\nSelect one of the following options:\n");
 	printf("Enter 1 - percentage based on total cases\n");
 	printf("Enter 2 - percentage based on total deaths\n");
@@ -423,53 +418,54 @@ int main(void) {
 	scanf("%d", &gsort);
 	
 	
-        /* array of total cases for country on idate */ 
+        /* Array of total cases for country on idate */ 
 	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum, ptype);	
-        /* array of percentage of population infected */
+        /* Array of percentage of population infected */
         iperPopArray = infectionPercent(pstart, icountryArray, icasesArray, idatenum);
 
-	//printf("For percentage equale to or greater than (enter %): ");
-	//scanf("%lf", &irateGr);
 	if(gsort == 1)
 	  printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
 	 
-       printf("\nSelect one of the following:\n");
-       printf("1 - Rate equale to or greater than.\n");
-       printf("2 - Range between two rates.\n");
-       printf("3 - Rate equale to or less than.\n");
-       printf("4 - All data all countries\n");
-       printf("Select option required: ");
-       scanf("%d",&is);
-       if (is == 1){
+        printf("\nSelect one of the following:\n");
+        printf("1 - Rate equale to or greater than.\n");
+        printf("2 - Range between two rates.\n");
+        printf("3 - Rate equale to or less than.\n");
+        printf("4 - All data all countries\n");
+        printf("Select option required: ");
+        scanf("%d",&is);
+	
+        if (is == 1){
           printf("Enter percentage greater of equale to: ");
 	  scanf("%lf", &rg);
-       }
-       else if (is == 2) {
-           printf("Enter percentage from: ");
-	   scanf("%lf", &rg);
-	   printf("Enter percentage to: ");
-	   scanf("%lf", &rl);
-       }
-       else if (is == 3){
-           printf("Enter percentage less or euqale to:");
-	   scanf("%lf", &rl);
-       }
-       else if (is == 4){
-	   rg = 00.0000;
-       }
+        }
+        else if (is == 2) {
+          printf("Enter percentage from: ");
+	  scanf("%lf", &rg);
+	  printf("Enter percentage to: ");
+	  scanf("%lf", &rl);
+        }
+        else if (is == 3){
+          printf("Enter percentage less or euqale to:");
+	  scanf("%lf", &rl);
+        }
+        else if (is == 4){
+	  rg = 00.0000;
+        }
   
-	/* prepare file with data */
-       infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
+        /* Prepare file with data */
+        infectionGraph(icountryArray,iperPopArray, idatenum, is, rg, rl);
 
-       if (gsort == 2)
-         printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
+        if (gsort == 2)
+          printPercInfection(pstart,icountryArray,iperPopArray,idatenum);
        
-        /* plot graph */
+        /* Plot graph */
 	buildInfecGraph(ptype);
-	/* free array memory */
+
+	/* Free array memory */
 	for (ic=0; ic<idatenum;ic++){
 	  free(icountryArray[ic]);
 	}
+	
 	free(icountryArray);
 	free(icasesArray);
 	free(iperPopArray);
@@ -488,7 +484,7 @@ int main(void) {
 	acount = 0;
 	int Countries_count = 0;
 
-        /* using application gwet to retrieve jason file from API */
+        /* Using application gwet to retrieve jason file from API */
         /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
         //api = popen("wget -q https://api.covid19api.com/summary","w");
 	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
@@ -506,16 +502,12 @@ int main(void) {
 
         cJSON *root = cJSON_Parse(apiStr);
 
-        //const cJSON *Country_idx = NULL;
         const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
-        //double totCases;
-
+       
         Countries_count = cJSON_GetArraySize(Countries_Obj);
         int idxData = 0;
-        //int NewConfirmed_Obj[220];
-
-      
-        /* cJSON_ArrayForEach(Country_idx, Countries_Obj) {
+	
+        /*cJSON_ArrayForEach(Country_idx, Countries_Obj) {
           cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
 	  cJSON *NewConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewConfirmed");
           cJSON *TotalConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "TotalConfirmed");
@@ -525,7 +517,7 @@ int main(void) {
           totCases = TotalConfirmed_Obj->valuedouble;
           printf("Country %s Total Confirmed %f Total Deaths %f New Confirmed %f New Deaths %f Date %s\n",
 	       Country_Obj->valuestring, totCases, TotalDeaths_Obj->valuedouble, NewConfirmed_Obj->valuedouble, NewDeaths_Obj->valuedouble, Date_Obj->valuestring);
-	       } */
+	 }*/
 
         for (idxData = 0; idxData < Countries_count; idxData++) {
           cJSON *CountryData_Array = cJSON_GetArrayItem(Countries_Obj, idxData);
@@ -538,9 +530,7 @@ int main(void) {
           char *Slug_Obj  = cJSON_GetObjectItem(CountryData_Array, "Slug")->valuestring;
           char *Date_Obj = cJSON_GetObjectItem(CountryData_Array, "Date")->valuestring;
 	  int rd = 0;
-       	  /* printf("country %s code %s  slug %s newCases %d totCases %d newDeaths %d totDeaths %d date %s\n",
-	     CountryName_Obj, CountryCode_Obj, Slug_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj); */
-	  //printf("%s\n",CountryCode_Obj); 
+       	  
 	  if (apiList == 0) {
 	    apiStart = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj, rd);
 	    apiEnd = apiStart;
@@ -554,20 +544,15 @@ int main(void) {
 
         char *rendered = cJSON_Print(root);
 
-	//apiPrintCountry(apiStart);
-	//printf("countries count %d\n", Countries_count);
-
-        /* Convert string date to int date format */
+	/* Convert string date to int date format */
 	if (apiStart != NULL){
 	  apiDateStr = apiDataDate(apiStart);
-	  // printf("Date string %s\n", *apiDateStr);
 	  fileUploadDate = formatDate(apiDateStr);
 	}
 
 	apiCorrectDate(apiStart, fileUploadDate);
-        //apiPrintCountry(apiStart);
-
-        /* open datafile containing the country and its country code (alias)
+        
+        /* Open datafile containing the country and its country code (alias)
            and pass data into linked list */
 	fAlias = fopen("datacode.dat", "r");
 
@@ -588,7 +573,6 @@ int main(void) {
 	  acount++;
         }
 
-	//apiPrintAlias(aStart);
 	apiCorrectCountryName(apiStart, aStart, acount);
 	apiPrintCountry(apiStart);
 	printf("File upload date %d\n",fileUploadDate);
@@ -605,7 +589,7 @@ int main(void) {
         exit(0);
         break;
       }
-    } while (choice != 99);
+  } while (choice != 99);
 
   return 0;
 }
