@@ -103,7 +103,7 @@ Tested with new datafile and can now use above date format and shellsort on date
 This is a great and simple fix, really happy with this.
 
 
-STAGE 12
+STAGE 12 - COMPLETED
 look at smooth lines in the plot
 plot "DATA" smooth csplines,
 other options:
@@ -118,7 +118,7 @@ A better approach could be to use cubic splines smooth csplines, which go throug
 The probably best solution in your case is to use monotonic cubic splines, smooth mcsplines, which maintain the monotonicity and convexity of the original data points
 
 
-STAGE 13
+STAGE 13 - COMPLETE
 Country population and rate of infection. Could have a seperate file with country and population. Use this to calculation rate of infection and plot graph. 
 1. datafile with country and population
 2. upload this data to a struct.
@@ -133,8 +133,8 @@ Country population and rate of infection. Could have a seperate file with countr
    enters a rate value and will plot rate value or greater
  
 
-STAGE 14 - API
-1. Need to make linklist of data upload
+STAGE 14 - API COMPLETE
+1. API - Need to make linklist of data upload
 2. Lookup table for country name with its alias, this will be a file of 2 columns
 3. Replace country name in linklist with that from lookup table
 4. Date in api is string format need to change this to yyyymmdd and string format
