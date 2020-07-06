@@ -108,7 +108,7 @@ int main(void) {
     printf("Option 8:  Upload data files\n\n");
     printf("Option 10: Percentage of Population Infected\n\n");
     printf("Option 11: Select Graph View Type\n\n");
-    printf("Option 12: Covid data make upload file\n\n");
+    printf("Option 12: API Covid data - make upload file\n\n");
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
@@ -223,9 +223,7 @@ int main(void) {
 	  } 
 	  for (g=0; g<f; g++){
 	    strcpy(s, compare[g]);
-	    printf("AND NOW compare %s\n", s);            //debug
 	    numrec = getCoRec(start, s);
-	    printf("numrec in compare %d in country %s\n", numrec, s); //debug
 	    arrayDate = getCoRecdate(start, s, numrec);
 	    arraytcases =  filterCo(start, s, arrayDate, numrec, choice);	
 	    compareGraph(arrayDate, arraytcases, numrec, s, g);
@@ -241,7 +239,7 @@ int main(void) {
         ucount = 0;
         strcpy(path,"livedata/");
         auditcheck = 0;
-        printf("value of u 1st %d\n", u);
+        //printf("value of u 1st %d\n", u);
         u = 0;
       
         /* Count number of items in audit file and load filename into array */
@@ -257,7 +255,7 @@ int main(void) {
        
         fclose(uf);
        
-        printf("ucount first scan %d\n", ucount);
+        //printf("ucount first scan %d\n", ucount);
        
         ufdata = malloc(ucount * sizeof(char*));
        
@@ -267,21 +265,17 @@ int main(void) {
         while (fscanf(uf, "%s", ufname) != EOF) {
 	  ufdata[ucount] = malloc(UPLOAD * sizeof(char));
 	  strcpy(ufdata[ucount], ufname);
-	  printf("ucount %d\n", ucount);
 	  ++ucount;
         }
        
         fclose(uf);
        
-        printf("ucount second scan %d\n", ucount);
-	
         for (z=0; z<ucount; z++)
           printf("upload filename %s\n",ufdata[z]);
 
         printf("Enter filename to import ");
         scanf("%s", filename);
         snprintf(fileSpec, sizeof(fileSpec), "%s%s", filename, extension);
-        printf("FILENAME %s\n", fileSpec);   //debug code
         strcat(path, fileSpec);
         printf("path %s\n", path);        
       
@@ -301,7 +295,6 @@ int main(void) {
             break;
           }
 
-	  printf("value of u 2nd %d\n", u);
           /* If file is not in auditfile load data to country structure */
           while (fscanf(temp, "%s %d %d %d %d %d", name, &rcdate, &totalcases, &totaldeaths, &dailycases, &dailydeaths) != EOF) {   
             if (u == 0) {
@@ -313,11 +306,8 @@ int main(void) {
               ufend = append(ufend, ufnewCountryPtr);
             }       
             u++;
-	    printf("value of u 3rd %d\n", u);
          }
 
-	  printf("value of u 4th %d\n", u);
-	 
           fclose(temp);
        
           printCountry(ufstart);
@@ -344,7 +334,6 @@ int main(void) {
           }
 
           fclose(ufp);
-
           freeCountry(ufstart);
       }
 	
@@ -393,8 +382,7 @@ int main(void) {
         scanf("%d", &ptype);
 	printf("Sort high to low options  Yes = 1, No = 2:  ");
 	scanf("%d", &gsort);
-	
-	
+		
         /* Array of total cases for country on idate */ 
 	icasesArray = getDateRecCountryCases(start, icountryArray, idate, idatenum, ptype);	
         /* Array of percentage of population infected */

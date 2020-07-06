@@ -4,7 +4,7 @@
 
 #include "lkdlst.h"
 
-int coName = COUNTRY;                /* issue with using #define COUNTRY */
+int coName = COUNTRY;               
 
 
 struct country *createCountry(char countryname[], int rcdate,  int totcases, int totdeaths, int daycases, int daydeaths) {
@@ -26,30 +26,32 @@ struct country *createCountry(char countryname[], int rcdate,  int totcases, int
 }
 
 
-/* add new struct to end of linked list */
+/* Add new struct to end of linked list */
 struct country *append(struct country *end, struct country *newpt) {
   end->next = newpt;
   return (end->next);
 }
 
-/* search for a specific country and display struct values. The country may have
+/* Search for a specific country and display struct values. The country may have
    multiple entries*/
 void searchCountry(struct country *start, char countryname[]) {
   struct country *ptr = start;
   int c = 0;
+  
   while (ptr != NULL) {
     if (strcmp(ptr->nation, countryname) == 0) {
-      printf("Country %s date %d totcases %d totdeaths %d dailycases %d dailydeaths %d\n ",
+      printf("Country %s date %d totcases %d totdeaths %d newcases %d newdeaths %d\n ",
 	     ptr->nation, ptr->recdate, ptr->tcases, ptr->tdeaths, ptr->dcases, ptr->ddeaths);
 	ptr = ptr->next;
 	c++;
       } else {
 	ptr = ptr->next;
       }
-      }
-    if (c ==0)
-      printf("Country not found\n");    
-  }
+   }
+  
+  if (c ==0)
+    printf("Country not found\n");    
+}
 
 void printCountry(struct country *start) {
   struct country *ptr;
@@ -66,7 +68,7 @@ void printCountry(struct country *start) {
 }
 
 
-/* free up malloc memory initaied with createCountry */
+/* Free up malloc memory initaied with createCountry */
 void freeCountry(struct country *start) {  
   struct country *ptr;
   struct country *tmp;
@@ -89,10 +91,11 @@ int getCoRec(struct country *start, char countryname[]) {
     if (strcmp(ptr->nation, countryname) == 0) {
 	ptr = ptr->next;
 	c++;
-      } else {
+    }
+    else {
 	ptr = ptr->next;
-      }
-      }
+    }
+  }
   return c;
 }
 
@@ -106,10 +109,11 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
   int i;
   int gap, a, b, temp;
   int k = z;
-  /* once number of values for a country found allocate the size to the array recdt */
+
+  /* Once number of values for a country found allocate the size to the array recdt */
   recdt = (int *)malloc(k * sizeof(int));
   
-  /* now that dynamic array has been allocated the correct size of memory, assign the
+  /* Now that dynamic array has been allocated the correct size of memory, assign the
      date values for the country */
   ptr = start;
   while (ptr != NULL) {
@@ -117,21 +121,22 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
       recdt[j] = ptr->recdate;
       ptr = ptr->next;
       j++;
-    } else {
+    }
+    else {
       ptr = ptr->next;
     }
   }
 
-  /* use a shellsort to arrange the date values in ascending order */  
+  /* Use a shellsort to arrange the date values in ascending order */  
   for (gap = k/2; gap > 0; gap /=2) {
     for (a=gap; a<k; a++) {
-     for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
-	temp = recdt[b];
+      for (b=a-gap; b>=0 && recdt[b]>recdt[b+gap]; b-=gap){
+        temp = recdt[b];
         recdt[b] = recdt[b+gap];
         recdt[b+gap] = temp;
-	}
+      }
     }
-    }
+  }
   return recdt;
 }
 
@@ -157,12 +162,13 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
       while (ptr != NULL) {
         if (strcmp(ptr->nation, countryname) == 0) {
           if (arrayDate[i] == ptr->recdate) {
-	       if (choice == 2 || choice == 4) {
-	    totalc[i] = ptr->tcases;
-	     } else if (choice == 5 || choice == 7) {
-	      totalc[i] = ptr->dcases;
-	       }	    	 
-         }
+	    if (choice == 2 || choice == 4) {
+	      totalc[i] = ptr->tcases;
+	     }
+	     else if (choice == 5 || choice == 7) {
+	       totalc[i] = ptr->dcases;
+	     }	    	 
+          }
        }
       ptr = ptr->next;
     }  
@@ -188,7 +194,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
   return totalc;
 }
 
-/* total deaths for a country */
+/* Total deaths for a country */
 int * filterDCo(struct country *start, char countryname[], int *arrayDate, int numrec, int choice) {
   struct country *ptr = start;
   int i = 0;
@@ -207,8 +213,7 @@ int * filterDCo(struct country *start, char countryname[], int *arrayDate, int n
 	    } else if (choice == 6){
 	      totalc[i] = ptr->ddeaths;
 	    }
-	    //printf(" cases %d date %d arraydate %d values of i %d\n", totalc[i], ptr->recdate, arrayDate[i], i);
-         }
+	  }
        }
       ptr = ptr->next;
     }  
@@ -250,7 +255,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
      "set xtics font ',5'",
      "set ytics font ',6'",
      "set ylabel 'Total number of Cases",
-oo     "set xlabel 'Date'",
+     "set xlabel 'Date'",
      "set grid",
      "unset key",
      "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines"};
@@ -259,7 +264,7 @@ oo     "set xlabel 'Date'",
    
   char commandsForGnuplot[8][200];
   // strcpy(commandsForGnuplot[0],"set terminal gif");
-  //strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
+  // strcpy(commandsForGnuplot[1],"set output '| display gif:-'");  
   strcpy(commandsForGnuplot[0],"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify");
   strcpy(commandsForGnuplot[1],"set xtics font ',5'");
   strcpy(commandsForGnuplot[2],"set ytics font ',6'");
@@ -268,19 +273,16 @@ oo     "set xlabel 'Date'",
   strcpy(commandsForGnuplot[5],"set grid");
   strcpy(commandsForGnuplot[6],"unset key");
   if (view == 2) {    
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 2 using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
   } else {
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 2 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
   }
-  /* if need to plot using every 3rd x value, can use every 3 as follows  
+  /* If need to plot using every 3rd x value, can use every 3 as follows  
      strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 3 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines"); 
-So to plot the 3rd column vs. the 1st, and plot every 3rd row starting from
-the 2nd, I do
-
-plot "filename" every 3::1 using 1:3 */
+     So to plot the 3rd column vs. the 1st, and plot every 3rd row starting from the 2nd, I do plot "filename" every 3::1 using 1:3 */
   
-  //  strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
-  //  "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines"};
+ //  strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth mcsplines");
+ //  "plot for [i=2:2] 'data.temp' using i:xtic(1) lw 1.5 smooth acsplines"};
   
   char * commandForGnuplotOne[] = 
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
@@ -293,18 +295,19 @@ plot "filename" every 3::1 using 1:3 */
      "plot for [i=2:2] 'data.temp' using i:xtic(1)"};
    
   FILE *temp = fopen("data.temp", "w");   /* LINUX PATH */
- //  FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
+ // FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w"); //WINDOWS
 
-    /* The option -persistent will leave gnuplot running even when application is closed.
-       Noted that gnuplot-qt session for each graph and this session remains even when graph
-       is closed. Seems to cause gnuplot to crash after many graphs open. */
-   //   FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
+  /* The option -persistent will leave gnuplot running even when application is closed.
+     Noted that gnuplot-qt session for each graph and this session remains even when graph
+     is closed. Seems to cause gnuplot to crash after many graphs open. */
+
+ // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w"); //LINUX
   
   FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w"); //LINUX
     
-   //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
+ //  FILE * gnuplotPipe = popen("gnuplot -persistent", "w");   //windows
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
-   these warnings make program exit */
+     these warnings make program exit */
 
   for (i=0; i < numrec; i++)
       fprintf(temp, "%d %d \n", arrayDate[i], arraytcases[i]); //Write the data to a temporary file
@@ -338,7 +341,7 @@ plot "filename" every 3::1 using 1:3 */
         fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
      }
    }
-  /* need both to allow graph to plot while terminal program remains in focus */
+  /* Need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp);
@@ -378,7 +381,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "set xlabel 'Date'",
      "set key font ',6'",
      "set grid",
-     "plot 'data.temp' using 0:2:xtic(1) title 'cases' lw 1.5 with lines axes x1y1, 'data.temp' using 0:3:xtic(1) title 'deaths' lw 1.5 with lines axes x1y2"}; 
+     "plot 'data.temp' every 2 using 0:2:xtic(1) title 'cases' lw 1.5 with lines axes x1y1, 'data.temp' every 2 using 0:3:xtic(1) title 'deaths' lw 1.5 with lines axes x1y2"}; 
      //"unset key",
      //"plot for [i=2:3] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
    char * commandForGnuplotOne[] = //{"plot 'data.temp'"};
@@ -392,13 +395,13 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "plot for [i=2:3] 'data.temp' using i:xtic(1)"};
    
    FILE *temp = fopen("data.temp", "w");   // LINUX
-  // FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
+ // FILE *temp = fopen("C:\\Users\\gsignorini\\Documents\\pandemic\\data.temp", "w");  //WINDOWS
 
-   // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  /* LINUX */
+ // FILE * gnuplotPipe = popen("gnuplot -persistent 2> /dev/null", "w");  /* LINUX */
     FILE * gnuplotPipe = popen("gnuplot 2> /dev/null", "w");  /* LINUX */
-  // FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
+ // FILE * gnuplotPipe = popen("gnuplot -persistent", "w");  //WINDOWS
   /* 2> /dev/null (nul in windows) prevents gnuplot warning messages when range is auto adjusted, 
-   these warnings make program exit */
+     these warnings make program exit */
   
   for (i=0; i < numrec; i++)
     fprintf(temp, "%d %d %d\n", arrayDate[i], arraytcases[i], arraydcases[i]); //Write the data to a temporary file
@@ -417,7 +420,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
       fprintf(gnuplotPipe, "%s \n", commandForGnuplotOne[i]); //Send commands to gnuplot one by one.
      }
    }
-  /* need both to allow graph to plot while terminal program remains in focus */
+  /* Need both to allow graph to plot while terminal program remains in focus */
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp); 
@@ -492,7 +495,6 @@ int * getDateRecCountryCases(struct country *start, char **ctryName, int rdate, 
 	} else {
 	  icases[i] = ptr->tcases;
 	}
-	  
      }
     }
     ptr = ptr->next;
