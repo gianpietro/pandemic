@@ -346,7 +346,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(gnuplotPipe);
   fclose(temp);
   
-  /*  could look at using getchar to hit enter so newline would close graph and go back to main menu 
+  /*  could look at using gethar to hit enter so newline would close graph and go back to main menu 
   int cls =0;
   printf("CLOSE WINDOW");
   scanf("%d", &cls);
