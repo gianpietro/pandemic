@@ -2,7 +2,7 @@
 #define _LKDLST_H
 
 #define COUNTRY 25   /* if value changed see also coName in lkdlst.c */
-#define UPLOAD 15   /*data file to be uploaded */
+#define UPLOAD 15    /* data file to be uploaded */
 
  struct country {
   char nation[COUNTRY];
@@ -15,7 +15,7 @@
 };
     typedef struct country country;
 
-/* functions to create, search, preint and free memonotry for  linked list */
+/* functions to create, search, print and free memory from linked list */
 struct country *createCountry(char *, int,  int, int, int, int);
 struct country *append(struct country *, struct country *);
 void searchCountry(struct country *, char *);

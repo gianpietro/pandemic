@@ -170,7 +170,7 @@ int formatDate(char **dateStr) {
 void makeUploadFile(struct apiGetData *start, int fileUploadDate){
   struct apiGetData *ptr  = start;
   int d = fileUploadDate;
-  char *extension = ".datx";  //remove x from name after testing
+  char *extension = ".dat";  
   FILE *temp;
   char path[] = "livedata/";
   char uploadFileSpec[strlen(path)+flift+strlen(extension)+1];

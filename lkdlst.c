@@ -91,8 +91,7 @@ int getCoRec(struct country *start, char countryname[]) {
     if (strcmp(ptr->nation, countryname) == 0) {
 	ptr = ptr->next;
 	c++;
-    }
-    else {
+    } else {
 	ptr = ptr->next;
     }
   }
@@ -121,8 +120,7 @@ int * getCoRecdate(struct country *start, char countryname[], int z) {
       recdt[j] = ptr->recdate;
       ptr = ptr->next;
       j++;
-    }
-    else {
+    } else {
       ptr = ptr->next;
     }
   }
@@ -164,8 +162,7 @@ int * filterCo(struct country *start, char countryname[], int *arrayDate, int nu
           if (arrayDate[i] == ptr->recdate) {
 	    if (choice == 2 || choice == 4) {
 	      totalc[i] = ptr->tcases;
-	     }
-	     else if (choice == 5 || choice == 7) {
+	     } else if (choice == 5 || choice == 7) {
 	       totalc[i] = ptr->dcases;
 	     }	    	 
           }
@@ -373,11 +370,11 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
-     "set ylabel 'Total number of Cases'",
+     "set ylabel 'Total Number of Cases'",
      "set ytics nomirror",
      "set y2tics",
      "set y2tics font ',6'",
-     "set y2label 'Total number of Deaths",
+     "set y2label 'Total Number of Deaths",
      "set xlabel 'Date'",
      "set key font ',6'",
      "set grid",
@@ -388,7 +385,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
     {"set xtics border out rotate by 90 offset character 0, -2, 0 autojustify",
      "set xtics font ',5'",
      "set ytics font ',6'",
-     "set ylabel 'Total number of Cases",
+     "set ylabel 'Total Number of Cases",
      "set xlabel 'Date'",
      "set grid",
      "unset key",

@@ -12,7 +12,7 @@ plot a graph using gnuplot
 #include "poplib.h"
 #include "cJSON.h"
 #include "apiget.h"
-
+//#include <ctype.h>
 
 int main(void) {
   struct country *start, *newCountryPtr, *end, *ptr;
@@ -26,7 +26,7 @@ int main(void) {
   int *arrayDate;
   int m;
   int *arraytcases, *arraydcases;
-  int choice = 0;
+  int choice;
   int f=0, g, p=0;                                                       /* option 7 */
   char **compare;
   FILE *fp;
@@ -93,6 +93,7 @@ int main(void) {
   fclose(fp);
 
   do {
+    choice = 0;
     printf("\n");
     printf("********************************************************************\n");
     printf("************** P A N D E M I C -  C O V I D 19 *********************\n");
@@ -112,7 +113,7 @@ int main(void) {
     printf("Option 99: Exit\n\n");
     printf("\n");
     printf("Select option: ");
-    scanf("%d", &choice);
+    scanf("%d", &choice);    
     switch (choice) {
       case 1:
         /* Print struct content of linked list */ 
@@ -122,7 +123,7 @@ int main(void) {
         printf("Graph View %d\n", gview);
         /* Search for a particular country and print the values in its struct */
         printf("Search for a country: ");
-        scanf("%s", s);
+	scanf("%s", s);
         searchCountry(start,s);
         /* Pulls back the number of records for the country searched */
         numrec = getCoRec(start,s);                           
@@ -134,7 +135,7 @@ int main(void) {
         arrayDate = getCoRecdate(start,s,numrec); 
         arraytcases =  filterCo(start, s, arrayDate, numrec, choice);
         countryGraph(arrayDate, arraytcases, numrec, s, choice, gview);
-	
+
         free(arraytcases);
         free(arrayDate);
         break;
@@ -452,6 +453,7 @@ int main(void) {
         /* Using application gwet to retrieve jason file from API */
         /* https://documenter.getpostman.com/view/10808728/SzS8rjbc?version=latest#e831c268-9da1-4d86-8b5a-8d7f61910af8 */
         //api = popen("wget -q https://api.covid19api.com/summary","w");
+	/* Thank you Kyle Redelinghuys for your API - https://covid19api.com/ */
 	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
 	fflush(api);
 	pclose(api);
