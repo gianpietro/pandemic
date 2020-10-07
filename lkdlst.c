@@ -270,9 +270,9 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   strcpy(commandsForGnuplot[5],"set grid");
   strcpy(commandsForGnuplot[6],"unset key");
   if (view == 2) {    
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 2 using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 3 using i:xtic(1) lc 'red' lw 1.5 smooth acsplines");
   } else {
-    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 2 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
+    strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 3 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines");
   }
   /* If need to plot using every 3rd x value, can use every 3 as follows  
      strcpy(commandsForGnuplot[7],"plot for [i=2:2] 'data.temp' every 3 using i:xtic(1) lc 'blue' lw 1.5 smooth mcsplines"); 
@@ -342,7 +342,7 @@ void countryGraph(int *arrayDate, int *arraytcases, int numrec, char countryname
   fflush(temp);
   fflush(gnuplotPipe);
   fclose(temp);
-  
+    
   /*  could look at using gethar to hit enter so newline would close graph and go back to main menu 
   int cls =0;
   printf("CLOSE WINDOW");
@@ -378,7 +378,7 @@ void countryGraphTotDC(int *arrayDate, int *arraytcases, int *arraydcases, int n
      "set xlabel 'Date'",
      "set key font ',6'",
      "set grid",
-     "plot 'data.temp' every 2 using 0:2:xtic(1) title 'cases' lw 1.5 with lines axes x1y1, 'data.temp' every 2 using 0:3:xtic(1) title 'deaths' lw 1.5 with lines axes x1y2"}; 
+     "plot 'data.temp' every 3 using 0:2:xtic(1) title 'cases' lw 1.5 with lines axes x1y1, 'data.temp' every 3 using 0:3:xtic(1) title 'deaths' lw 1.5 with lines axes x1y2"}; 
      //"unset key",
      //"plot for [i=2:3] 'data.temp' using i:xtic(1) lw 1.5 with lines"};
    char * commandForGnuplotOne[] = //{"plot 'data.temp'"};

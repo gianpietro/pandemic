@@ -70,7 +70,9 @@ int main(void) {
   char **apiDateStr;
   int fileUploadDate;
 
-    
+  FILE *gplot;
+
+   
   fp = fopen("datafile.dat", "r");
 
   if (fp == NULL) {
@@ -553,7 +555,7 @@ int main(void) {
         freeCountry(start);
 	apiFreeCountry(apiStart);
 	apiFreeAlias(aStart);
-        exit(0);
+	exit(0);	
         break;
       }
   } while (choice != 99);
