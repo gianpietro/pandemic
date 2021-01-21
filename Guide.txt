@@ -1,5 +1,5 @@
 Program to input numbers and perform various calculations
-----
+-----------
 Starting point is to have
 
 1. structure
