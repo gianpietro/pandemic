@@ -457,6 +457,7 @@ int main(void) {
         //api = popen("wget -q https://api.covid19api.com/summary","w");
 	/* Thank you Kyle Redelinghuys for your API - https://covid19api.com/ */
 	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
+	//api = popen("wget -d --header=X-Auth-Token: '5cf9dfd5-3449-485e-b5ae-70a60e997864' https://api.covid19api.com/summary", "w");
 	fflush(api);
 	pclose(api);
         fapi = fopen("summary", "r");
