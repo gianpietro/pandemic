@@ -1,7 +1,7 @@
 #ifndef _LKDLST_H
 #define _LKDLST_H
 
-#define COUNTRY 25   /* if value changed see also coName in lkdlst.c */
+#define COUNTRY 40   /* if value changed see also coName in lkdlst.c */
 #define UPLOAD 15    /* data file to be uploaded */
 
  struct country {

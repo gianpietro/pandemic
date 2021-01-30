@@ -1,7 +1,7 @@
 #ifndef _APIGET_H
 #define _APIGET_H
 
-#define APICOUNTRY 35
+#define APICOUNTRY 40  //was 35
 #define UPLDFILE 8
 
 struct apiGetData {

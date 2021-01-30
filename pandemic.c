@@ -58,7 +58,7 @@ int main(void) {
   double rg = 00.0000, rl = 00.0000;
   /* API link */
   FILE *api, *fapi;
-  char apiStr[50000];
+  char apiStr[60000];
   struct apiGetData *apiStart, *apiNewCountryPtr, *apiEnd, *apiPtr;
   int apiList = 0;
   char **aliasName;
@@ -457,26 +457,34 @@ int main(void) {
         //api = popen("wget -q https://api.covid19api.com/summary","w");
 	/* Thank you Kyle Redelinghuys for your API - https://covid19api.com/ */
 	api = popen("wget -cq --retry-connrefused --tries=5 --timeout=1 https://api.covid19api.com/summary", "w");
-	//api = popen("wget -d --header=X-Auth-Token: '5cf9dfd5-3449-485e-b5ae-70a60e997864' https://api.covid19api.com/summary", "w");
-	fflush(api);
+
+	//this was successsful to pull back summary file but same data as without token.
+	//api = popen("wget --header=\"Authorization: Bearer 5cf9dfd5-3449-485e-b5ae-70a60e997864\" https://api.covid19api.com/summary", "w"); 
+       	fflush(api);
 	pclose(api);
+
         fapi = fopen("summary", "r");
 
 	if (fapi == NULL) {
-	  perror("Error ");
-          break; 
+	 perror("Error ");
+	 break; 
         }
-	
-        fread(apiStr, 50000, 1, fapi);  
-        fclose(fapi);
+
+        //fread(apiStr, 50000, 1, fapi);
+	fread(apiStr, sizeof(char), 60000, fapi);
+
+	fclose(fapi);
+
 
         cJSON *root = cJSON_Parse(apiStr);
 
-        const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
-       
-        Countries_count = cJSON_GetArraySize(Countries_Obj);
-        int idxData = 0;
 	
+        const cJSON *Countries_Obj = cJSON_GetObjectItemCaseSensitive(root, "Countries");
+
+        Countries_count = cJSON_GetArraySize(Countries_Obj);
+
+        int idxData = 0;
+
         /*cJSON_ArrayForEach(Country_idx, Countries_Obj) {
           cJSON *Country_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "Country");
 	  cJSON *NewConfirmed_Obj = cJSON_GetObjectItemCaseSensitive(Country_idx, "NewConfirmed");
@@ -500,8 +508,7 @@ int main(void) {
           char *Slug_Obj  = cJSON_GetObjectItem(CountryData_Array, "Slug")->valuestring;
           char *Date_Obj = cJSON_GetObjectItem(CountryData_Array, "Date")->valuestring;
 	  int rd = 0;
-       	  
-	  if (apiList == 0) {
+ 	  if (apiList == 0) {
 	    apiStart = apiCreateCountry(CountryName_Obj, CountryCode_Obj, NewConfirmed_Obj, TotalConfirmed_Obj, NewDeaths_Obj, TotalDeaths_Obj, Date_Obj, rd);
 	    apiEnd = apiStart;
 	  }
@@ -511,51 +518,55 @@ int main(void) {
 	  }
 	  apiList++;  	  
         }
-
+ 
         char *rendered = cJSON_Print(root);
-
+ 
 	/* Convert string date to int date format */
 	if (apiStart != NULL){
 	  apiDateStr = apiDataDate(apiStart);
 	  fileUploadDate = formatDate(apiDateStr);
 	}
-
+ 
 	apiCorrectDate(apiStart, fileUploadDate);
-        
+ 
         /* Open datafile containing the country and its country code (alias)
            and pass data into linked list */
 	fAlias = fopen("datacode.dat", "r");
-
+ 
         if(fAlias == NULL){
 	  perror("Error");
           break;
         }
-
+ 
         while (fscanf(fAlias, "%s %s", nameStr, aliasStr) != EOF){
- 	  if (acount == 0) {
+	  if (acount == 0) {
 	    aStart = apiCreateAliasList(nameStr, aliasStr);
 	    aEnd = aStart;
-	  }
+	    }
 	  else {
 	    aNewAliasPtr = apiCreateAliasList(nameStr, aliasStr);
 	    aEnd = apiAliasAppend(aEnd, aNewAliasPtr);
 	  }
-	  acount++;
+	  acount++;	 
         }
+	fclose(fAlias);
 
 	apiCorrectCountryName(apiStart, aStart, acount);
+
 	apiPrintCountry(apiStart);
+	
 	printf("File upload date %d\n",fileUploadDate);
 
 	makeUploadFile(apiStart, fileUploadDate);
 
         free(rendered);	
         cJSON_Delete(root);
+	apiFreeAlias(aStart);  //added 30Jan21 changes to fread() causing malloc error
         break; 
       case 99:
         freeCountry(start);
 	apiFreeCountry(apiStart);
-	apiFreeAlias(aStart);
+	//apiFreeAlias(aStart);
 	exit(0);	
         break;
       }
