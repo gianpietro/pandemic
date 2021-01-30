@@ -3,6 +3,7 @@
 
 #define APICOUNTRY 40  //was 35
 #define UPLDFILE 8
+#define API_MAX_LEN 60000
 
 struct apiGetData {
   char apiCountryName[APICOUNTRY];

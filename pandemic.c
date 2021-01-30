@@ -58,7 +58,7 @@ int main(void) {
   double rg = 00.0000, rl = 00.0000;
   /* API link */
   FILE *api, *fapi;
-  char apiStr[60000];
+  char apiStr[API_MAX_LEN+1];
   struct apiGetData *apiStart, *apiNewCountryPtr, *apiEnd, *apiPtr;
   int apiList = 0;
   char **aliasName;
@@ -471,8 +471,8 @@ int main(void) {
         }
 
         //fread(apiStr, 50000, 1, fapi);
-	fread(apiStr, sizeof(char), 60000, fapi);
-
+	fread(apiStr, sizeof(char), API_MAX_LEN, fapi);
+	
 	fclose(fapi);
 
 

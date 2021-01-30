@@ -7,7 +7,6 @@
 int apiName = APICOUNTRY;
 int flift = UPLDFILE;
 
-
 struct apiGetData *apiCreateCountry(char apiCountry[], char apiCode[], int apiNewCases, int apiTotCases, int apiNewDeaths, int apiTotDeaths, char apiRecDate[], int apiUpDate){
   struct apiGetData *ptr;
   int i = 0;
