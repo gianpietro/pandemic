@@ -447,7 +447,7 @@ int main(void) {
 	printf("view %d\n", gview);
         break;
       case 12:
-        remove("summary");
+        //remove("summary");
 	apiList = 0;
 	acount = 0;
 	int Countries_count = 0;
