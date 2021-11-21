@@ -85,6 +85,7 @@ void apiCorrectCountryName(struct apiGetData *start, struct apiAlias *aliasStart
 void apiFreeCountry(struct apiGetData *start){
   struct apiGetData *ptr = start;;
   struct apiGetData *tmp;
+  ptr = start;
   while (ptr != NULL){
     tmp = ptr->next;
     free(ptr);

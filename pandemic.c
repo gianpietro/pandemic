@@ -413,7 +413,7 @@ int main(void) {
 	  scanf("%lf", &rl);
         }
         else if (is == 3){
-          printf("Enter percentage less or euqale to:");
+          printf("Enter percentage less or equale to:");
 	  scanf("%lf", &rl);
         }
         else if (is == 4){
@@ -565,7 +565,8 @@ int main(void) {
         break; 
       case 99:
         freeCountry(start);
-	apiFreeCountry(apiStart);
+	if(Countries_count > 0)
+	   apiFreeCountry(apiStart);	
 	//apiFreeAlias(aStart);
 	exit(0);	
         break;
